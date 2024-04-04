@@ -172,6 +172,9 @@ public class LoginSystem extends JFrame implements ActionListener {
                 ResultSet rs = stmt.executeQuery("select * from login where ID='" + userText.getText() + "' and password='" + passwordText.getText() + "'");
                 if (rs.next()) {
                     data1 = "Login Successful";
+                    Home a = new Home();
+                    a.show();
+                    this.dispose();
                 } else {
                     data1 = "Login Failed";
                 }
