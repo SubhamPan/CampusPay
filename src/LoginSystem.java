@@ -16,8 +16,6 @@ public class LoginSystem extends JFrame implements ActionListener {
     private JButton sub;
     private JButton reset;
     private JTextArea tout;
-    private JLabel res;
-    private JTextArea resadd;
 
     public LoginSystem() {
         setTitle("Login");
@@ -140,11 +138,8 @@ public class LoginSystem extends JFrame implements ActionListener {
                 String password = p1.getText();
                 User user = new User(ID, password);
                 try {
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/campuspay", "root", "Lmao_ded@456");
-                    Statement stmt = con.createStatement();
-                    stmt.executeUpdate("insert into login values('" + user.getID() + "','" + user.getPassword() + "')");
-                    con.close();
+                    Conn con = new Conn();
+                    con.stmt.executeUpdate("insert into login values('" + user.getID() + "','" + user.getPassword() + "')");
                     f.dispose();
                 } catch (Exception ex) {
                     Logger.getLogger(LoginSystem.class.getName()).log(Level.SEVERE, null, ex);
@@ -166,10 +161,8 @@ public class LoginSystem extends JFrame implements ActionListener {
             String data1;
             String data = "ID: " + userText.getText();
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/campuspay", "root", "Lmao_ded@456");
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("select * from login where ID='" + userText.getText() + "' and password='" + passwordText.getText() + "'");
+                Conn con = new Conn();
+                ResultSet rs = con.stmt.executeQuery("select * from login where ID='" + userText.getText() + "' and password='" + passwordText.getText() + "'");
                 if (rs.next()) {
                     data1 = "Login Successful";
                     Home a = new Home();
@@ -180,7 +173,6 @@ public class LoginSystem extends JFrame implements ActionListener {
                 }
                 tout.setText(data + "\n" + data1);
                 tout.setEditable(false);
-                con.close();
             } catch (Exception ex) {
                 System.out.println(ex);
             }

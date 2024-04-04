@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.*;
 
 public class Home {
     // show the home page
@@ -18,6 +17,22 @@ public class Home {
         title.setSize(300, 30);
         title.setLocation(250, 30);
         f.add(title);
+
+        // vendors page button
+        JButton vendors = new JButton("Vendors");
+        vendors.setFont(new Font("Arial", Font.PLAIN, 15));
+        vendors.setSize(100, 20);
+        vendors.setLocation(250, 100);
+        vendors.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // show the list of vendors
+                Vendors vendors = new Vendors();
+                vendors.show();
+            }
+        });
+        f.add(vendors);
 
         // create a button
         JButton logout = new JButton("Logout");
@@ -38,10 +53,5 @@ public class Home {
 
         // set the frame visibility
         f.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        Home home = new Home();
-        home.show();
     }
 }
