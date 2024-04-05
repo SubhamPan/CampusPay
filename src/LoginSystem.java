@@ -70,15 +70,19 @@ public class LoginSystem extends JFrame implements ActionListener {
         reset.addActionListener(this);
         c.add(reset);
 
-        // register button
-        JButton register = new JButton("Register");
+        // student registration option
+        JButton register = new JButton("Student Registration");
         register.setFont(new Font("Arial", Font.PLAIN, 15));
-        register.setSize(100, 20);
+        register.setSize(200, 20);
         register.setLocation(200, 250);
         register.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                register();
+                // show the student registration form
+                RegisterStudent r = new RegisterStudent();
+                // dispose the current frame
+                dispose();
+                r.show();
             }
         });
         c.add(register);
@@ -94,101 +98,31 @@ public class LoginSystem extends JFrame implements ActionListener {
 
     }
 
-    // register option
-    public void register() {
-        JFrame f = new JFrame("Register");
-        f.setSize(400, 400);
-        f.setLayout(null);
-        f.setVisible(true);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        JLabel l1, l2;
-        JTextField tf1;
-        JPasswordField p1;
-        JButton b1, b2;
-
-        l1 = new JLabel("ID");
-        l1.setBounds(50, 50, 150, 30);
-        f.add(l1);
-
-        tf1 = new JTextField();
-        tf1.setBounds(150, 50, 150, 30);
-        f.add(tf1);
-
-        l2 = new JLabel("Password");
-        l2.setBounds(50, 100, 150, 30);
-        f.add(l2);
-
-        p1 = new JPasswordField();
-        p1.setBounds(150, 100, 150, 30);
-        f.add(p1);
-
-        b1 = new JButton("Submit");
-        b1.setBounds(50, 150, 100, 30);
-        f.add(b1);
-
-        b2 = new JButton("Cancel");
-        b2.setBounds(200, 150, 100, 30);
-        f.add(b2);
-
-        b1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String ID = tf1.getText();
-                String password = p1.getText();
-                // make the User object
-                User user = User.getInstance();
-                user.setId(ID);
-                user.setPassword(password);
-                try {
-                    Conn con = new Conn();
-                    con.stmt.executeUpdate("insert into login values('" + ID + "', '" + password + "')");
-                    JOptionPane.showMessageDialog(f, "Data Saved Successfully");
-                    f.dispose();
-                } catch (Exception ex) {
-                    System.out.println(ex);
-                }
-            }
-        });
-
-        b2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                f.dispose();
-            }
-        });
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == sub) {
             String data1;
             String data = "ID: " + userText.getText();
+            String ID = userText.getText();
+            String password = passwordText.getText();
+            // hash the password using sha256
+            password = Hash.hash(password);
             try {
-                Conn con = new Conn();
-                ResultSet rs = con.stmt.executeQuery("select * from login where ID='" + userText.getText() + "' and password='" + passwordText.getText() + "'");
+                Conn c = new Conn();
+                ResultSet rs = c.stmt.executeQuery("SELECT * FROM login WHERE ID = '" + ID + "' AND password = '" + password + "'");
                 if (rs.next()) {
-                    // make the User object
-                    User user = User.getInstance();
-                    user.setId(userText.getText());
-                    user.setPassword(passwordText.getText());
-                    data1 = "Login Successful";
-                    Home a = new Home();
-                    a.show();
                     this.dispose();
+                    Home h = new Home();
+                    h.show();
                 } else {
-                    data1 = "Login Failed";
+                    JOptionPane.showMessageDialog(this, "Invalid ID or Password");
                 }
-                tout.setText(data + "\n" + data1);
-                tout.setEditable(false);
             } catch (Exception ex) {
                 System.out.println(ex);
             }
         } else if (e.getSource() == reset) {
-            String def = "";
-            userText.setText(def);
-            passwordText.setText(def);
-            tout.setText(def);
+            userText.setText("");
+            passwordText.setText("");
         }
     }
 
