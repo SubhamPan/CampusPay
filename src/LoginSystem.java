@@ -111,6 +111,10 @@ public class LoginSystem extends JFrame implements ActionListener {
                 Conn c = new Conn();
                 ResultSet rs = c.stmt.executeQuery("SELECT * FROM login WHERE ID = '" + ID + "' AND password = '" + password + "'");
                 if (rs.next()) {
+                    // instantiate the user
+                    User user = User.getInstance();
+                    user.setId(ID);
+                    user.setPassword(password);
                     this.dispose();
                     Home h = new Home();
                     h.show();

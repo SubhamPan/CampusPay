@@ -93,7 +93,7 @@ public class Payment {
                     // transaction_id is auto incremented
                     // student_id is current user ID
                     // date_time is current date and time
-                    c.stmt.executeUpdate("INSERT INTO transactions (vendor_id, total_amount, date_time) VALUES ('" + vendor_id + "', '" + amount + "', NOW())");
+                    c.stmt.executeUpdate("INSERT INTO transactions (vendor_id, student_id, total_amount) VALUES ('" + vendor_id + "', '" + User.getInstance().getId() + "', '" + amount + "')");
 
                     JOptionPane.showMessageDialog(f, "Payment successful");
                 } catch (Exception ex) {
@@ -113,6 +113,8 @@ public class Payment {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // go back to the home page
+                Home h = new Home();
+                h.show();
                 f.dispose();
             }
         });

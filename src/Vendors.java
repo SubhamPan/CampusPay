@@ -53,6 +53,8 @@ public class Vendors {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // go back to the home page
+                Home home = new Home();
+                home.show();
                 f.dispose();
             }
         });
