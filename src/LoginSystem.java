@@ -136,13 +136,17 @@ public class LoginSystem extends JFrame implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 String ID = tf1.getText();
                 String password = p1.getText();
-                User user = new User(ID, password);
+                // make the User object
+                User user = User.getInstance();
+                user.setId(ID);
+                user.setPassword(password);
                 try {
                     Conn con = new Conn();
-                    con.stmt.executeUpdate("insert into login values('" + user.getID() + "','" + user.getPassword() + "')");
+                    con.stmt.executeUpdate("insert into login values('" + ID + "', '" + password + "')");
+                    JOptionPane.showMessageDialog(f, "Data Saved Successfully");
                     f.dispose();
                 } catch (Exception ex) {
-                    Logger.getLogger(LoginSystem.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println(ex);
                 }
             }
         });
@@ -164,6 +168,10 @@ public class LoginSystem extends JFrame implements ActionListener {
                 Conn con = new Conn();
                 ResultSet rs = con.stmt.executeQuery("select * from login where ID='" + userText.getText() + "' and password='" + passwordText.getText() + "'");
                 if (rs.next()) {
+                    // make the User object
+                    User user = User.getInstance();
+                    user.setId(userText.getText());
+                    user.setPassword(passwordText.getText());
                     data1 = "Login Successful";
                     Home a = new Home();
                     a.show();

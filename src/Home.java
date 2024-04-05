@@ -34,6 +34,22 @@ public class Home {
         });
         f.add(vendors);
 
+        // payment page button
+        JButton payment = new JButton("Payment");
+        payment.setFont(new Font("Arial", Font.PLAIN, 15));
+        payment.setSize(100, 20);
+        payment.setLocation(250, 150);
+        payment.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // show the payment form
+                Payment payment = new Payment();
+                payment.show();
+            }
+        });
+        f.add(payment);
+
         // create a button
         JButton logout = new JButton("Logout");
         logout.setFont(new Font("Arial", Font.PLAIN, 15));
