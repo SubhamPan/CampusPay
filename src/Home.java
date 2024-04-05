@@ -54,7 +54,7 @@ public class Home {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // show the list of vendors
-                Vendors vendors = new Vendors();
+                VendorsMenu vendors = new VendorsMenu();
                 vendors.show();
                 f.dispose();
             }

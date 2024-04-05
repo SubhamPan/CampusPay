@@ -2,9 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
-import javax.swing.table.DefaultTableModel;
 
-public class Vendors {
+public class VendorsMenu {
     // this will show the list of vendors
     // vendors are stored in the database in the vendors table
     public void show() {
