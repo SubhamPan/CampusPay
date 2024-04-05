@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 public class Vendors {
     // this will show the list of vendors
@@ -20,12 +21,14 @@ public class Vendors {
         title.setLocation(250, 30);
         f.add(title);
 
-        // create a text area to store the list of vendors
-        JTextArea vendors = new JTextArea();
-        vendors.setFont(new Font("Arial", Font.PLAIN, 15));
-        vendors.setSize(400, 200);
-        vendors.setLocation(100, 100);
-        f.add(vendors);
+        // create a scrollable area to store the list of vendors
+        JTextArea vendors = new JTextArea(30, 30);
+        vendors.setFont(new Font("Arial", Font.PLAIN, 10));
+        JScrollPane scroll = new JScrollPane(vendors);
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setSize(500, 200);
+        scroll.setLocation(50, 100);
+        f.add(scroll);
 
         // connect to the database and get the list of vendors
         try {
@@ -34,11 +37,9 @@ public class Vendors {
 
             // display the list of vendors
             while (rs.next()) {
-                vendors.append("ID: " + rs.getString("ID") + "\n");
-                vendors.append("Name: " + rs.getString("v_name") + "\n");
+                vendors.append("Vendor Name: " + rs.getString("v_name") + "\n");
                 vendors.append("Contact: " + rs.getString("contact") + "\n\n");
             }
-
         } catch (Exception e) {
             System.out.println(e);
         }
