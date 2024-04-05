@@ -8,7 +8,7 @@ public class Home {
     public void show() {
         // create a new frame to store text field and button
         JFrame f = new JFrame("Home");
-        f.setSize(600, 400);
+        f.setSize(800, 600);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLayout(null);
 
@@ -78,11 +78,28 @@ public class Home {
         });
         f.add(payment);
 
+        // payment history page button
+        JButton paymentHistory = new JButton("Payment History");
+        paymentHistory.setFont(new Font("Arial", Font.PLAIN, 15));
+        paymentHistory.setSize(150, 20);
+        paymentHistory.setLocation(250, 250);
+        paymentHistory.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // show the payment history
+                PaymentHistory paymentHistory = new PaymentHistory();
+                paymentHistory.show();
+                f.dispose();
+            }
+        });
+        f.add(paymentHistory);
+
         // create a button
         JButton logout = new JButton("Logout");
         logout.setFont(new Font("Arial", Font.PLAIN, 15));
         logout.setSize(100, 20);
-        logout.setLocation(250, 250);
+        logout.setLocation(250, 300);
         logout.addActionListener(new ActionListener() {
 
             @Override
