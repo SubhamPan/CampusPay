@@ -25,6 +25,8 @@ public class LoginSystem extends JFrame implements ActionListener {
 
         c = getContentPane();
         c.setLayout(null);
+        // set backgroung color to C5FFF8
+        c.setBackground(new Color(197, 255, 248));
 
         title = new JLabel("Login System");
         title.setFont(new Font("Arial", Font.PLAIN, 30));
@@ -61,6 +63,8 @@ public class LoginSystem extends JFrame implements ActionListener {
         sub.setSize(100, 20);
         sub.setLocation(150, 200);
         sub.addActionListener(this);
+        // set color to 7B66FF
+        sub.setBackground(new Color(123, 102, 255));
         c.add(sub);
 
         reset = new JButton("Reset");
@@ -68,13 +72,14 @@ public class LoginSystem extends JFrame implements ActionListener {
         reset.setSize(100, 20);
         reset.setLocation(270, 200);
         reset.addActionListener(this);
+        reset.setBackground(Color.RED);
         c.add(reset);
 
         // student registration option
         JButton register = new JButton("Student Registration");
         register.setFont(new Font("Arial", Font.PLAIN, 15));
-        register.setSize(200, 20);
-        register.setLocation(200, 250);
+        register.setBounds(175, 250, 175, 20);
+        register.setBackground(Color.ORANGE);
         register.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
