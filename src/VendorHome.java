@@ -48,7 +48,7 @@ public class VendorHome {
         JButton transactionHistory = new JButton("Transaction History");
         transactionHistory.setFont(new Font("Arial", Font.PLAIN, 15));
         transactionHistory.setSize(200, 20);
-        transactionHistory.setLocation(250, 125);
+        transactionHistory.setLocation(250, 140);
         transactionHistory.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -58,6 +58,22 @@ public class VendorHome {
             }
         });
         f.add(transactionHistory);
+
+        // create a button to view the items sold by vendor
+        JButton itemsSold = new JButton("My Items");
+        itemsSold.setFont(new Font("Arial", Font.PLAIN, 15));
+        itemsSold.setSize(200, 20);
+        itemsSold.setLocation(250, 180);
+        itemsSold.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VendorItems items = new VendorItems();
+                items.show();
+                f.dispose();
+            }
+        });
+        f.add(itemsSold);
+
 
         // add logout button
         JButton logout = new JButton("Logout");

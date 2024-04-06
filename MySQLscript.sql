@@ -104,3 +104,27 @@ begin
     select * from transactions where transactions.vendor_id = vendor_id;
 end //
 delimiter ;
+
+-- make procedure to get all the items sold by a vendor
+delimiter //
+create procedure get_all_items_sold_by_vendor(IN vendor_id varchar(50))
+begin
+    select * from items where items.vendor_id = vendor_id;
+end //
+delimiter ;
+
+-- make procedure to add an item to the menu of a vendor
+delimiter //
+create procedure add_item_to_menu(IN item_name varchar(50), IN price int, IN vendor_id varchar(50))
+begin
+    insert into items (item_name, price, vendor_id) values (item_name, price, vendor_id);
+end //
+delimiter ;
+
+-- make procedure to change the price of an item
+delimiter //
+create procedure change_price_of_item(IN item_id int, IN new_price int)
+begin
+    update items set price = new_price where items.ID = item_id;
+end //
+delimiter ;
