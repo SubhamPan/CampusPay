@@ -53,7 +53,7 @@ public class VendorsMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // go back to the home page
-                Home home = new Home();
+                StudentHome home = new StudentHome();
                 home.show();
                 f.dispose();
             }

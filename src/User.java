@@ -5,6 +5,8 @@
 public class User {
     private static User user;
     private String id;
+
+    private int role;
     private String password;
 
     private User() {
@@ -24,6 +26,14 @@ public class User {
 
     public String getId() {
         return id;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
+    public int getRole() {
+        return role;
     }
 
     public void setPassword(String password) {

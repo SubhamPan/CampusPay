@@ -2,8 +2,6 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class LoginSystem extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
@@ -12,6 +10,10 @@ public class LoginSystem extends JFrame implements ActionListener {
     private JLabel user;
     private JTextField userText;
     private JLabel password;
+
+    private JLabel role;
+
+    private JTextField roleText;
     private JPasswordField passwordText;
     private JButton sub;
     private JButton reset;
@@ -45,6 +47,18 @@ public class LoginSystem extends JFrame implements ActionListener {
         userText.setSize(190, 20);
         userText.setLocation(200, 100);
         c.add(userText);
+
+        role = new JLabel("Role");
+        role.setFont(new Font("Arial", Font.PLAIN, 20));
+        role.setSize(100, 20);
+        role.setLocation(100, 125);
+        c.add(role);
+
+        roleText = new JTextField();
+        roleText.setFont(new Font("Arial", Font.PLAIN, 15));
+        roleText.setSize(190, 20);
+        roleText.setLocation(200, 125);
+        c.add(roleText);
 
         password = new JLabel("Password");
         password.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -84,13 +98,30 @@ public class LoginSystem extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // show the student registration form
-                RegisterStudent r = new RegisterStudent();
+                StudentRegistration r = new StudentRegistration();
                 // dispose the current frame
                 dispose();
                 r.show();
             }
         });
         c.add(register);
+
+        // vendor registration option
+        JButton vendorRegister = new JButton("Vendor Registration");
+        vendorRegister.setFont(new Font("Arial", Font.PLAIN, 15));
+        vendorRegister.setBounds(175, 300, 175, 20);
+        vendorRegister.setBackground(Color.ORANGE);
+        vendorRegister.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // show the vendor registration form
+                VendorRegistration v = new VendorRegistration();
+                // dispose the current frame
+                dispose();
+                v.show();
+            }
+        });
+        c.add(vendorRegister);
 
         tout = new JTextArea();
         tout.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -109,6 +140,19 @@ public class LoginSystem extends JFrame implements ActionListener {
             String data1;
             String data = "ID: " + userText.getText();
             String ID = userText.getText();
+            String roletxt = roleText.getText();
+            int role = -1;
+            if (roletxt.toLowerCase().equals("student")) {
+                role = 0;
+            } else if (roletxt.toLowerCase().equals("vendor")) {
+                role = 1;
+            }
+            else if (roletxt.toLowerCase().equals("admin")) {
+                role = 2;
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid Role");
+                return;
+            }
             String password = passwordText.getText();
             // hash the password using sha256
             password = Hash.hash(password);
@@ -119,10 +163,20 @@ public class LoginSystem extends JFrame implements ActionListener {
                     // instantiate the user
                     User user = User.getInstance();
                     user.setId(ID);
+                    user.setRole(role);
                     user.setPassword(password);
                     this.dispose();
-                    Home h = new Home();
-                    h.show();
+                    if (role == 0) {
+                        StudentHome home = new StudentHome();
+                        home.show();
+                    } else if (role == 1) {
+                        VendorHome home = new VendorHome();
+                        home.show();
+                    } else if (role == 2) {
+                        // temporary admin home is the student home
+                        StudentHome home = new StudentHome();
+                        home.show();
+                    }
                 } else {
                     JOptionPane.showMessageDialog(this, "Invalid ID or Password");
                 }

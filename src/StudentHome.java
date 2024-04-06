@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 
-public class Home {
+public class StudentHome {
     // show the home page
     public void show() {
         // create a new frame to store text field and button
@@ -88,7 +88,7 @@ public class Home {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // show the payment history
-                PaymentHistory paymentHistory = new PaymentHistory();
+                StudentPaymentHistory paymentHistory = new StudentPaymentHistory();
                 paymentHistory.show();
                 f.dispose();
             }

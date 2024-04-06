@@ -113,7 +113,7 @@ public class Payment {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // go back to the home page
-                Home h = new Home();
+                StudentHome h = new StudentHome();
                 h.show();
                 f.dispose();
             }

@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
 
-public class RegisterStudent {
+public class StudentRegistration {
     // this class is used to register a student
     private Container c;
     private JLabel title;
@@ -100,20 +100,16 @@ public class RegisterStudent {
                 // make a connection to the database
                 Conn c = new Conn();
                 try {
-                    // get the values from the text fields
-                    String name = nameText.getText();
-                    String ID = IDText.getText();
-                    String contact = ContactText.getText();
-                    String password = passwordText.getText();
-                    // hash the password using sha256
+                    // use procedure register_student(IN ID varchar(50), IN BITS_account varchar(50), IN s_name varchar(50), IN contact char(10), IN password varchar(256))
+                    CallableStatement cs = c.con.prepareCall("{call register_student(?, ?, ?, ?, ?)}");
+                    cs.setString(1, IDText.getText());
+                    cs.setString(2, IDText.getText());
+                    cs.setString(3, nameText.getText());
+                    cs.setString(4, ContactText.getText());
+                    String password = new String(passwordText.getPassword());
                     password = Hash.hash(password);
-                    String BITS_account = ID;
-
-                    // insert the values into the database
-                    c.stmt.executeUpdate("INSERT INTO student VALUES ('" + ID + "', '" + BITS_account + "', '" + name + "', '" + contact + "', '" + password + "')");
-
-                    // add the login details to the login table
-                    c.stmt.executeUpdate("INSERT INTO login VALUES ('" + ID + "', '" + password + "')");
+                    cs.setString(5, password);
+                    cs.execute();
 
                     // show a success message
                     JOptionPane.showMessageDialog(f, "Student registered successfully");

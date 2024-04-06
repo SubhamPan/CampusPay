@@ -2,7 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
-public class PaymentHistory {
+public class StudentPaymentHistory {
     // this class is used to display the payment history of a student
     private Container c;
     private JLabel title;
@@ -61,7 +61,7 @@ public class PaymentHistory {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // go back to the home page
-                Home home = new Home();
+                StudentHome home = new StudentHome();
                 home.show();
                 f.dispose();
             }
