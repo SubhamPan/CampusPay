@@ -2,6 +2,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
+import java.io.File;
+import java.net.URL;
 
 public class LoginSystem extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
@@ -24,6 +26,15 @@ public class LoginSystem extends JFrame implements ActionListener {
         setBounds(300, 90, 900, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
+
+        // add login.jpg image to the frame from the images folder in the project directory
+        ImageIcon image = new ImageIcon("images/login.jpg");
+        // make the image fit the frame
+        Image img = image.getImage().getScaledInstance(300, 400, Image.SCALE_DEFAULT);
+        image = new ImageIcon(img);
+        JLabel imageLabel = new JLabel(image);
+        imageLabel.setBounds(500, 100, 300, 400);
+        add(imageLabel);
 
         c = getContentPane();
         c.setLayout(null);
@@ -122,16 +133,6 @@ public class LoginSystem extends JFrame implements ActionListener {
             }
         });
         c.add(vendorRegister);
-
-        tout = new JTextArea();
-        tout.setFont(new Font("Arial", Font.PLAIN, 15));
-        tout.setSize(300, 400);
-        tout.setLocation(500, 100);
-        tout.setLineWrap(true);
-        tout.setEditable(false);
-        c.add(tout);
-
-
     }
 
     @Override
