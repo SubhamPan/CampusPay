@@ -44,11 +44,26 @@ public class VendorHome {
             System.out.println(e);
         }
 
+        // create a button to view the transaction history
+        JButton transactionHistory = new JButton("Transaction History");
+        transactionHistory.setFont(new Font("Arial", Font.PLAIN, 15));
+        transactionHistory.setSize(200, 20);
+        transactionHistory.setLocation(250, 125);
+        transactionHistory.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VendorTransactionHistory transaction = new VendorTransactionHistory();
+                transaction.show();
+                f.dispose();
+            }
+        });
+        f.add(transactionHistory);
+
         // add logout button
         JButton logout = new JButton("Logout");
         logout.setFont(new Font("Arial", Font.PLAIN, 15));
         logout.setSize(100, 20);
-        logout.setLocation(250, 150);
+        logout.setLocation(250, 500);
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

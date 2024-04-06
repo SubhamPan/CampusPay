@@ -96,3 +96,11 @@ begin
     select sum(total_amount) into total_amount_earned from transactions where transactions.vendor_id = vendor_id;
 end //
 delimiter ;
+
+-- make procedure to get all the transactions made by a vendor
+delimiter //
+create procedure get_all_transactions_made_by_vendor(IN vendor_id varchar(50))
+begin
+    select * from transactions where transactions.vendor_id = vendor_id;
+end //
+delimiter ;
