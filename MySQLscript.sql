@@ -128,3 +128,27 @@ begin
     update items set price = new_price where items.ID = item_id;
 end //
 delimiter ;
+
+-- make procedure to get price of an item
+delimiter //
+create procedure get_price_of_item(IN item_id int, OUT price int)
+begin
+    select items.price into price from items where items.ID = item_id;
+end //
+delimiter ;
+
+-- make procedure to make a new order
+delimiter //
+create procedure make_order(IN transaction_id int, IN item_id int, IN price int, IN quantity int)
+begin
+    insert into orders (transaction_id, item_id, price, quantity) values (transaction_id, item_id, price, quantity);
+end //
+delimiter ;
+
+-- make procedure to make a new transaction
+delimiter //
+create procedure make_transaction(IN vendor_id varchar(50), IN student_id varchar(50), IN total_amount int, IN date_time datetime)
+begin
+    insert into transactions (vendor_id, student_id, total_amount, date_time) values (vendor_id, student_id, total_amount, date_time);
+end //
+delimiter ;

@@ -74,6 +74,21 @@ public class VendorHome {
         });
         f.add(itemsSold);
 
+        // create a button to start a new transaction
+        JButton newTransaction = new JButton("New Transaction");
+        newTransaction.setFont(new Font("Arial", Font.PLAIN, 15));
+        newTransaction.setSize(200, 20);
+        newTransaction.setLocation(250, 220);
+        newTransaction.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VendorTransactionProcess transaction = new VendorTransactionProcess();
+                transaction.show();
+                f.dispose();
+            }
+        });
+        f.add(newTransaction);
+
 
         // add logout button
         JButton logout = new JButton("Logout");
