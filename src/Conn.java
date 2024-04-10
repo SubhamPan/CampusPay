@@ -14,8 +14,13 @@ public class Conn {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/campuspay", user, password);
             stmt = con.createStatement();
         }
-        catch (Exception e) {
-            System.out.println(e);
+        catch (SQLException e) {
+            System.out.println("Error connecting to the database:");
+            System.out.println(e.getMessage());
+        }
+        catch (ClassNotFoundException e) {
+            System.out.println("MySQL JDBC driver not found:");
+            System.out.println(e.getMessage());
         }
     }
 }
