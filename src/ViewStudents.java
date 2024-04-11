@@ -54,6 +54,12 @@ public class ViewStudents {
         table.setLocation(100, 100);
         f.add(table);
 
+        JScrollPane scroll = new JScrollPane(table);
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setSize(500, 200);
+        scroll.setLocation(50, 100);
+        f.add(scroll);
+
         // create a button to add a student
         add = new JButton("Add Student");
         add.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -85,11 +91,29 @@ public class ViewStudents {
         });
         f.add(edit);
 
+//        create button to view payments of selected student from table
+        JButton viewPayments = new JButton("View Payments");
+        viewPayments.setFont(new Font("Arial", Font.PLAIN, 15));
+        viewPayments.setSize(200, 20);
+        viewPayments.setLocation(200, 450);
+        viewPayments.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = table.getSelectedRow();
+                String student_id = table.getModel().getValueAt(row, 0).toString();
+                AdminViewStudentTransactions studentPaymentHistory = new AdminViewStudentTransactions();
+                studentPaymentHistory.show(student_id);
+                f.dispose();
+            }
+        });
+        f.add(viewPayments);
+
+
 // create a button to go back
         JButton back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(100, 20);
-        back.setLocation(250, 450);
+        back.setLocation(250, 500);
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

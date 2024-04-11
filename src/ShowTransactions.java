@@ -23,6 +23,8 @@ public class ShowTransactions {
         title.setLocation(200, 50);
         f.add(title);
 
+
+
         String[][] data = new String[100][5];
         try {
             Conn c = new Conn();
@@ -41,11 +43,18 @@ public class ShowTransactions {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
         table = new JTable(data, columns);
         table.setFont(new Font("Arial", Font.PLAIN, 15));
         table.setSize(300, 200);
         table.setLocation(100, 100);
         f.add(table);
+        JScrollPane scroll = new JScrollPane(table);
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setSize(500, 200);
+        scroll.setLocation(50, 100);
+        f.add(scroll);
 
         add = new JButton("Add Transaction");
         add.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -54,9 +63,6 @@ public class ShowTransactions {
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                AddTransaction addTransaction = new AddTransaction();
-//                addTransaction.show();
-//                f.dispose();
                 AdminAddTransaction adminAddTransaction = new AdminAddTransaction();
                 adminAddTransaction.show();
                 f.dispose();
@@ -64,11 +70,33 @@ public class ShowTransactions {
         });
         f.add(add);
 
+//        Edit selected transaction from table
+        edit = new JButton("Edit Transaction");
+        edit.setFont(new Font("Arial", Font.PLAIN, 15));
+        edit.setSize(200, 20);
+        edit.setLocation(200, 400);
+        edit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = table.getSelectedRow();
+                String transaction_id = table.getModel().getValueAt(row, 0).toString();
+                String vendor_id = table.getModel().getValueAt(row, 1).toString();
+                String student_id = table.getModel().getValueAt(row, 2).toString();
+                String total_amount = table.getModel().getValueAt(row, 3).toString();
+                String date_time = table.getModel().getValueAt(row, 4).toString();
+                AdminEditTransaction adminEditTransaction = new AdminEditTransaction(transaction_id, vendor_id, student_id, total_amount, date_time);
+                adminEditTransaction.show();
+                f.dispose();
+            }
+        });
+        f.add(edit);
+
+
 //        back
         JButton back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(100, 20);
-        back.setLocation(200, 400);
+        back.setLocation(200, 450);
         back.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -82,8 +110,8 @@ public class ShowTransactions {
         f.setVisible(true);
     }
 
-//    public static void main(String[] args) {
-//        ShowTransactions showTransactions = new ShowTransactions();
-//        showTransactions.show();
-//    }
+    public static void main(String[] args) {
+        ShowTransactions showTransactions = new ShowTransactions();
+        showTransactions.show();
+    }
 }
