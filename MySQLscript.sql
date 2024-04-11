@@ -193,3 +193,33 @@ begin
     select * from login where login.ID = ID and login.password = password;
 end //
 delimiter ;
+
+-- make procedure to get all the students
+delimiter //
+create procedure get_all_students()
+begin
+    select * from student;
+end //
+delimiter ;
+
+-- make procedure to get all the vendors
+delimiter //
+create procedure get_all_vendors()
+begin
+    select * from vendors;
+end //
+delimiter ;
+
+-- make procedure to get all transactions
+delimiter //
+create procedure get_all_transactions()
+begin
+    select * from transactions;
+end //
+
+-- make procedure to add transaction
+delimiter //
+create procedure add_transaction(IN vendor_id varchar(50), IN student_id varchar(50), IN total_amount int)
+begin
+    insert into transactions (vendor_id, student_id, total_amount, date_time) values (vendor_id, student_id, total_amount, now());
+end //

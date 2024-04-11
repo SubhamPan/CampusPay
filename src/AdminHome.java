@@ -88,4 +88,8 @@ public class AdminHome {
         f.add(logout);
         f.setVisible(true);
     }
+    public static void main(String[] args) {
+        AdminHome adminHome = new AdminHome();
+        adminHome.show();
+    }
 }

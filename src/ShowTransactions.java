@@ -26,8 +26,9 @@ public class ShowTransactions {
         String[][] data = new String[100][5];
         try {
             Conn c = new Conn();
-            ResultSet rs = c.stmt.executeQuery("SELECT * FROM transactions");
-
+//            ResultSet rs = c.stmt.executeQuery("SELECT * FROM transactions");
+            CallableStatement cs = c.con.prepareCall("{call get_all_transactions()}");
+            ResultSet rs = cs.executeQuery();
             int i = 0;
             while (rs.next()) {
                 data[i][0] = rs.getString(columns[0]);
@@ -56,6 +57,9 @@ public class ShowTransactions {
 //                AddTransaction addTransaction = new AddTransaction();
 //                addTransaction.show();
 //                f.dispose();
+                AdminAddTransaction adminAddTransaction = new AdminAddTransaction();
+                adminAddTransaction.show();
+                f.dispose();
             }
         });
         f.add(add);
@@ -68,9 +72,9 @@ public class ShowTransactions {
         back.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-//                AdminHome adminHome = new AdminHome();
-//                adminHome.show();
-//                f.dispose();
+                AdminHome adminHome = new AdminHome();
+                adminHome.show();
+                f.dispose();
             }
         });
         f.add(back);

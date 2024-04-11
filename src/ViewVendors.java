@@ -33,8 +33,9 @@ public class ViewVendors {
 
         try {
             Conn c = new Conn();
-            ResultSet rs = c.stmt.executeQuery("SELECT * FROM vendors");
-
+//            ResultSet rs = c.stmt.executeQuery("SELECT * FROM vendors");
+            CallableStatement cs = c.con.prepareCall("{call get_all_vendors()}");
+            ResultSet rs = cs.executeQuery();
             int i = 0;
             while (rs.next()) {
                 data[i][0] = rs.getString(columns[0]);
@@ -93,10 +94,10 @@ public class ViewVendors {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // go back to the admin home page
-//                AdminHome adminHome = new AdminHome();
-//                adminHome.show();
-//                f.dispose();
+//                 go back to the admin home page
+                AdminHome adminHome = new AdminHome();
+                adminHome.show();
+                f.dispose();
             }
         });
         f.add(back);

@@ -33,8 +33,10 @@ public class ViewStudents {
 
         try {
             Conn c = new Conn();
-            ResultSet rs = c.stmt.executeQuery("SELECT * FROM student");
-
+//            ResultSet rs = c.stmt.executeQuery("SELECT * FROM student");
+//            calling sql procesdure
+                CallableStatement cs = c.con.prepareCall("{call get_all_students()}");
+                ResultSet rs = cs.executeQuery();
             int i = 0;
             while (rs.next()) {
                 data[i][0] = rs.getString("ID");
@@ -92,9 +94,9 @@ public class ViewStudents {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // go back to the admin home page
-//                AdminHome adminHome = new AdminHome();
-//                adminHome.show();
-//                f.dispose();
+                AdminHome adminHome = new AdminHome();
+                adminHome.show();
+                f.dispose();
             }
         });
         f.add(back);
