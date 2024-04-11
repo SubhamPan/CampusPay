@@ -95,11 +95,28 @@ public class StudentHome {
         });
         f.add(paymentHistory);
 
+        // update student details page button
+        JButton updateDetails = new JButton("Update Details");
+        updateDetails.setFont(new Font("Arial", Font.PLAIN, 15));
+        updateDetails.setSize(150, 20);
+        updateDetails.setLocation(250, 300);
+        updateDetails.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // show the update student details form
+                EditStudent editStudent = new EditStudent();
+                editStudent.show();
+                f.dispose();
+            }
+        });
+        f.add(updateDetails);
+
         // create a button
         JButton logout = new JButton("Logout");
         logout.setFont(new Font("Arial", Font.PLAIN, 15));
         logout.setSize(100, 20);
-        logout.setLocation(250, 300);
+        logout.setLocation(250, 500);
         logout.addActionListener(new ActionListener() {
 
             @Override

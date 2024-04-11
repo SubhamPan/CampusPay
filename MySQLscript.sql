@@ -185,4 +185,3 @@ begin
     select vendors.v_name, transactions.total_amount, transactions.date_time from transactions, vendors where transactions.student_id = student_id and transactions.vendor_id = vendors.ID;
 end //
 delimiter ;
-

@@ -76,10 +76,9 @@ public class ViewStudents {
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // go to the student edit page
-//                Student student = new Student();
-//                student.show();
-//                f.dispose();
+                // go to the edit student page
+                EditStudent editStudent = new EditStudent();
+                editStudent.show();
             }
         });
         f.add(edit);
