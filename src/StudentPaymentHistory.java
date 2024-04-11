@@ -2,12 +2,11 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 public class StudentPaymentHistory {
     // this class is used to display the payment history of a student
     private Container c;
     private JLabel title;
-    private JTextArea payments;
-    private JScrollPane scroll;
 
     public void show() {
         // create a new frame to store the payment history
@@ -23,11 +22,23 @@ public class StudentPaymentHistory {
         title.setLocation(250, 30);
         f.add(title);
 
-        // create a scrollable area to store the payment history
-        payments = new JTextArea(30, 30);
-        payments.setFont(new Font("Arial", Font.PLAIN, 10));
-        scroll = new JScrollPane(payments);
-        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        // create a Jtable to display the payment history
+        JTable table = new JTable();
+        table.setFont(new Font("Arial", Font.PLAIN, 15));
+        table.setSize(400, 200);
+        table.setLocation(100, 100);
+        f.add(table);
+
+        // create a model for the table
+        DefaultTableModel model = new DefaultTableModel();
+        // vendor, amount, date
+        model.addColumn("Vendor");
+        model.addColumn("Amount");
+        model.addColumn("Date");
+        table.setModel(model);
+
+        // create a scroll pane for the table
+        JScrollPane scroll = new JScrollPane(table);
         scroll.setSize(500, 200);
         scroll.setLocation(50, 100);
         f.add(scroll);
@@ -42,10 +53,7 @@ public class StudentPaymentHistory {
 
             // display the payment history
             while (rs.next()) {
-                payments.append("Transaction ID: " + rs.getString("ID") + "\n");
-                payments.append("Vendor ID: " + rs.getString("vendor_id") + "\n");
-                payments.append("Amount: " + rs.getString("total_amount") + "\n");
-                payments.append("Date and Time: " + rs.getString("date_time") + "\n\n");
+                model.addRow(new Object[] {rs.getString("v_name"), rs.getString("total_amount"), rs.getString("date_time")});
             }
         } catch (Exception e) {
             System.out.println(e);

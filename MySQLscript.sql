@@ -176,3 +176,13 @@ begin
     update items set item_name = item_name, price = price where items.ID = ID;
 end //
 delimiter ;
+
+-- alter procedure get_all_payments_made_by_student to get v_name, amount, date_time
+drop procedure get_all_payments_made_by_student;
+delimiter //
+create procedure get_all_payments_made_by_student(IN student_id varchar(50))
+begin
+    select vendors.v_name, transactions.total_amount, transactions.date_time from transactions, vendors where transactions.student_id = student_id and transactions.vendor_id = vendors.ID;
+end //
+delimiter ;
+
