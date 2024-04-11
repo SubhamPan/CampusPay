@@ -78,15 +78,14 @@ public class ViewVendors {
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // go to the student edit page
-//                Student student = new Student();
-//                student.show();
-//                f.dispose();
+                // go to the vendor edit page
+                EditVendor editVendor = new EditVendor();
+                editVendor.show();
             }
         });
         f.add(edit);
 
-// create a button to go back
+        // create a button to go back
         JButton back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(100, 20);

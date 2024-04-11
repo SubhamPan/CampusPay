@@ -152,3 +152,27 @@ begin
     insert into transactions (vendor_id, student_id, total_amount, date_time) values (vendor_id, student_id, total_amount, date_time);
 end //
 delimiter ;
+
+-- make procedure to update student details
+delimiter //
+create procedure update_student_details(IN ID varchar(50), IN BITS_account varchar(50), IN s_name varchar(50), IN contact char(10), IN password varchar(256))
+begin
+    update student set BITS_account = BITS_account, s_name = s_name, contact = contact, password = password where student.ID = ID;
+end //
+delimiter ;
+
+-- make procedure to update vendor details
+delimiter //
+create procedure update_vendor_details(IN ID varchar(50), IN v_name varchar(50), IN account_no varchar(50), IN contact char(10), IN password varchar(256))
+begin
+    update vendors set v_name = v_name, account_no = account_no, contact = contact, password = password where vendors.ID = ID;
+end //
+delimiter ;
+
+-- make procedure to update item details
+delimiter //
+create procedure update_item_details(IN ID int, IN item_name varchar(50), IN price int)
+begin
+    update items set item_name = item_name, price = price where items.ID = ID;
+end //
+delimiter ;

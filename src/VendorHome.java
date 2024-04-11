@@ -89,6 +89,20 @@ public class VendorHome {
         });
         f.add(newTransaction);
 
+        // create a button to edit the vendor details
+        JButton editVendor = new JButton("Edit Details");
+        editVendor.setFont(new Font("Arial", Font.PLAIN, 15));
+        editVendor.setSize(200, 20);
+        editVendor.setLocation(250, 260);
+        editVendor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EditVendor edit = new EditVendor();
+                edit.show();
+            }
+        });
+        f.add(editVendor);
+
 
         // add logout button
         JButton logout = new JButton("Logout");

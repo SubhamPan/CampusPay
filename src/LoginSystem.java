@@ -172,8 +172,7 @@ public class LoginSystem extends JFrame implements ActionListener {
                         VendorHome home = new VendorHome();
                         home.show();
                     } else if (role == 2) {
-                        // temporary admin home is the student home
-                        StudentHome home = new StudentHome();
+                        AdminHome home = new AdminHome();
                         home.show();
                     }
                 } else {
