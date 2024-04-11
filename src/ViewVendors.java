@@ -33,8 +33,9 @@ public class ViewVendors {
 
         try {
             Conn c = new Conn();
-            ResultSet rs = c.stmt.executeQuery("SELECT * FROM vendors");
-
+//            ResultSet rs = c.stmt.executeQuery("SELECT * FROM vendors");
+            CallableStatement cs = c.con.prepareCall("{call get_all_vendors()}");
+            ResultSet rs = cs.executeQuery();
             int i = 0;
             while (rs.next()) {
                 data[i][0] = rs.getString(columns[0]);
@@ -51,6 +52,14 @@ public class ViewVendors {
         table.setSize(300, 200);
         table.setLocation(100, 100);
         f.add(table);
+
+        JScrollPane scroll = new JScrollPane(table);
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setSize(500, 200);
+        scroll.setLocation(50, 100);
+
+        f.add(scroll);
+
 
         // create a button to add a student
         add = new JButton("Add Vendor");
@@ -85,18 +94,53 @@ public class ViewVendors {
         });
         f.add(edit);
 
+//        Create a button to view vendor transactions for selected vendor from table
+        JButton viewTransactions = new JButton("View Transactions");
+        viewTransactions.setFont(new Font("Arial", Font.PLAIN, 15));
+        viewTransactions.setSize(200, 20);
+        viewTransactions.setLocation(200, 450);
+        viewTransactions.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = table.getSelectedRow();
+                String vendor_id = table.getModel().getValueAt(row, 0).toString();
+                AdminViewVendorTransaction vendorTransactions = new AdminViewVendorTransaction();
+                vendorTransactions.show(vendor_id);
+                f.dispose();
+            }
+        });
+        f.add(viewTransactions);
+
+        JButton viewItems = new JButton("View Items");
+        viewItems.setFont(new Font("Arial", Font.PLAIN, 15));
+        viewItems.setSize(200, 20);
+        viewItems.setLocation(200, 500);
+        viewItems.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = table.getSelectedRow();
+                String vendor_id = table.getModel().getValueAt(row, 0).toString();
+                AdminViewVendorItems vendorTransactions = new AdminViewVendorItems();
+                vendorTransactions.show(vendor_id);
+                f.dispose();
+            }
+        });
+        f.add(viewItems);
+
+
+
         // create a button to go back
         JButton back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(100, 20);
-        back.setLocation(250, 450);
+        back.setLocation(250, 550);
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // go back to the admin home page
-//                AdminHome adminHome = new AdminHome();
-//                adminHome.show();
-//                f.dispose();
+//                 go back to the admin home page
+                AdminHome adminHome = new AdminHome();
+                adminHome.show();
+                f.dispose();
             }
         });
         f.add(back);
