@@ -185,3 +185,11 @@ begin
     select vendors.v_name, transactions.total_amount, transactions.date_time from transactions, vendors where transactions.student_id = student_id and transactions.vendor_id = vendors.ID;
 end //
 delimiter ;
+
+-- make procedure to verify login
+delimiter //
+create procedure verify_login(IN ID varchar(50), IN password varchar(256))
+begin
+    select * from login where login.ID = ID and login.password = password;
+end //
+delimiter ;

@@ -157,7 +157,12 @@ public class LoginSystem extends JFrame implements ActionListener {
             password = Hash.hash(password);
             try {
                 Conn c = new Conn();
-                ResultSet rs = c.stmt.executeQuery("SELECT * FROM login WHERE ID = '" + ID + "' AND password = '" + password + "'");
+                // use procedure verify_login(IN ID varchar(50), IN password varchar(256))
+                CallableStatement cs = c.con.prepareCall("{call verify_login(?, ?)}");
+                cs.setString(1, ID);
+                cs.setString(2, password);
+                ResultSet rs = cs.executeQuery();
+
                 if (rs.next()) {
                     // instantiate the user
                     User user = User.getInstance();
