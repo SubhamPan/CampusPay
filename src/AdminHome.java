@@ -77,9 +77,7 @@ public class AdminHome {
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                User.getInstance().setId(null);
-                User.getInstance().setRole(-1);
-                User.getInstance().setPassword(null);
+                User.getInstance().clear();
                 LoginSystem login = new LoginSystem();
                 login.show();
                 f.dispose();

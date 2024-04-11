@@ -122,6 +122,7 @@ public class StudentHome {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // go back to the login page
+                User.getInstance().clear();
                 LoginSystem login = new LoginSystem();
                 login.show();
                 f.dispose();

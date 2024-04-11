@@ -1,199 +1,187 @@
+// Main login system class
 import java.awt.*;
 import javax.swing.*;
-import java.awt.event.*;
 import java.sql.*;
 
-public class LoginSystem extends JFrame implements ActionListener {
-    private static final long serialVersionUID = 1L;
-    private Container c;
-    private JLabel title;
-    private JLabel user;
-    private JTextField userText;
-    private JLabel password;
+public class LoginSystem {
+    public void show() {
+        // if User not null, show the respective home page
+        if (User.getInstance().getId() != null) {
+            if (User.getInstance().getRole() == 0) {
+                StudentHome home = new StudentHome();
+                home.show();
+            } else if (User.getInstance().getRole() == 1) {
+                VendorHome home = new VendorHome();
+                home.show();
+            } else {
+                AdminHome home = new AdminHome();
+                home.show();
+            }
+            return;
+        }
 
-    private JLabel role;
+        JFrame frame = new JFrame("Login");
+        frame.setBounds(300, 90, 900, 600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
 
-    private JTextField roleText;
-    private JPasswordField passwordText;
-    private JButton sub;
-    private JButton reset;
-    private JTextArea tout;
-
-    public LoginSystem() {
-        setTitle("Login");
-        setBounds(300, 90, 900, 600);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setResizable(false);
-
-        // add login.jpg image to the frame from the images folder in the project directory
+        // Add login.jpg image to the frame from the images folder in the project directory
         ImageIcon image = new ImageIcon("images/login.jpg");
-        // make the image fit the frame
+        // Make the image fit the frame
         Image img = image.getImage().getScaledInstance(300, 400, Image.SCALE_DEFAULT);
         image = new ImageIcon(img);
         JLabel imageLabel = new JLabel(image);
         imageLabel.setBounds(500, 100, 300, 400);
-        add(imageLabel);
+        frame.add(imageLabel);
 
-        c = getContentPane();
-        c.setLayout(null);
-        // set backgroung color to C5FFF8
-        c.setBackground(new Color(197, 255, 248));
+        Container container = frame.getContentPane();
+        container.setLayout(null);
+        // Set background color to C5FFF8
+        container.setBackground(new Color(197, 255, 248));
 
-        title = new JLabel("Login System");
+        JLabel title = new JLabel("Login System");
         title.setFont(new Font("Arial", Font.PLAIN, 30));
         title.setSize(300, 30);
         title.setLocation(300, 30);
-        c.add(title);
+        container.add(title);
 
-        user = new JLabel("ID");
-        user.setFont(new Font("Arial", Font.PLAIN, 20));
-        user.setSize(100, 20);
-        user.setLocation(100, 100);
-        c.add(user);
+        JLabel userLabel = new JLabel("ID");
+        userLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        userLabel.setSize(100, 20);
+        userLabel.setLocation(100, 100);
+        container.add(userLabel);
 
-        userText = new JTextField();
+        JTextField userText = new JTextField();
         userText.setFont(new Font("Arial", Font.PLAIN, 15));
         userText.setSize(190, 20);
         userText.setLocation(200, 100);
-        c.add(userText);
+        container.add(userText);
 
-        role = new JLabel("Role");
-        role.setFont(new Font("Arial", Font.PLAIN, 20));
-        role.setSize(100, 20);
-        role.setLocation(100, 125);
-        c.add(role);
+        JLabel roleLabel = new JLabel("Role");
+        roleLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        roleLabel.setSize(100, 20);
+        roleLabel.setLocation(100, 125);
+        container.add(roleLabel);
 
-        roleText = new JTextField();
+        JTextField roleText = new JTextField();
         roleText.setFont(new Font("Arial", Font.PLAIN, 15));
         roleText.setSize(190, 20);
         roleText.setLocation(200, 125);
-        c.add(roleText);
+        container.add(roleText);
 
-        password = new JLabel("Password");
-        password.setFont(new Font("Arial", Font.PLAIN, 20));
-        password.setSize(100, 20);
-        password.setLocation(100, 150);
-        c.add(password);
+        JLabel passwordLabel = new JLabel("Password");
+        passwordLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        passwordLabel.setSize(100, 20);
+        passwordLabel.setLocation(100, 150);
+        container.add(passwordLabel);
 
-        passwordText = new JPasswordField();
+        JPasswordField passwordText = new JPasswordField();
         passwordText.setFont(new Font("Arial", Font.PLAIN, 15));
         passwordText.setSize(190, 20);
         passwordText.setLocation(200, 150);
-        c.add(passwordText);
+        container.add(passwordText);
 
-        sub = new JButton("Submit");
-        sub.setFont(new Font("Arial", Font.PLAIN, 15));
-        sub.setSize(100, 20);
-        sub.setLocation(150, 200);
-        sub.addActionListener(this);
-        // set color to 7B66FF
-        sub.setBackground(new Color(123, 102, 255));
-        c.add(sub);
-
-        reset = new JButton("Reset");
-        reset.setFont(new Font("Arial", Font.PLAIN, 15));
-        reset.setSize(100, 20);
-        reset.setLocation(270, 200);
-        reset.addActionListener(this);
-        reset.setBackground(Color.RED);
-        c.add(reset);
-
-        // student registration option
-        JButton register = new JButton("Student Registration");
-        register.setFont(new Font("Arial", Font.PLAIN, 15));
-        register.setBounds(175, 250, 175, 20);
-        register.setBackground(Color.ORANGE);
-        register.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // show the student registration form
-                StudentRegistration r = new StudentRegistration();
-                // dispose the current frame
-                dispose();
-                r.show();
-            }
-        });
-        c.add(register);
-
-        // vendor registration option
-        JButton vendorRegister = new JButton("Vendor Registration");
-        vendorRegister.setFont(new Font("Arial", Font.PLAIN, 15));
-        vendorRegister.setBounds(175, 300, 175, 20);
-        vendorRegister.setBackground(Color.ORANGE);
-        vendorRegister.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // show the vendor registration form
-                VendorRegistration v = new VendorRegistration();
-                // dispose the current frame
-                dispose();
-                v.show();
-            }
-        });
-        c.add(vendorRegister);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == sub) {
-            String data1;
-            String data = "ID: " + userText.getText();
+        JButton submitButton = new JButton("Submit");
+        submitButton.setFont(new Font("Arial", Font.PLAIN, 15));
+        submitButton.setSize(100, 20);
+        submitButton.setLocation(150, 200);
+        submitButton.setBackground(new Color(123, 102, 255));
+        submitButton.addActionListener(e -> {
             String ID = userText.getText();
-            String roletxt = roleText.getText();
             int role = -1;
-            if (roletxt.toLowerCase().equals("student")) {
+            String roleTxt = roleText.getText();
+            if (roleTxt.toLowerCase().equals("student")) {
                 role = 0;
-            } else if (roletxt.toLowerCase().equals("vendor")) {
+            } else if (roleTxt.toLowerCase().equals("vendor")) {
                 role = 1;
-            }
-            else if (roletxt.toLowerCase().equals("admin")) {
+            } else if (roleTxt.toLowerCase().equals("admin")) {
                 role = 2;
             } else {
-                JOptionPane.showMessageDialog(this, "Invalid Role");
+                JOptionPane.showMessageDialog(frame, "Invalid Role");
                 return;
             }
-            String password = passwordText.getText();
-            // hash the password using sha256
+            String password = new String(passwordText.getPassword());
+            // Hash the password using sha256
             password = Hash.hash(password);
             try {
                 Conn c = new Conn();
-                // use procedure verify_login(IN ID varchar(50), IN password varchar(256))
+                // Use procedure verify_login(IN ID varchar(50), IN password varchar(256))
                 CallableStatement cs = c.con.prepareCall("{call verify_login(?, ?)}");
                 cs.setString(1, ID);
                 cs.setString(2, password);
                 ResultSet rs = cs.executeQuery();
 
                 if (rs.next()) {
-                    // instantiate the user
+                    // Instantiate the user
                     User user = User.getInstance();
                     user.setId(ID);
                     user.setRole(role);
                     user.setPassword(password);
-                    this.dispose();
+                    frame.dispose();
                     if (role == 0) {
                         StudentHome home = new StudentHome();
                         home.show();
                     } else if (role == 1) {
                         VendorHome home = new VendorHome();
                         home.show();
-                    } else if (role == 2) {
+                    } else {
                         AdminHome home = new AdminHome();
                         home.show();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Invalid ID or Password");
+                    JOptionPane.showMessageDialog(frame, "Invalid ID or Password");
                 }
             } catch (Exception ex) {
                 System.out.println(ex);
             }
-        } else if (e.getSource() == reset) {
+        });
+        container.add(submitButton);
+
+        JButton resetButton = new JButton("Reset");
+        resetButton.setFont(new Font("Arial", Font.PLAIN, 15));
+        resetButton.setSize(100, 20);
+        resetButton.setLocation(270, 200);
+        resetButton.setBackground(Color.RED);
+        resetButton.addActionListener(e -> {
             userText.setText("");
             passwordText.setText("");
-        }
+        });
+        container.add(resetButton);
+
+        // Student registration option
+        JButton registerButton = new JButton("Student Registration");
+        registerButton.setFont(new Font("Arial", Font.PLAIN, 15));
+        registerButton.setBounds(175, 250, 175, 20);
+        registerButton.setBackground(Color.ORANGE);
+        registerButton.addActionListener(e -> {
+            // Show the student registration form
+            StudentRegistration registration = new StudentRegistration();
+            // Dispose the current frame
+            frame.dispose();
+            registration.show();
+        });
+        container.add(registerButton);
+
+        // Vendor registration option
+        JButton vendorRegisterButton = new JButton("Vendor Registration");
+        vendorRegisterButton.setFont(new Font("Arial", Font.PLAIN, 15));
+        vendorRegisterButton.setBounds(175, 300, 175, 20);
+        vendorRegisterButton.setBackground(Color.ORANGE);
+        vendorRegisterButton.addActionListener(e -> {
+            // Show the vendor registration form
+            VendorRegistration registration = new VendorRegistration();
+            // Dispose the current frame
+            frame.dispose();
+            registration.show();
+        });
+        container.add(vendorRegisterButton);
+
+        frame.setVisible(true);
     }
 
     public static void main(String[] args) {
-        LoginSystem f = new LoginSystem();
-        f.setVisible(true);
+        LoginSystem loginSystem = new LoginSystem();
+        loginSystem.show();
     }
 }
+

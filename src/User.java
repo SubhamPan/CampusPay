@@ -43,4 +43,10 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+    public void clear() {
+        id = null;
+        role = -1;
+        password = null;
+    }
 }

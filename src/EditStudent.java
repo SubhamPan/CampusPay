@@ -133,7 +133,7 @@ public class EditStudent {
             public void actionPerformed(ActionEvent e) {
                 // get the values from the form
                 String s_name = nameText.getText();
-                String v_account = accountText.getText();
+                String s_account = accountText.getText();
                 String s_contact = contactText.getText();
                 String s_password = passwordText.getText();
 
@@ -147,8 +147,8 @@ public class EditStudent {
                         String[] parts = studentList.getSelectedItem().toString().split(" - ");
                         cs.setString(1, parts[0]);
                     }
-                    cs.setString(2, s_name);
-                    cs.setString(3, v_account);
+                    cs.setString(3, s_name);
+                    cs.setString(2, s_account);
                     cs.setString(4, s_contact);
                     s_password = Hash.hash(s_password);
                     cs.setString(5, s_password);
