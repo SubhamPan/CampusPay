@@ -223,3 +223,31 @@ create procedure add_transaction(IN vendor_id varchar(50), IN student_id varchar
 begin
     insert into transactions (vendor_id, student_id, total_amount, date_time) values (vendor_id, student_id, total_amount, now());
 end //
+
+-- make procedure to get all orders of a transaction
+delimiter //
+create procedure get_all_orders_of_transaction(IN transaction_id int)
+begin
+    select * from orders where orders.transaction_id = transaction_id;
+end //
+
+-- make procedure to get student details
+delimiter //
+create procedure get_student_details(IN ID varchar(50))
+begin
+    select * from student where student.ID = ID;
+end //
+
+-- make procedure to get vendor details
+delimiter //
+create procedure get_vendor_details(IN ID varchar(50))
+begin
+    select * from vendors where vendors.ID = ID;
+end //
+
+-- make procedure to get item details
+delimiter //
+create procedure get_item_details(IN ID int)
+begin
+    select * from items where items.ID = ID;
+end //

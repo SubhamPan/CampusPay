@@ -73,6 +73,21 @@ public class EditItem {
         submit.setLocation(100, 200);
         f.add(submit);
 
+        // set the price text field to the current price of the item
+        // use procedure get_item_details(IN ID int)
+        try {
+            Conn c = new Conn();
+            CallableStatement cs = c.con.prepareCall("{call get_item_details(?)}");
+            String item = selectItem.getSelectedItem().toString();
+            String[] parts = item.split(" - ");
+            cs.setInt(1, Integer.parseInt(parts[0]));
+            ResultSet rs = cs.executeQuery();
+            rs.next();
+            priceText.setText(rs.getString("price"));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
         // listen for the submit button to be clicked
         submit.addActionListener(new ActionListener() {
             @Override

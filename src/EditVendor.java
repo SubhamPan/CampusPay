@@ -121,6 +121,26 @@ public class EditVendor {
         passwordText.setLocation(200, 250);
         f.add(passwordText);
 
+        // populate the form with the vendor's details
+        try {
+            Conn c = new Conn();
+            CallableStatement cs = c.con.prepareCall("{call get_vendor_details(?)}");
+            if(User.getInstance().getRole() == 1) {
+                cs.setString(1, User.getInstance().getId());
+            } else {
+                String[] parts = vendorList.getSelectedItem().toString().split(" - ");
+                cs.setString(1, parts[0]);
+            }
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                nameText.setText(rs.getString("v_name"));
+                accountText.setText(rs.getString("account_no"));
+                contactText.setText(rs.getString("contact"));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
         // create a button to edit the vendor
         edit = new JButton("Edit");
         edit.setFont(new Font("Arial", Font.PLAIN, 15));

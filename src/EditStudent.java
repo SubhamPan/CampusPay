@@ -123,6 +123,27 @@ public class EditStudent {
         passwordText.setLocation(200, 250);
         f.add(passwordText);
 
+        // populate the form with the student's details
+        // use procedure get_student_details(IN ID varchar(50))
+        try {
+            Conn c = new Conn();
+            CallableStatement cs = c.con.prepareCall("{call get_student_details(?)}");
+            if(User.getInstance().getRole() != 2) {
+                cs.setString(1, User.getInstance().getId());
+            } else {
+                String[] parts = studentList.getSelectedItem().toString().split(" - ");
+                cs.setString(1, parts[0]);
+            }
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                nameText.setText(rs.getString("s_name"));
+                accountText.setText(rs.getString("account_no"));
+                contactText.setText(rs.getString("contact"));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
         // create a button to edit the student
         edit = new JButton("Edit");
         edit.setFont(new Font("Arial", Font.PLAIN, 15));
