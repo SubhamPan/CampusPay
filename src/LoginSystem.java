@@ -105,10 +105,11 @@ public class LoginSystem {
             password = Hash.hash(password);
             try {
                 Conn c = new Conn();
-                // Use procedure verify_login(IN ID varchar(50), IN password varchar(256))
-                CallableStatement cs = c.con.prepareCall("{call verify_login(?, ?)}");
+                // Use procedure verify_login(IN ID varchar(50), IN password varchar(256), IN role int)
+                CallableStatement cs = c.con.prepareCall("{call verify_login(?, ?, ?)}");
                 cs.setString(1, ID);
                 cs.setString(2, password);
+                cs.setInt(3, role);
                 ResultSet rs = cs.executeQuery();
 
                 if (rs.next()) {
@@ -129,7 +130,7 @@ public class LoginSystem {
                         home.show();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(frame, "Invalid ID or Password");
+                    JOptionPane.showMessageDialog(frame, "Invalid ID or Password or Role");
                 }
             } catch (Exception ex) {
                 System.out.println(ex);

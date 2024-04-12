@@ -255,3 +255,45 @@ end //
 
 drop procedure get_price_of_item;
 drop procedure change_price_of_item;
+
+
+-- modify login table to include role (student(0)/vendor(1)/admin(2))
+alter table login add role int;
+
+drop procedure verify_login;
+-- make procedure to verify login
+delimiter //
+create procedure verify_login(IN ID varchar(50), IN password varchar(256), IN role int)
+begin
+    select * from login where login.ID = ID and login.password = password and login.role = role;
+end //
+delimiter ;
+
+drop procedure register_student;
+drop procedure register_vendor;
+
+-- make procedure to register a vendor
+delimiter //
+create procedure register_vendor(IN ID varchar(50), IN v_name varchar(50), IN account_no varchar(50), IN contact char(10), IN password varchar(256))
+begin
+    insert into vendors (ID, v_name, account_no, contact, password) values (ID, v_name, account_no, contact, password);
+    insert into login (ID, password, role) values (ID, password, 1);
+end //
+delimiter ;
+
+-- make procedure to register a student
+delimiter //
+create procedure register_student(IN ID varchar(50), IN BITS_account varchar(50), IN s_name varchar(50), IN contact char(10), IN password varchar(256))
+begin
+    insert into student (ID, BITS_account, s_name, contact, password) values (ID, BITS_account, s_name, contact, password);
+    insert into login (ID, password, role) values (ID, password, 0);
+end //
+delimiter ;
+
+-- make procedure to register an admin
+delimiter //
+create procedure register_admin(IN ID varchar(50), IN password varchar(256))
+begin
+    insert into login (ID, password, role) values (ID, password, 2);
+end //
+delimiter ;
