@@ -228,7 +228,8 @@ end //
 delimiter //
 create procedure get_all_orders_of_transaction(IN transaction_id int)
 begin
-    select * from orders where orders.transaction_id = transaction_id;
+    -- item_id, item_name, price, quantity
+    select items.ID, items.item_name, items.price, orders.quantity from orders, items where orders.transaction_id = transaction_id and orders.item_id = items.ID;
 end //
 
 -- make procedure to get student details

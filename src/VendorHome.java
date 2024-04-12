@@ -103,6 +103,20 @@ public class VendorHome {
         });
         f.add(editVendor);
 
+        // create a button to show orders
+        JButton orders = new JButton("Show Orders");
+        orders.setFont(new Font("Arial", Font.PLAIN, 15));
+        orders.setSize(200, 20);
+        orders.setLocation(200, 300);
+        orders.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ShowOrders showOrders = new ShowOrders();
+                showOrders.show();
+                f.dispose();
+            }
+        });
+        f.add(orders);
 
         // add logout button
         JButton logout = new JButton("Logout");
