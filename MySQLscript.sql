@@ -252,3 +252,6 @@ create procedure get_item_details(IN ID int)
 begin
     select * from items where items.ID = ID;
 end //
+
+drop procedure get_price_of_item;
+drop procedure change_price_of_item;

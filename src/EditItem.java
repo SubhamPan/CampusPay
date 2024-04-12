@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.sql.*;
 
 public class EditItem {
-    // this is used to change the price of an item sold by a vendor
+    // this is used to change the details of an item
     private Container c;
     private JLabel title;
     private JLabel price;
@@ -52,28 +52,42 @@ public class EditItem {
             System.out.println(e);
         }
 
+        // create a label for the item_name
+        JLabel item_name = new JLabel("Item Name");
+        item_name.setFont(new Font("Arial", Font.PLAIN, 20));
+        item_name.setSize(100, 20);
+        item_name.setLocation(100, 150);
+        f.add(item_name);
+
+        // create a text field for the item_name
+        JTextField item_nameText = new JTextField();
+        item_nameText.setFont(new Font("Arial", Font.PLAIN, 15));
+        item_nameText.setSize(190, 20);
+        item_nameText.setLocation(200, 150);
+        f.add(item_nameText);
+
         // create a label for the price
         price = new JLabel("Price");
         price.setFont(new Font("Arial", Font.PLAIN, 20));
         price.setSize(100, 20);
-        price.setLocation(100, 150);
+        price.setLocation(100, 200);
         f.add(price);
 
         // create a text field for the price
         priceText = new JTextField();
         priceText.setFont(new Font("Arial", Font.PLAIN, 15));
         priceText.setSize(190, 20);
-        priceText.setLocation(200, 150);
+        priceText.setLocation(200, 200);
         f.add(priceText);
 
         // create a button to submit the form
         submit = new JButton("Submit");
         submit.setFont(new Font("Arial", Font.PLAIN, 15));
         submit.setSize(100, 20);
-        submit.setLocation(100, 200);
+        submit.setLocation(200, 250);
         f.add(submit);
 
-        // set the price text field to the current price of the item
+        // set the item_name and price to the current price of the item
         // use procedure get_item_details(IN ID int)
         try {
             Conn c = new Conn();
@@ -84,6 +98,7 @@ public class EditItem {
             ResultSet rs = cs.executeQuery();
             rs.next();
             priceText.setText(rs.getString("price"));
+            item_nameText.setText(rs.getString("item_name"));
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -92,16 +107,16 @@ public class EditItem {
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // connect to the database and update the price of the item
+                // connect to the database and update the details of the item
                 try {
                     Conn c = new Conn();
-                    // use procedure change_price_of_item(IN item_id int, IN new_price int)
-                    CallableStatement cs = c.con.prepareCall("{call change_price_of_item(?, ?)}");
-                    // get the item ID from the drop down menu
+                    // use procedure update_item_details(IN ID int, IN item_name varchar(50), IN price int)
+                    CallableStatement cs = c.con.prepareCall("{call update_item_details(?, ?, ?)}");
                     String item = selectItem.getSelectedItem().toString();
                     String[] parts = item.split(" - ");
                     cs.setInt(1, Integer.parseInt(parts[0]));
-                    cs.setInt(2, Integer.parseInt(priceText.getText()));
+                    cs.setString(2, item_nameText.getText());
+                    cs.setInt(3, Integer.parseInt(priceText.getText()));
                     cs.execute();
                     JOptionPane.showMessageDialog(f, "Price updated successfully");
                 } catch (Exception ex) {
@@ -115,7 +130,7 @@ public class EditItem {
         back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(100, 20);
-        back.setLocation(250, 200);
+        back.setLocation(250, 300);
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -125,15 +140,6 @@ public class EditItem {
             }
         });
         f.add(back);
-
-        // create a text area to display the result of the form submission
-        tout = new JTextArea();
-        tout.setFont(new Font("Arial", Font.PLAIN, 15));
-        tout.setSize(300, 200);
-        tout.setLocation(100, 250);
-        tout.setLineWrap(true);
-        tout.setEditable(false);
-        f.add(tout);
 
         // display the frame
         f.setVisible(true);
