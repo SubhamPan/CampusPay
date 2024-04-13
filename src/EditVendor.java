@@ -28,57 +28,57 @@ public class EditVendor {
 
         title = new JLabel("Edit Vendor");
         title.setFont(new Font("Arial", Font.PLAIN, 30));
-        title.setBounds(300, 30, 300, 30);
+        title.setBounds(350, 50, 400, 30);
         container.add(title);
 
         ID = new JLabel("Vendor ID");
         ID.setFont(new Font("Arial", Font.PLAIN, 20));
-        ID.setBounds(100, 50, 100, 20);
+        ID.setBounds(300, 150, 100, 20);
         container.add(ID);
 
         JComboBox<String> vendorList = new JComboBox<String>();
         vendorList.setFont(new Font("Arial", Font.PLAIN, 15));
-        vendorList.setBounds(200, 50, 190, 20);
+        vendorList.setBounds(400, 150, 190, 20);
         container.add(vendorList);
 
         name = new JLabel("Name");
         name.setFont(new Font("Arial", Font.PLAIN, 20));
-        name.setBounds(100, 100, 100, 20);
+        name.setBounds(300, 200, 100, 20);
         container.add(name);
 
         nameText = new JTextField();
         nameText.setFont(new Font("Arial", Font.PLAIN, 15));
-        nameText.setBounds(200, 100, 190, 20);
+        nameText.setBounds(400, 200, 190, 20);
         container.add(nameText);
 
         account = new JLabel("Acc No.");
         account.setFont(new Font("Arial", Font.PLAIN, 20));
-        account.setBounds(100, 150, 200, 20);
+        account.setBounds(300, 250, 200, 20);
         container.add(account);
 
         accountText = new JTextField();
         accountText.setFont(new Font("Arial", Font.PLAIN, 15));
-        accountText.setBounds(200, 150, 190, 20);
+        accountText.setBounds(400, 250, 190, 20);
         container.add(accountText);
 
         contact = new JLabel("Contact");
         contact.setFont(new Font("Arial", Font.PLAIN, 20));
-        contact.setBounds(100, 200, 100, 20);
+        contact.setBounds(300, 300, 100, 20);
         container.add(contact);
 
         contactText = new JTextField();
         contactText.setFont(new Font("Arial", Font.PLAIN, 15));
-        contactText.setBounds(200, 200, 190, 20);
+        contactText.setBounds(400, 300, 190, 20);
         container.add(contactText);
 
         password = new JLabel("Password");
         password.setFont(new Font("Arial", Font.PLAIN, 20));
-        password.setBounds(100, 250, 100, 20);
+        password.setBounds(300, 350, 100, 20);
         container.add(password);
 
         passwordText = new JPasswordField();
         passwordText.setFont(new Font("Arial", Font.PLAIN, 15));
-        passwordText.setBounds(200, 250, 190, 20);
+        passwordText.setBounds(400, 350, 190, 20);
         container.add(passwordText);
 
         try {
@@ -101,7 +101,7 @@ public class EditVendor {
         }
 
         edit = new JButton("Edit");
-        configureButton(edit, 250, 300, 100, 30);
+        configureButton(edit, 400, 450, 100, 30);
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -135,7 +135,7 @@ public class EditVendor {
         container.add(edit);
 
         back = new JButton("Back");
-        configureButton(back, 250, 350, 100, 30);
+        configureButton(back, 400, 500, 100, 30);
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
