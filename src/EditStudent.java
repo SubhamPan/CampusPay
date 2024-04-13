@@ -1,13 +1,9 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.CallableStatement;
-import java.sql.ResultSet;
 import javax.swing.*;
+import java.awt.event.*;
+import java.sql.*;
 
 public class EditStudent {
-    // this class will be used to update student
-    private Container c;
     private JLabel title;
     private JLabel ID;
     private JLabel name;
@@ -22,29 +18,26 @@ public class EditStudent {
     private JButton back;
 
     public void show() {
-        // create a new frame to store the edit student form
-        JFrame f = new JFrame("Edit student");
-        f.setSize(600, 400);
+        JFrame f = new JFrame("Edit Student");
+        f.setSize(900, 600);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setLayout(null);
+        f.setResizable(false);
 
-        // create a label
-        title = new JLabel("Edit student");
+        Container container = f.getContentPane();
+        container.setLayout(null);
+        container.setBackground(new Color(243, 238, 234));
+
+        title = new JLabel("Edit Student");
         title.setFont(new Font("Arial", Font.PLAIN, 30));
-        title.setSize(300, 30);
-        title.setLocation(250, 30);
-        f.add(title);
+        title.setBounds(375, 30, 300, 30);
+        container.add(title);
 
-        // create a label for the student ID
-        ID = new JLabel("student ID");
+        ID = new JLabel("Student ID");
         ID.setFont(new Font("Arial", Font.PLAIN, 20));
-        ID.setSize(100, 20);
-        ID.setLocation(100, 50);
-        f.add(ID);
+        ID.setBounds(250, 100, 100, 20);
+        container.add(ID);
 
-        // create a drop down list for the students, this will be populated from the database
         JComboBox<String> studentList = new JComboBox<String>();
-
         if(User.getInstance().getRole() == 2) {
             // user is admin, get all students
             try {
@@ -62,69 +55,56 @@ public class EditStudent {
             studentList.setEnabled(false);
             studentList.addItem(User.getInstance().getId());
         }
-        studentList.setFont(new Font("Arial", Font.PLAIN, 15));
-        studentList.setSize(190, 20);
-        studentList.setLocation(200, 50);
-        f.add(studentList);
 
-        // create a label for the name
+        studentList.setFont(new Font("Arial", Font.PLAIN, 15));
+        studentList.setBounds(450, 100, 190, 20);
+        studentList.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2));
+        container.add(studentList);
+
         name = new JLabel("Name");
         name.setFont(new Font("Arial", Font.PLAIN, 20));
-        name.setSize(100, 20);
-        name.setLocation(100, 100);
-        f.add(name);
+        name.setBounds(250, 150, 100, 20);
+        container.add(name);
 
-        // create a text field for the name
         nameText = new JTextField();
         nameText.setFont(new Font("Arial", Font.PLAIN, 15));
-        nameText.setSize(190, 20);
-        nameText.setLocation(200, 100);
-        f.add(nameText);
+        nameText.setBounds(450, 150, 190, 20);
+        nameText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2));
+        container.add(nameText);
 
-        // create a label for the account number
         account = new JLabel("Account Number");
         account.setFont(new Font("Arial", Font.PLAIN, 20));
-        account.setSize(200, 20);
-        account.setLocation(100, 150);
-        f.add(account);
+        account.setBounds(250, 200, 200, 20);
+        container.add(account);
 
-        // create a text field for the account number
         accountText = new JTextField();
         accountText.setFont(new Font("Arial", Font.PLAIN, 15));
-        accountText.setSize(190, 20);
-        accountText.setLocation(200, 150);
-        f.add(accountText);
+        accountText.setBounds(450, 200, 190, 20);
+        accountText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2));
+        container.add(accountText);
 
-        // create a label for the contact
         contact = new JLabel("Contact");
         contact.setFont(new Font("Arial", Font.PLAIN, 20));
-        contact.setSize(100, 20);
-        contact.setLocation(100, 200);
-        f.add(contact);
+        contact.setBounds(250, 250, 100, 20);
+        container.add(contact);
 
-        // create a text field for the contact
         contactText = new JTextField();
         contactText.setFont(new Font("Arial", Font.PLAIN, 15));
-        contactText.setSize(190, 20);
-        contactText.setLocation(200, 200);
-        f.add(contactText);
+        contactText.setBounds(450, 250, 190, 20);
+        contactText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2));
+        container.add(contactText);
 
-        // create a label for the password
         password = new JLabel("Password");
         password.setFont(new Font("Arial", Font.PLAIN, 20));
-        password.setSize(100, 20);
-        password.setLocation(100, 250);
-        f.add(password);
+        password.setBounds(250, 300, 100, 20);
+        container.add(password);
 
-        // create a text field for the password
         passwordText = new JPasswordField();
         passwordText.setFont(new Font("Arial", Font.PLAIN, 15));
-        passwordText.setSize(190, 20);
-        passwordText.setLocation(200, 250);
-        f.add(passwordText);
+        passwordText.setBounds(450, 300, 190, 20);
+        passwordText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2));
+        container.add(passwordText);
 
-        // populate the form with the student's details
-        // use procedure get_student_details(IN ID varchar(50))
         try {
             Conn c = new Conn();
             CallableStatement cs = c.con.prepareCall("{call get_student_details(?)}");
@@ -144,11 +124,11 @@ public class EditStudent {
             System.out.println(e);
         }
 
-        // create a button to edit the student
         edit = new JButton("Edit");
         edit.setFont(new Font("Arial", Font.PLAIN, 15));
-        edit.setSize(100, 20);
-        edit.setLocation(250, 300);
+        edit.setBounds(425, 350, 100, 20);
+        edit.setBackground(new Color(176, 166, 149));
+        edit.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -181,21 +161,38 @@ public class EditStudent {
                 }
             }
         });
-        f.add(edit);
 
-        // create a button to go back to the home page
+        container.add(edit);
+
         back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
-        back.setSize(100, 20);
-        back.setLocation(250, 350);
+        back.setBounds(425, 400, 100, 20);
+        back.setBackground(new Color(176, 166, 149));
+        back.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(User.getInstance().getRole() == 2) {
+                    ViewStudents home = new ViewStudents();
+                    home.show();
+                } else if(User.getInstance().getRole() == 0){
+                    StudentHome home = new StudentHome();
+                    home.show();
+                }
                 f.dispose();
             }
         });
-        f.add(back);
+
+        container.add(back);
 
         f.setVisible(true);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (dim.width - f.getSize().width) / 2;
+        int y = (dim.height - f.getSize().height) / 2;
+        f.setLocation(x, y);
     }
+//    public static void main(String[] args) {
+//        EditStudent editStudent = new EditStudent();
+//        editStudent.show();
+//    }
 }
