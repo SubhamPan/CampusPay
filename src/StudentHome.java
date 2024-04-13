@@ -29,13 +29,13 @@ public class StudentHome {
         container.add(totalAmount);
 
         try {
-//            Conn c = new Conn();
-//            CallableStatement cs = c.con.prepareCall("{call get_total_amount_spent_by_student(?, ?)}");
-//            cs.setString(1, User.getInstance().getId());
-//            cs.registerOutParameter(2, Types.INTEGER);
-//            cs.execute();
-//            int total_amount_spent = cs.getInt(2);
-            int total_amount_spent = 1000;
+            Conn c = new Conn();
+            CallableStatement cs = c.con.prepareCall("{call get_total_amount_spent_by_student(?, ?)}");
+            cs.setString(1, User.getInstance().getId());
+            cs.registerOutParameter(2, Types.INTEGER);
+            cs.execute();
+            int total_amount_spent = cs.getInt(2);
+//            int total_amount_spent = 1000;
             totalAmount.setText(Integer.toString(total_amount_spent));
         } catch (Exception e) {
             System.out.println(e);
