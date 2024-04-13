@@ -20,7 +20,7 @@ public class LoginSystem {
         }
 
         JFrame frame = new JFrame("Login");
-        frame.setBounds(300, 90, 900, 600);
+        frame.setSize(900, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 

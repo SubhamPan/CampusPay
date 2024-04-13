@@ -4,7 +4,6 @@ import java.awt.event.*;
 import java.sql.*;
 
 public class VendorRegistration {
-    private Container c;
     private JLabel title;
     private JLabel name;
     private JTextField nameText;
@@ -20,7 +19,7 @@ public class VendorRegistration {
 
     public void show() {
         JFrame f = new JFrame("Vendor Registration");
-        f.setBounds(300, 90, 900, 600);
+        f.setSize(900, 600);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLayout(null);
 
@@ -30,7 +29,7 @@ public class VendorRegistration {
 
         title = new JLabel("Vendor Registration");
         title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
-        title.setBounds(300, 30, 300, 40); // Centered horizontally
+        title.setBounds(300, 30, 400, 40); // Centered horizontally
         container.add(title);
 
         name = new JLabel("Name");
@@ -79,7 +78,7 @@ public class VendorRegistration {
 
         register = new JButton("Register");
         register.setFont(new Font("Arial", Font.PLAIN, 15));
-        register.setBounds(300, 300, 100, 30); // Centered horizontally
+        register.setBounds(350, 300, 100, 30); // Centered horizontally
         register.setBackground(new Color(176, 166, 149)); // B0A695
         register.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
         register.addActionListener(new ActionListener() {
@@ -113,7 +112,7 @@ public class VendorRegistration {
 
         back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
-        back.setBounds(300, 350, 100, 30); // Centered horizontally
+        back.setBounds(350, 350, 100, 30); // Centered horizontally
         back.setBackground(new Color(176, 166, 149)); // B0A695
         back.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
         back.addActionListener(new ActionListener() {
