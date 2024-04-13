@@ -2,57 +2,57 @@ create database campuspay;
 use campuspay;
 create table login (
     ID varchar(50),
-    password varchar(255),
-    primary key (ID)
+    password varchar(256) NOT NULL,
+    primary key (ID),
+    role int,
+    CONSTRAINT chk_role CHECK (role = 0 OR role = 1 OR role = 2)
 );
 
 create table student (
     ID varchar(50),
-    BITS_account varchar(50),
-    s_name varchar(50),
+    BITS_account varchar(50) NOT NULL,
+    s_name varchar(50) NOT NULL,
     contact char(10),
-    password varchar(256),
     primary key (ID)
 );
-use campuspay;
+
 create table vendors (
     ID varchar(50),
-    v_name varchar(50),
-    account_no varchar(50),
+    v_name varchar(50) NOT NULL,
+    account_no varchar(50) NOT NULL,
     contact char(10),
-    password varchar(256),
     primary key (ID)
 );
 
 create table items (
     ID int auto_increment,
     item_name varchar(50),
-    price int,
+    price int unsigned NOT NULL,
     vendor_id varchar(50),
     primary key (ID),
-    foreign key (vendor_id) references vendors(ID)
+    foreign key (vendor_id) references vendors(ID) on delete cascade
 );
 
 create table transactions (
     ID int auto_increment,
     vendor_id varchar(50),
     student_id varchar(50),
-    total_amount int,
+    total_amount int unsigned NOT NULL,
     date_time datetime,
     primary key (ID),
-    foreign key (vendor_id) references vendors(ID),
-    foreign key (student_id) references student(ID)
+    foreign key (vendor_id) references vendors(ID) on delete set null,
+    foreign key (student_id) references student(ID) on delete set null
 );
 
 create table orders (
     ID int auto_increment,
     transaction_id int,
     item_id int,
-    price int,
-    quantity int,
+    price int unsigned NOT NULL,
+    quantity int unsigned NOT NULL,
     primary key (ID),
-    foreign key (transaction_id) references transactions(ID),
-    foreign key (item_id) references items(ID)
+    foreign key (transaction_id) references transactions(ID) on delete cascade,
+    foreign key (item_id) references items(ID) on delete set null
 );
 
 -- define a procedure to get the total amount spent by a student
@@ -63,7 +63,7 @@ begin
 end //
 delimiter ;
 
--- make procedure to get all the payments made by a student
+-- procedure to get all the payments made by a student
 delimiter //
 create procedure get_all_payments_made_by_student(IN student_id varchar(50))
 begin
@@ -71,25 +71,7 @@ begin
 end //
 delimiter ;
 
--- make procedure to register a vendor
-delimiter //
-create procedure register_vendor(IN ID varchar(50), IN v_name varchar(50), IN account_no varchar(50), IN contact char(10), IN password varchar(256))
-begin
-    insert into vendors (ID, v_name, account_no, contact, password) values (ID, v_name, account_no, contact, password);
-    insert into login (ID, password) values (ID, password);
-end //
-delimiter ;
-
--- make procedure to register a student
-delimiter //
-create procedure register_student(IN ID varchar(50), IN BITS_account varchar(50), IN s_name varchar(50), IN contact char(10), IN password varchar(256))
-begin
-    insert into student (ID, BITS_account, s_name, contact, password) values (ID, BITS_account, s_name, contact, password);
-    insert into login (ID, password) values (ID, password);
-end //
-delimiter ;
-
--- make procedure to check total amount earned by a vendor
+-- procedure to check total amount earned by a vendor
 delimiter //
 create procedure get_total_amount_earned_by_vendor(IN vendor_id varchar(50), OUT total_amount_earned int)
 begin
@@ -97,7 +79,7 @@ begin
 end //
 delimiter ;
 
--- make procedure to get all the transactions made by a vendor
+-- procedure to get all the transactions made by a vendor
 delimiter //
 create procedure get_all_transactions_made_by_vendor(IN vendor_id varchar(50))
 begin
@@ -105,7 +87,7 @@ begin
 end //
 delimiter ;
 
--- make procedure to get all the items sold by a vendor
+-- procedure to get all the items sold by a vendor
 delimiter //
 create procedure get_all_items_sold_by_vendor(IN vendor_id varchar(50))
 begin
@@ -113,7 +95,7 @@ begin
 end //
 delimiter ;
 
--- make procedure to add an item to the menu of a vendor
+-- procedure to add an item to the menu of a vendor
 delimiter //
 create procedure add_item_to_menu(IN item_name varchar(50), IN price int, IN vendor_id varchar(50))
 begin
@@ -121,23 +103,7 @@ begin
 end //
 delimiter ;
 
--- make procedure to change the price of an item
-delimiter //
-create procedure change_price_of_item(IN item_id int, IN new_price int)
-begin
-    update items set price = new_price where items.ID = item_id;
-end //
-delimiter ;
-
--- make procedure to get price of an item
-delimiter //
-create procedure get_price_of_item(IN item_id int, OUT price int)
-begin
-    select items.price into price from items where items.ID = item_id;
-end //
-delimiter ;
-
--- make procedure to make a new order
+-- procedure to a new order
 delimiter //
 create procedure make_order(IN transaction_id int, IN item_id int, IN price int, IN quantity int)
 begin
@@ -145,7 +111,7 @@ begin
 end //
 delimiter ;
 
--- make procedure to make a new transaction
+-- procedure to a new transaction
 delimiter //
 create procedure make_transaction(IN vendor_id varchar(50), IN student_id varchar(50), IN total_amount int, IN date_time datetime)
 begin
@@ -153,7 +119,7 @@ begin
 end //
 delimiter ;
 
--- make procedure to update student details
+-- procedure to update student details
 delimiter //
 create procedure update_student_details(IN ID varchar(50), IN BITS_account varchar(50), IN s_name varchar(50), IN contact char(10), IN password varchar(256))
 begin
@@ -161,7 +127,7 @@ begin
 end //
 delimiter ;
 
--- make procedure to update vendor details
+-- procedure to update vendor details
 delimiter //
 create procedure update_vendor_details(IN ID varchar(50), IN v_name varchar(50), IN account_no varchar(50), IN contact char(10), IN password varchar(256))
 begin
@@ -169,7 +135,7 @@ begin
 end //
 delimiter ;
 
--- make procedure to update item details
+-- procedure to update item details
 delimiter //
 create procedure update_item_details(IN ID int, IN item_name varchar(50), IN price int)
 begin
@@ -186,15 +152,7 @@ begin
 end //
 delimiter ;
 
--- make procedure to verify login
-delimiter //
-create procedure verify_login(IN ID varchar(50), IN password varchar(256))
-begin
-    select * from login where login.ID = ID and login.password = password;
-end //
-delimiter ;
-
--- make procedure to get all the students
+-- procedure to get all the students
 delimiter //
 create procedure get_all_students()
 begin
@@ -202,7 +160,7 @@ begin
 end //
 delimiter ;
 
--- make procedure to get all the vendors
+-- procedure to get all the vendors
 delimiter //
 create procedure get_all_vendors()
 begin
@@ -210,58 +168,56 @@ begin
 end //
 delimiter ;
 
--- make procedure to get all transactions
+-- procedure to get all transactions
 delimiter //
 create procedure get_all_transactions()
 begin
     select * from transactions;
 end //
+delimiter ;
 
--- make procedure to add transaction
+-- procedure to add transaction
 delimiter //
 create procedure add_transaction(IN vendor_id varchar(50), IN student_id varchar(50), IN total_amount int)
 begin
     insert into transactions (vendor_id, student_id, total_amount, date_time) values (vendor_id, student_id, total_amount, now());
 end //
+delimiter ;
 
--- make procedure to get all orders of a transaction
+-- procedure to get all orders of a transaction
 delimiter //
 create procedure get_all_orders_of_transaction(IN transaction_id int)
 begin
     -- item_id, item_name, price, quantity
     select items.ID, items.item_name, items.price, orders.quantity from orders, items where orders.transaction_id = transaction_id and orders.item_id = items.ID;
 end //
+delimiter ;
 
--- make procedure to get student details
+-- procedure to get student details
 delimiter //
 create procedure get_student_details(IN ID varchar(50))
 begin
     select * from student where student.ID = ID;
 end //
+delimiter ;
 
--- make procedure to get vendor details
+-- procedure to get vendor details
 delimiter //
 create procedure get_vendor_details(IN ID varchar(50))
 begin
     select * from vendors where vendors.ID = ID;
 end //
+delimiter ;
 
--- make procedure to get item details
+-- procedure to get item details
 delimiter //
 create procedure get_item_details(IN ID int)
 begin
     select * from items where items.ID = ID;
 end //
+delimiter ;
 
-drop procedure get_price_of_item;
-drop procedure change_price_of_item;
-
-
--- modify login table to include role (student(0)/vendor(1)/admin(2))
-alter table login add role int;
-
-drop procedure verify_login;
--- make procedure to verify login
+-- procedure to verify login
 delimiter //
 create procedure verify_login(IN ID varchar(50), IN password varchar(256), IN role int)
 begin
@@ -269,31 +225,73 @@ begin
 end //
 delimiter ;
 
-drop procedure register_student;
-drop procedure register_vendor;
-
--- make procedure to register a vendor
+-- procedure to register a vendor
 delimiter //
 create procedure register_vendor(IN ID varchar(50), IN v_name varchar(50), IN account_no varchar(50), IN contact char(10), IN password varchar(256))
 begin
+    start transaction;
     insert into vendors (ID, v_name, account_no, contact, password) values (ID, v_name, account_no, contact, password);
     insert into login (ID, password, role) values (ID, password, 1);
+    commit;
 end //
 delimiter ;
 
--- make procedure to register a student
+-- procedure wrapped in a transaction to register a student
 delimiter //
 create procedure register_student(IN ID varchar(50), IN BITS_account varchar(50), IN s_name varchar(50), IN contact char(10), IN password varchar(256))
 begin
-    insert into student (ID, BITS_account, s_name, contact, password) values (ID, BITS_account, s_name, contact, password);
+    start transaction;
+    insert into student (ID, BITS_account, s_name, contact) values (ID, BITS_account, s_name, contact);
     insert into login (ID, password, role) values (ID, password, 0);
+    commit;
 end //
 delimiter ;
 
--- make procedure to register an admin
+
+-- procedure to register an admin
 delimiter //
 create procedure register_admin(IN ID varchar(50), IN password varchar(256))
 begin
     insert into login (ID, password, role) values (ID, password, 2);
+end //
+delimiter ;
+
+-- procedure to delete an item
+delimiter //
+create procedure delete_item(IN ID int)
+begin
+    delete from items where items.ID = ID;
+end //
+delimiter ;
+
+-- procedure to delete a transaction
+delimiter //
+create procedure delete_transaction(IN ID int)
+begin
+    delete from transactions where transactions.ID = ID;
+end //
+delimiter ;
+
+-- procedure to delete a student
+delimiter //
+create procedure delete_student(IN ID varchar(50))
+begin
+    delete from student where student.ID = ID;
+end //
+delimiter ;
+
+-- procedure to delete a vendor
+delimiter //
+create procedure delete_vendor(IN ID varchar(50))
+begin
+    delete from vendors where vendors.ID = ID;
+end //
+delimiter ;
+
+-- procedure to delete an admin
+delimiter //
+create procedure delete_admin(IN ID varchar(50))
+begin
+    delete from login where login.ID = ID;
 end //
 delimiter ;
