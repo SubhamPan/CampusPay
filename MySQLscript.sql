@@ -230,7 +230,7 @@ delimiter //
 create procedure register_vendor(IN ID varchar(50), IN v_name varchar(50), IN account_no varchar(50), IN contact char(10), IN password varchar(256))
 begin
     start transaction;
-    insert into vendors (ID, v_name, account_no, contact, password) values (ID, v_name, account_no, contact, password);
+    insert into vendors (ID, v_name, account_no, contact) values (ID, v_name, account_no, contact);
     insert into login (ID, password, role) values (ID, password, 1);
     commit;
 end //

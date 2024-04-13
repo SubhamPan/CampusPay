@@ -4,8 +4,6 @@ import java.awt.event.*;
 import java.sql.*;
 
 public class VendorItems {
-    // this class is used to display, add and change prices of items sold by a vendor
-    private Container c;
     private JLabel title;
     private JTextArea items;
     private JScrollPane scroll;
@@ -13,37 +11,34 @@ public class VendorItems {
     private JButton edit;
 
     public void show() {
-        // create a new frame to store the items sold by the vendor
         JFrame f = new JFrame("Vendor Items");
-        f.setSize(600, 400);
+        f.setBounds(350, 90, 900, 600);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLayout(null);
 
-        // create a label
+        Container container = f.getContentPane();
+        container.setBackground(new Color(243, 238, 234));
+
         title = new JLabel("Vendor Items");
         title.setFont(new Font("Arial", Font.PLAIN, 30));
         title.setSize(300, 30);
-        title.setLocation(250, 30);
-        f.add(title);
+        title.setLocation(300, 30);
+        container.add(title);
 
-        // create a scrollable area to store the items sold by the vendor
         items = new JTextArea(30, 30);
         items.setFont(new Font("Arial", Font.PLAIN, 10));
         scroll = new JScrollPane(items);
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setSize(500, 200);
-        scroll.setLocation(50, 100);
-        f.add(scroll);
+        scroll.setSize(600, 200);
+        scroll.setLocation(150, 100);
+        container.add(scroll);
 
-        // connect to the database and get the items sold by the vendor
         try {
             Conn c = new Conn();
-            // use procedure get_all_items_sold_by_vendor(IN vendor_id varchar(50))
             CallableStatement cs = c.con.prepareCall("{call get_all_items_sold_by_vendor(?)}");
             cs.setString(1, User.getInstance().getId());
             ResultSet rs = cs.executeQuery();
 
-            // display the items sold by the vendor
             while (rs.next()) {
                 items.append("Item ID: " + rs.getString("ID") + "\n");
                 items.append("Item Name: " + rs.getString("item_name") + "\n");
@@ -53,11 +48,12 @@ public class VendorItems {
             System.out.println(e);
         }
 
-        // create a button to add an item
+        int buttonWidth = 100;
+        int buttonHeight = 30;
+        int buttonX = 300;
+
         add = new JButton("Add Item");
-        add.setFont(new Font("Arial", Font.PLAIN, 15));
-        add.setSize(100, 20);
-        add.setLocation(100, 300);
+        configureButton(add, buttonX - 50, 350, buttonWidth, buttonHeight);
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,13 +62,10 @@ public class VendorItems {
                 f.dispose();
             }
         });
-        f.add(add);
+        container.add(add);
 
-        // create a button to edit an item
         edit = new JButton("Edit Item");
-        edit.setFont(new Font("Arial", Font.PLAIN, 15));
-        edit.setSize(100, 20);
-        edit.setLocation(250, 300);
+        configureButton(edit, buttonX + 100, 350, buttonWidth, buttonHeight);
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -81,13 +74,10 @@ public class VendorItems {
                 f.dispose();
             }
         });
-        f.add(edit);
+        container.add(edit);
 
-        // create a button to go back to the home page
         JButton back = new JButton("Back");
-        back.setFont(new Font("Arial", Font.PLAIN, 15));
-        back.setSize(100, 20);
-        back.setLocation(400, 300);
+        configureButton(back, buttonX + 250, 350, buttonWidth, buttonHeight);
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -96,8 +86,15 @@ public class VendorItems {
                 f.dispose();
             }
         });
-        f.add(back);
+        container.add(back);
 
         f.setVisible(true);
+    }
+
+    private void configureButton(JButton button, int x, int y, int width, int height) {
+        button.setFont(new Font("Arial", Font.PLAIN, 15));
+        button.setBounds(x, y, width, height);
+        button.setBackground(new Color(176, 166, 149)); // B0A695
+        button.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
     }
 }
