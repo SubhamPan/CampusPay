@@ -125,8 +125,8 @@ public class StudentRegistration {
         frame.setLocation(x, y);
     }
 
-    public static void main(String[] args) {
-        StudentRegistration studentRegistration = new StudentRegistration();
-        studentRegistration.show();
-    }
+//    public static void main(String[] args) {
+//        StudentRegistration studentRegistration = new StudentRegistration();
+//        studentRegistration.show();
+//    }
 }
