@@ -20,7 +20,7 @@ public class VendorHome {
 
         JLabel total = new JLabel("Total Amount Earned: ");
         total.setFont(new Font("Arial", Font.PLAIN, 20));
-        total.setBounds(350, 100, 500, 20);
+        total.setBounds(320, 100, 500, 20);
         container.add(total);
 
         try {
@@ -32,7 +32,7 @@ public class VendorHome {
             int total_amount_earned = cs.getInt(2);
             JLabel totalAmount = new JLabel(Integer.toString(total_amount_earned));
             totalAmount.setFont(new Font("Arial", Font.PLAIN, 20));
-            totalAmount.setBounds(400, 100, 200, 20);
+            totalAmount.setBounds(520, 100, 200, 20);
             container.add(totalAmount);
         } catch (Exception e) {
             System.out.println(e);
