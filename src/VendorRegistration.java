@@ -4,7 +4,6 @@ import java.awt.event.*;
 import java.sql.*;
 
 public class VendorRegistration {
-    // this class is used to register a vendor, this has - name, account_no, contact, password
     private Container c;
     private JLabel title;
     private JLabel name;
@@ -20,80 +19,69 @@ public class VendorRegistration {
     private JTextArea tout;
 
     public void show() {
-        // create a new frame to store the vendor registration form
         JFrame f = new JFrame("Vendor Registration");
-        f.setSize(600, 400);
+        f.setBounds(300, 90, 900, 600);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLayout(null);
 
-        // create a label
-        title = new JLabel("Vendor Registration");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
-        title.setSize(300, 30);
-        title.setLocation(250, 30);
-        f.add(title);
+        // Setting background color
+        Container container = f.getContentPane();
+        container.setBackground(new Color(243, 238, 234));
 
-        // create a label for the name
+        title = new JLabel("Vendor Registration");
+        title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
+        title.setBounds(300, 30, 300, 40); // Centered horizontally
+        container.add(title);
+
         name = new JLabel("Name");
         name.setFont(new Font("Arial", Font.PLAIN, 20));
-        name.setSize(100, 20);
-        name.setLocation(100, 100);
-        f.add(name);
+        name.setBounds(250, 100, 100, 20); // Centered horizontally
+        container.add(name);
 
-        // create a text field for the name
         nameText = new JTextField();
         nameText.setFont(new Font("Arial", Font.PLAIN, 15));
-        nameText.setSize(190, 20);
-        nameText.setLocation(200, 100);
-        f.add(nameText);
+        nameText.setBounds(350, 100, 190, 20); // Centered horizontally
+        nameText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2)); // EBE3D5
+        container.add(nameText);
 
-        // create a label for the account number
-        accountNo = new JLabel("Account Number");
+        accountNo = new JLabel("Acc No.");
         accountNo.setFont(new Font("Arial", Font.PLAIN, 20));
-        accountNo.setSize(150, 20);
-        accountNo.setLocation(100, 150);
-        f.add(accountNo);
+        accountNo.setBounds(250, 150, 150, 20); // Centered horizontally
+        container.add(accountNo);
 
-        // create a text field for the account number
         accountNoText = new JTextField();
         accountNoText.setFont(new Font("Arial", Font.PLAIN, 15));
-        accountNoText.setSize(190, 20);
-        accountNoText.setLocation(250, 150);
-        f.add(accountNoText);
+        accountNoText.setBounds(350, 150, 190, 20); // Centered horizontally
+        accountNoText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2)); // EBE3D5
+        container.add(accountNoText);
 
-        // create a label for the contact
         contact = new JLabel("Contact");
         contact.setFont(new Font("Arial", Font.PLAIN, 20));
-        contact.setSize(100, 20);
-        contact.setLocation(100, 200);
-        f.add(contact);
+        contact.setBounds(250, 200, 100, 20); // Centered horizontally
+        container.add(contact);
 
-        // create a text field for the contact
         contactText = new JTextField();
         contactText.setFont(new Font("Arial", Font.PLAIN, 15));
-        contactText.setSize(190, 20);
-        contactText.setLocation(200, 200);
-        f.add(contactText);
+        contactText.setBounds(350, 200, 190, 20); // Centered horizontally
+        contactText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2)); // EBE3D5
+        container.add(contactText);
 
-        // create a label for the password
         password = new JLabel("Password");
         password.setFont(new Font("Arial", Font.PLAIN, 20));
-        password.setSize(100, 20);
-        password.setLocation(100, 250);
-        f.add(password);
+        password.setBounds(250, 250, 100, 20); // Centered horizontally
+        container.add(password);
 
-        // create a text field for the password
         passwordText = new JPasswordField();
         passwordText.setFont(new Font("Arial", Font.PLAIN, 15));
-        passwordText.setSize(190, 20);
-        passwordText.setLocation(200, 250);
-        f.add(passwordText);
+        passwordText.setBounds(350, 250, 190, 20); // Centered horizontally
+        passwordText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2)); // EBE3D5
+        container.add(passwordText);
 
-        // create a button to register the vendor
         register = new JButton("Register");
         register.setFont(new Font("Arial", Font.PLAIN, 15));
-        register.setSize(100, 20);
-        register.setLocation(250, 300);
+        register.setBounds(300, 300, 100, 30); // Centered horizontally
+        register.setBackground(new Color(176, 166, 149)); // B0A695
+        register.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
         register.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -121,13 +109,13 @@ public class VendorRegistration {
                 }
             }
         });
-        f.add(register);
+        container.add(register);
 
-        // create a button to go back to the LoginSystem
         back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
-        back.setSize(100, 20);
-        back.setLocation(250, 350);
+        back.setBounds(300, 350, 100, 30); // Centered horizontally
+        back.setBackground(new Color(176, 166, 149)); // B0A695
+        back.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -137,7 +125,13 @@ public class VendorRegistration {
                 f.dispose();
             }
         });
-        f.add(back);
+        container.add(back);
+
+        // Centering the form within the frame
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (dim.width - f.getSize().width) / 2;
+        int y = (dim.height - f.getSize().height) / 2;
+        f.setLocation(x, y);
 
         f.setVisible(true);
     }

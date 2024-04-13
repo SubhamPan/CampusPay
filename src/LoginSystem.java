@@ -1,4 +1,3 @@
-// Main login system class
 import java.awt.*;
 import javax.swing.*;
 import java.sql.*;
@@ -25,9 +24,7 @@ public class LoginSystem {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 
-        // Add login.jpg image to the frame from the images folder in the project directory
         ImageIcon image = new ImageIcon("images/login.jpg");
-        // Make the image fit the frame
         Image img = image.getImage().getScaledInstance(300, 400, Image.SCALE_DEFAULT);
         image = new ImageIcon(img);
         JLabel imageLabel = new JLabel(image);
@@ -36,56 +33,51 @@ public class LoginSystem {
 
         Container container = frame.getContentPane();
         container.setLayout(null);
-        // Set background color to C5FFF8
-        container.setBackground(new Color(197, 255, 248));
+        container.setBackground(new Color(243, 238, 234));
 
-        JLabel title = new JLabel("Login System");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
-        title.setSize(300, 30);
-        title.setLocation(300, 30);
+        JLabel title = new JLabel("CAMPUSPAY");
+        title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
+        title.setBounds(350, 30, 300, 30);
         container.add(title);
 
         JLabel userLabel = new JLabel("ID");
         userLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        userLabel.setSize(100, 20);
-        userLabel.setLocation(100, 100);
+        userLabel.setBounds(100, 100, 100, 20);
         container.add(userLabel);
 
         JTextField userText = new JTextField();
         userText.setFont(new Font("Arial", Font.PLAIN, 15));
-        userText.setSize(190, 20);
-        userText.setLocation(200, 100);
+        userText.setBounds(200, 100, 190, 20);
+        userText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2)); // EBE3D5
         container.add(userText);
 
         JLabel roleLabel = new JLabel("Role");
         roleLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        roleLabel.setSize(100, 20);
-        roleLabel.setLocation(100, 125);
+        roleLabel.setBounds(100, 130, 100, 20);
         container.add(roleLabel);
 
         JTextField roleText = new JTextField();
         roleText.setFont(new Font("Arial", Font.PLAIN, 15));
-        roleText.setSize(190, 20);
-        roleText.setLocation(200, 125);
+        roleText.setBounds(200, 130, 190, 20);
+        roleText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2)); // EBE3D5
         container.add(roleText);
 
         JLabel passwordLabel = new JLabel("Password");
         passwordLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        passwordLabel.setSize(100, 20);
-        passwordLabel.setLocation(100, 150);
+        passwordLabel.setBounds(100, 160, 100, 20);
         container.add(passwordLabel);
 
         JPasswordField passwordText = new JPasswordField();
         passwordText.setFont(new Font("Arial", Font.PLAIN, 15));
-        passwordText.setSize(190, 20);
-        passwordText.setLocation(200, 150);
+        passwordText.setBounds(200, 160, 190, 20);
+        passwordText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2)); // EBE3D5
         container.add(passwordText);
 
         JButton submitButton = new JButton("Submit");
         submitButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        submitButton.setSize(100, 20);
-        submitButton.setLocation(150, 200);
-        submitButton.setBackground(new Color(123, 102, 255));
+        submitButton.setBounds(150, 200, 100, 30);
+        submitButton.setBackground(new Color(176, 166, 149)); // B0A695
+        submitButton.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
         submitButton.addActionListener(e -> {
             String ID = userText.getText();
             int role = -1;
@@ -140,20 +132,20 @@ public class LoginSystem {
 
         JButton resetButton = new JButton("Reset");
         resetButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        resetButton.setSize(100, 20);
-        resetButton.setLocation(270, 200);
-        resetButton.setBackground(Color.RED);
+        resetButton.setBounds(270, 200, 100, 30);
+        resetButton.setBackground(new Color(176, 166, 149)); // B0A695 (changed to match theme)
+        resetButton.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695 (changed to match theme)
         resetButton.addActionListener(e -> {
             userText.setText("");
             passwordText.setText("");
         });
         container.add(resetButton);
 
-        // Student registration option
         JButton registerButton = new JButton("Student Registration");
         registerButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        registerButton.setBounds(175, 250, 175, 20);
-        registerButton.setBackground(Color.ORANGE);
+        registerButton.setBounds(175, 250, 175, 30);
+        registerButton.setBackground(new Color(176, 166, 149)); // B0A695
+        registerButton.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
         registerButton.addActionListener(e -> {
             // Show the student registration form
             StudentRegistration registration = new StudentRegistration();
@@ -163,11 +155,11 @@ public class LoginSystem {
         });
         container.add(registerButton);
 
-        // Vendor registration option
         JButton vendorRegisterButton = new JButton("Vendor Registration");
         vendorRegisterButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        vendorRegisterButton.setBounds(175, 300, 175, 20);
-        vendorRegisterButton.setBackground(Color.ORANGE);
+        vendorRegisterButton.setBounds(175, 300, 175, 30);
+        vendorRegisterButton.setBackground(new Color(176, 166, 149)); // B0A695
+        vendorRegisterButton.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
         vendorRegisterButton.addActionListener(e -> {
             // Show the vendor registration form
             VendorRegistration registration = new VendorRegistration();
@@ -178,6 +170,12 @@ public class LoginSystem {
         container.add(vendorRegisterButton);
 
         frame.setVisible(true);
+
+        // Centering the form within the frame
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (dim.width - frame.getSize().width) / 2;
+        int y = (dim.height - frame.getSize().height) / 2;
+        frame.setLocation(x, y);
     }
 
     public static void main(String[] args) {
@@ -185,4 +183,3 @@ public class LoginSystem {
         loginSystem.show();
     }
 }
-
