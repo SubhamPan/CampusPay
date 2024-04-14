@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
+
 public class AdminViewStudentTransactions {
     // this class is used to display the payment history of a student
     private Container c;
@@ -11,21 +12,23 @@ public class AdminViewStudentTransactions {
     public void show(String sid) {
         // create a new frame to store the payment history
         JFrame f = new JFrame("Payment History");
-        f.setSize(600, 400);
+        f.setSize(900, 600);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLayout(null);
+        f.setResizable(false);
+        f.getContentPane().setBackground(new Color(243, 238, 234)); // Set background color
 
         // create a label
         title = new JLabel("Payment History");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
+        title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
         title.setSize(300, 30);
-        title.setLocation(250, 30);
+        title.setLocation(350, 30);
         f.add(title);
 
         // create a Jtable to display the payment history
         JTable table = new JTable();
         table.setFont(new Font("Arial", Font.PLAIN, 15));
-        table.setSize(400, 200);
+        table.setSize(800, 400);
         table.setLocation(100, 100);
         f.add(table);
 
@@ -39,7 +42,7 @@ public class AdminViewStudentTransactions {
 
         // create a scroll pane for the table
         JScrollPane scroll = new JScrollPane(table);
-        scroll.setSize(500, 200);
+        scroll.setSize(800, 400);
         scroll.setLocation(50, 100);
         f.add(scroll);
 
@@ -48,8 +51,7 @@ public class AdminViewStudentTransactions {
             Conn c = new Conn();
             // use procedure get_all_payments_made_by_student(IN student_id varchar(50))
             CallableStatement cs = c.con.prepareCall("{call get_all_payments_made_by_student(?)}");
-//            cs.setString(1, User.getInstance().getId());
-            cs.setString(1,sid);
+            cs.setString(1, sid);
             ResultSet rs = cs.executeQuery();
 
             // display the payment history
@@ -64,14 +66,13 @@ public class AdminViewStudentTransactions {
         JButton back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(100, 20);
-        back.setLocation(250, 300);
+        back.setLocation(400, 530);
+        back.setBackground(new Color(176, 166, 149)); // Set background color
+        back.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // Set border color
         back.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 // go back to the home page
-//                StudentHome home = new StudentHome();
-//                home.show();
                 ViewStudents view1 = new ViewStudents();
                 view1.show();
                 f.dispose();
@@ -81,5 +82,16 @@ public class AdminViewStudentTransactions {
 
         // display the frame
         f.setVisible(true);
+
+        // Centering the frame on the screen
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (dim.width - f.getSize().width) / 2;
+        int y = (dim.height - f.getSize().height) / 2;
+        f.setLocation(x, y);
+    }
+
+    public static void main(String[] args) {
+        AdminViewStudentTransactions view = new AdminViewStudentTransactions();
+        view.show("S1");
     }
 }

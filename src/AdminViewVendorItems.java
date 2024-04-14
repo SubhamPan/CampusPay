@@ -9,29 +9,29 @@ public class AdminViewVendorItems {
     private JLabel title;
     private JTextArea items;
     private JScrollPane scroll;
-    private JButton add;
-    private JButton edit;
 
     public void show(String Vid) {
         // create a new frame to store the items sold by the vendor
         JFrame f = new JFrame("Vendor Items");
-        f.setSize(600, 400);
+        f.setSize(900, 600);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLayout(null);
+        f.getContentPane().setBackground(new Color(243, 238, 234)); // Set background color
 
         // create a label
         title = new JLabel("Vendor Items");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
+        title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
         title.setSize(300, 30);
-        title.setLocation(250, 30);
+        title.setLocation(350, 30);
         f.add(title);
 
         // create a scrollable area to store the items sold by the vendor
         items = new JTextArea(30, 30);
-        items.setFont(new Font("Arial", Font.PLAIN, 10));
+        items.setFont(new Font("Arial", Font.PLAIN, 15));
+        items.setEditable(false); // Disable editing
         scroll = new JScrollPane(items);
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setSize(500, 200);
+        scroll.setSize(800, 350);
         scroll.setLocation(50, 100);
         f.add(scroll);
 
@@ -53,17 +53,16 @@ public class AdminViewVendorItems {
             System.out.println(e);
         }
 
-
         // create a button to go back to the home page
         JButton back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(100, 20);
-        back.setLocation(400, 300);
+        back.setLocation(400, 470);
+        back.setBackground(new Color(176, 166, 149)); // Set background color
+        back.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // Set border color
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                VendorHome home = new VendorHome();
-//                home.show();
                 ViewVendors home = new ViewVendors();
                 home.show();
                 f.dispose();
@@ -71,6 +70,17 @@ public class AdminViewVendorItems {
         });
         f.add(back);
 
+        // Centering the frame on the screen
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (dim.width - f.getSize().width) / 2;
+        int y = (dim.height - f.getSize().height) / 2;
+        f.setLocation(x, y);
+
         f.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        AdminViewVendorItems items = new AdminViewVendorItems();
+        items.show("V1");
     }
 }

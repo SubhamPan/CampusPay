@@ -1,3 +1,8 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -13,27 +18,36 @@ public class EditItem {
     private JButton back;
     private JTextArea tout;
 
-    private JComboBox selectItem;
+    private JComboBox<String> selectItem;
 
     public void show() {
         // create a new frame to store the edit item form
         JFrame f = new JFrame("Edit Item");
-        f.setSize(600, 400);
+        f.setSize(900, 600);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLayout(null);
+        f.setResizable(false);
+        f.getContentPane().setBackground(new Color(243, 238, 234)); // Set background color
 
         // create a label
         title = new JLabel("Edit Item");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
+        title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
         title.setSize(300, 30);
-        title.setLocation(250, 30);
+        title.setLocation(400, 100);
         f.add(title);
 
+        JLabel selectItemLabel = new JLabel("Select Item");
+        selectItemLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        selectItemLabel.setSize(150, 20);
+        selectItemLabel.setLocation(325, 200);
+        f.add(selectItemLabel);
+
         // create a drop down menu to select the item to edit
-        selectItem = new JComboBox();
+        selectItem = new JComboBox<>();
         selectItem.setFont(new Font("Arial", Font.PLAIN, 15));
         selectItem.setSize(190, 20);
-        selectItem.setLocation(200, 100);
+        selectItem.setLocation(450, 200);
+        selectItem.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2));
         f.add(selectItem);
 
         // connect to the database and get the items sold by the vendor
@@ -53,38 +67,42 @@ public class EditItem {
         }
 
         // create a label for the item_name
-        JLabel item_name = new JLabel("Item Name");
-        item_name.setFont(new Font("Arial", Font.PLAIN, 20));
-        item_name.setSize(100, 20);
-        item_name.setLocation(100, 150);
-        f.add(item_name);
+        JLabel itemNameLabel = new JLabel("Item Name");
+        itemNameLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        itemNameLabel.setSize(100, 20);
+        itemNameLabel.setLocation(325, 250);
+        f.add(itemNameLabel);
 
         // create a text field for the item_name
-        JTextField item_nameText = new JTextField();
-        item_nameText.setFont(new Font("Arial", Font.PLAIN, 15));
-        item_nameText.setSize(190, 20);
-        item_nameText.setLocation(200, 150);
-        f.add(item_nameText);
+        JTextField itemNameText = new JTextField();
+        itemNameText.setFont(new Font("Arial", Font.PLAIN, 15));
+        itemNameText.setSize(190, 20);
+        itemNameText.setLocation(450, 250);
+        itemNameText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2));
+        f.add(itemNameText);
 
         // create a label for the price
         price = new JLabel("Price");
         price.setFont(new Font("Arial", Font.PLAIN, 20));
         price.setSize(100, 20);
-        price.setLocation(100, 200);
+        price.setLocation(325, 300);
         f.add(price);
 
         // create a text field for the price
         priceText = new JTextField();
         priceText.setFont(new Font("Arial", Font.PLAIN, 15));
         priceText.setSize(190, 20);
-        priceText.setLocation(200, 200);
+        priceText.setLocation(450, 300);
+        priceText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2));
         f.add(priceText);
 
         // create a button to submit the form
         submit = new JButton("Submit");
         submit.setFont(new Font("Arial", Font.PLAIN, 15));
         submit.setSize(100, 20);
-        submit.setLocation(200, 250);
+        submit.setLocation(400, 350);
+        submit.setBackground(new Color(176, 166, 149)); // Set background color
+        submit.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // Set border color
         f.add(submit);
 
         // set the item_name and price to the current price of the item
@@ -98,7 +116,7 @@ public class EditItem {
             ResultSet rs = cs.executeQuery();
             rs.next();
             priceText.setText(rs.getString("price"));
-            item_nameText.setText(rs.getString("item_name"));
+            itemNameText.setText(rs.getString("item_name"));
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -115,7 +133,7 @@ public class EditItem {
                     String item = selectItem.getSelectedItem().toString();
                     String[] parts = item.split(" - ");
                     cs.setInt(1, Integer.parseInt(parts[0]));
-                    cs.setString(2, item_nameText.getText());
+                    cs.setString(2, itemNameText.getText());
                     cs.setInt(3, Integer.parseInt(priceText.getText()));
                     cs.execute();
                     JOptionPane.showMessageDialog(f, "Price updated successfully");
@@ -125,12 +143,13 @@ public class EditItem {
             }
         });
 
-
         // create a button to go back to the vendor items page
         back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(100, 20);
-        back.setLocation(250, 300);
+        back.setLocation(400, 400);
+        back.setBackground(new Color(176, 166, 149)); // Set background color
+        back.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // Set border color
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -143,5 +162,16 @@ public class EditItem {
 
         // display the frame
         f.setVisible(true);
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (dim.width - f.getSize().width) / 2;
+        int y = (dim.height - f.getSize().height) / 2;
+        f.setLocation(x, y);
+
+    }
+
+    public static void main(String[] args) {
+        EditItem edit = new EditItem();
+        edit.show();
     }
 }

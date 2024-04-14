@@ -20,9 +20,9 @@ public class VendorItems {
         container.setBackground(new Color(243, 238, 234));
 
         title = new JLabel("Vendor Items");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
+        title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
         title.setSize(300, 30);
-        title.setLocation(300, 30);
+        title.setLocation(350, 30);
         container.add(title);
 
         // create a table to display all the items
@@ -58,10 +58,10 @@ public class VendorItems {
 
         int buttonWidth = 100;
         int buttonHeight = 30;
-        int buttonX = 300;
+//        int buttonX = 300;
 
         add = new JButton("Add Item");
-        configureButton(add, buttonX - 90, 500, buttonWidth, buttonHeight);
+        configureButton(add, 250, 450, buttonWidth, buttonHeight);
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -73,7 +73,7 @@ public class VendorItems {
         container.add(add);
 
         edit = new JButton("Edit Item");
-        configureButton(edit, buttonX + 60, 500, buttonWidth, buttonHeight);
+        configureButton(edit, 400, 450, buttonWidth, buttonHeight);
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -85,7 +85,7 @@ public class VendorItems {
         container.add(edit);
 
         JButton back = new JButton("Back");
-        configureButton(back, buttonX + 210, 500, buttonWidth, buttonHeight);
+        configureButton(back, 400, 500, buttonWidth, buttonHeight);
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -98,7 +98,7 @@ public class VendorItems {
 
         //  add button to delete item
         JButton delete = new JButton("Delete Item");
-        configureButton(delete, buttonX + 320, 500, buttonWidth, buttonHeight);
+        configureButton(delete, 550, 450, buttonWidth, buttonHeight);
         delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -121,5 +121,10 @@ public class VendorItems {
         button.setBounds(x, y, width, height);
         button.setBackground(new Color(176, 166, 149)); // B0A695
         button.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
+    }
+
+    public static void main(String[] args) {
+        VendorItems items = new VendorItems();
+        items.show();
     }
 }

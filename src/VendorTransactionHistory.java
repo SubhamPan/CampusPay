@@ -25,7 +25,7 @@ public class VendorTransactionHistory {
         // create a table to display all the transactions
         JTable table = new JTable();
         table.setFont(new Font("Arial", Font.PLAIN, 15));
-        table.setSize(800, 300);
+        table.setSize(800, 350);
         table.setLocation(50, 100);
         container.add(table);
 
@@ -37,7 +37,7 @@ public class VendorTransactionHistory {
         table.setModel(model);
 
         JScrollPane scroll = new JScrollPane(table);
-        scroll.setSize(800, 300);
+        scroll.setSize(800, 350);
         scroll.setLocation(50, 100);
         container.add(scroll);
 
@@ -79,5 +79,10 @@ public class VendorTransactionHistory {
         button.setBounds(x, y, width, height);
         button.setBackground(new Color(176, 166, 149)); // B0A695
         button.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
+    }
+
+    public static void main(String[] args) {
+        VendorTransactionHistory transactionHistory = new VendorTransactionHistory();
+        transactionHistory.show();
     }
 }

@@ -2,6 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
+
 public class Payment {
     // this class is used to make a payment
     private Container c;
@@ -15,36 +16,39 @@ public class Payment {
     public void show() {
         // create a new frame to store the payment form
         JFrame f = new JFrame("Payment");
-        f.setSize(600, 400);
+        f.setSize(900, 600);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setResizable(false);
         f.setLayout(null);
+        f.getContentPane().setBackground(new Color(243, 238, 234)); // Set background color
 
         // create a label
         title = new JLabel("Make a Payment");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
+        title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
         title.setSize(300, 30);
-        title.setLocation(250, 30);
+        title.setLocation(350, 130);
         f.add(title);
 
         // create a label for the amount
         amount = new JLabel("Amount");
         amount.setFont(new Font("Arial", Font.PLAIN, 20));
         amount.setSize(100, 20);
-        amount.setLocation(100, 100);
+        amount.setLocation(300, 200);
         f.add(amount);
 
         // create a text field for the amount
         amountText = new JTextField();
         amountText.setFont(new Font("Arial", Font.PLAIN, 15));
         amountText.setSize(190, 20);
-        amountText.setLocation(200, 100);
+        amountText.setLocation(400, 200);
+        amountText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2)); // Set border color
         f.add(amountText);
 
         // create a label for the vendor
         JLabel vendor = new JLabel("Vendor");
         vendor.setFont(new Font("Arial", Font.PLAIN, 20));
         vendor.setSize(100, 20);
-        vendor.setLocation(100, 150);
+        vendor.setLocation(300, 250);
         f.add(vendor);
 
         // create a drop down list for the vendors, this will be populated from the database
@@ -66,14 +70,17 @@ public class Payment {
 
         vendorList.setFont(new Font("Arial", Font.PLAIN, 15));
         vendorList.setSize(190, 20);
-        vendorList.setLocation(200, 150);
+        vendorList.setLocation(400, 250);
+        vendorList.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2)); // Set border color
         f.add(vendorList);
 
         // create a button to make the payment
         pay = new JButton("Pay");
         pay.setFont(new Font("Arial", Font.PLAIN, 15));
         pay.setSize(100, 20);
-        pay.setLocation(250, 200);
+        pay.setLocation(400, 300);
+        pay.setBackground(new Color(176, 166, 149)); // Set background color
+        pay.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // Set border color
         pay.addActionListener(new ActionListener() {
 
             @Override
@@ -107,7 +114,9 @@ public class Payment {
         back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(100, 20);
-        back.setLocation(250, 250);
+        back.setLocation(400, 350);
+        back.setBackground(new Color(176, 166, 149)); // Set background color
+        back.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // Set border color
         back.addActionListener(new ActionListener() {
 
             @Override
@@ -122,6 +131,10 @@ public class Payment {
 
         // set the frame visibility
         f.setVisible(true);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (dim.width - f.getSize().width) / 2;
+        int y = (dim.height - f.getSize().height) / 2;
+        f.setLocation(x, y);
     }
 
     public static void main(String[] args) {

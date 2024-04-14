@@ -17,19 +17,20 @@ public class VendorTransactionProcess {
         JLabel title = new JLabel("Vendor Transaction Process");
         title.setFont(new Font("Arial", Font.PLAIN, 30));
         title.setSize(400, 30);
-        title.setLocation(150, 50);
+        title.setLocation(250, 25);
         container.add(title);
 
         JLabel amount = new JLabel("Amount");
         amount.setFont(new Font("Arial", Font.PLAIN, 20));
         amount.setSize(100, 20);
-        amount.setLocation(100, 100);
+        amount.setLocation(300, 75);
         container.add(amount);
 
         JTextField amountText = new JTextField();
         amountText.setFont(new Font("Arial", Font.PLAIN, 15));
         amountText.setSize(190, 20);
-        amountText.setLocation(200, 100);
+        amountText.setLocation(400, 75);
+        amountText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2));
         amountText.setEditable(false);
         amountText.setText("0");
         container.add(amountText);
@@ -37,19 +38,20 @@ public class VendorTransactionProcess {
         JLabel student = new JLabel("Student ID");
         student.setFont(new Font("Arial", Font.PLAIN, 20));
         student.setSize(100, 20);
-        student.setLocation(100, 125);
+        student.setLocation(300, 100);
         container.add(student);
 
         JTextField studentText = new JTextField();
         studentText.setFont(new Font("Arial", Font.PLAIN, 15));
         studentText.setSize(190, 20);
-        studentText.setLocation(200, 125);
+        studentText.setLocation(400, 100);
+        studentText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2));
         container.add(studentText);
 
         JLabel product = new JLabel("Product");
         product.setFont(new Font("Arial", Font.PLAIN, 20));
         product.setSize(100, 20);
-        product.setLocation(100, 150);
+        product.setLocation(300, 125);
         container.add(product);
 
         JComboBox<String> productList = new JComboBox<String>();
@@ -68,25 +70,27 @@ public class VendorTransactionProcess {
 
         productList.setFont(new Font("Arial", Font.PLAIN, 15));
         productList.setSize(190, 20);
-        productList.setLocation(200, 150);
+        productList.setLocation(400, 125);
+        productList.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2));
         container.add(productList);
 
         JLabel quantity = new JLabel("Quantity");
         quantity.setFont(new Font("Arial", Font.PLAIN, 20));
         quantity.setSize(100, 20);
-        quantity.setLocation(100, 200);
+        quantity.setLocation(300, 150);
         container.add(quantity);
 
         JTextField quantityText = new JTextField();
         quantityText.setFont(new Font("Arial", Font.PLAIN, 15));
         quantityText.setSize(190, 20);
-        quantityText.setLocation(200, 200);
+        quantityText.setLocation(400, 150);
+        quantityText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2));
         container.add(quantityText);
 
         JTable table = new JTable();
         table.setFont(new Font("Arial", Font.PLAIN, 15));
-        table.setSize(400, 200);
-        table.setLocation(100, 250);
+        table.setSize(800, 200);
+        table.setLocation(50, 200);
         container.add(table);
 
         DefaultTableModel model = new DefaultTableModel();
@@ -96,12 +100,12 @@ public class VendorTransactionProcess {
         table.setModel(model);
 
         JScrollPane sp = new JScrollPane(table);
-        sp.setSize(400, 200);
-        sp.setLocation(100, 250);
+        sp.setSize(800, 200);
+        sp.setLocation(50, 200);
         container.add(sp);
 
         JButton add = new JButton("Add");
-        configureButton(add, 250, 470, 100, 30);
+        configureButton(add, 300, 425, 100, 30);
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -133,7 +137,7 @@ public class VendorTransactionProcess {
         container.add(add);
 
         JButton remove = new JButton("Remove");
-        configureButton(remove, 350, 470, 100, 30);
+        configureButton(remove, 500, 425, 100, 30);
         remove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -152,7 +156,7 @@ public class VendorTransactionProcess {
         container.add(remove);
 
         JButton confirm = new JButton("Confirm");
-        configureButton(confirm, 250, 500, 100, 30);
+        configureButton(confirm, 300, 475, 100, 30);
         confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -202,7 +206,7 @@ public class VendorTransactionProcess {
         container.add(confirm);
 
         JButton back = new JButton("Back");
-        configureButton(back, 350, 500, 100, 30);
+        configureButton(back, 500, 475, 100, 30);
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -227,5 +231,10 @@ public class VendorTransactionProcess {
         button.setBounds(x, y, width, height);
         button.setBackground(new Color(176, 166, 149));
         button.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
+    }
+
+    public static void main(String[] args) {
+        VendorTransactionProcess transactionProcess = new VendorTransactionProcess();
+        transactionProcess.show();
     }
 }

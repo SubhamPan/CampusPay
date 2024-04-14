@@ -21,7 +21,7 @@ public class StudentPaymentHistory {
 
         JTable table = new JTable();
         table.setFont(new Font("Arial", Font.PLAIN, 15));
-        table.setSize(800, 300);
+        table.setSize(800, 325);
         table.setLocation(100, 100);
         container.add(table);
 
@@ -32,7 +32,7 @@ public class StudentPaymentHistory {
         table.setModel(model);
 
         JScrollPane scroll = new JScrollPane(table);
-        scroll.setSize(800, 300);
+        scroll.setSize(800, 325);
         scroll.setLocation(50, 100);
         container.add(scroll);
 
@@ -51,7 +51,7 @@ public class StudentPaymentHistory {
 
         JButton backButton = new JButton("Back");
         backButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        backButton.setBounds(400, 450, 100, 30);
+        backButton.setBounds(400, 475, 100, 30);
         backButton.setBackground(new Color(176, 166, 149));
         backButton.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
         backButton.addActionListener(e -> {
@@ -69,8 +69,8 @@ public class StudentPaymentHistory {
         int y = (dim.height - frame.getSize().height) / 2;
         frame.setLocation(x, y);
     }
-//    public static void main(String[] args) {
-//        StudentPaymentHistory studentPaymentHistory = new StudentPaymentHistory();
-//        studentPaymentHistory.show();
-//    }
+    public static void main(String[] args) {
+        StudentPaymentHistory studentPaymentHistory = new StudentPaymentHistory();
+        studentPaymentHistory.show();
+    }
 }
