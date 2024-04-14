@@ -2,10 +2,10 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 public class VendorItems {
     private JLabel title;
-    private JTextArea items;
     private JScrollPane scroll;
     private JButton add;
     private JButton edit;
@@ -25,12 +25,22 @@ public class VendorItems {
         title.setLocation(300, 30);
         container.add(title);
 
-        items = new JTextArea(30, 30);
-        items.setFont(new Font("Arial", Font.PLAIN, 10));
-        scroll = new JScrollPane(items);
-        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setSize(600, 200);
-        scroll.setLocation(150, 100);
+        // create a table to display all the items
+        JTable table = new JTable();
+        table.setFont(new Font("Arial", Font.PLAIN, 15));
+        table.setSize(800, 300);
+        table.setLocation(50, 100);
+        container.add(table);
+
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Name");
+        model.addColumn("Price");
+        table.setModel(model);
+
+        JScrollPane scroll = new JScrollPane(table);
+        scroll.setSize(800, 300);
+        scroll.setLocation(50, 100);
         container.add(scroll);
 
         try {
@@ -40,9 +50,7 @@ public class VendorItems {
             ResultSet rs = cs.executeQuery();
 
             while (rs.next()) {
-                items.append("Item ID: " + rs.getString("ID") + "\n");
-                items.append("Item Name: " + rs.getString("item_name") + "\n");
-                items.append("Price: " + rs.getString("price") + "\n\n");
+                model.addRow(new Object[]{rs.getString("ID"), rs.getString("item_name"), rs.getString("price")});
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -53,7 +61,7 @@ public class VendorItems {
         int buttonX = 300;
 
         add = new JButton("Add Item");
-        configureButton(add, buttonX - 50, 350, buttonWidth, buttonHeight);
+        configureButton(add, buttonX - 50, 500, buttonWidth, buttonHeight);
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -65,7 +73,7 @@ public class VendorItems {
         container.add(add);
 
         edit = new JButton("Edit Item");
-        configureButton(edit, buttonX + 100, 350, buttonWidth, buttonHeight);
+        configureButton(edit, buttonX + 100, 500, buttonWidth, buttonHeight);
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -77,7 +85,7 @@ public class VendorItems {
         container.add(edit);
 
         JButton back = new JButton("Back");
-        configureButton(back, buttonX + 250, 350, buttonWidth, buttonHeight);
+        configureButton(back, buttonX + 250, 500, buttonWidth, buttonHeight);
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

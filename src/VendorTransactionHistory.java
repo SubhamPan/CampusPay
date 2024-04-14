@@ -2,11 +2,10 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 public class VendorTransactionHistory {
     private JLabel title;
-    private JTextArea transactions;
-    private JScrollPane scroll;
 
     public void show() {
         JFrame f = new JFrame("Transaction History");
@@ -23,12 +22,23 @@ public class VendorTransactionHistory {
         title.setLocation(300, 30);
         container.add(title);
 
-        transactions = new JTextArea(30, 30);
-        transactions.setFont(new Font("Arial", Font.PLAIN, 10));
-        scroll = new JScrollPane(transactions);
-        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setSize(600, 200);
-        scroll.setLocation(150, 100);
+        // create a table to display all the transactions
+        JTable table = new JTable();
+        table.setFont(new Font("Arial", Font.PLAIN, 15));
+        table.setSize(800, 300);
+        table.setLocation(50, 100);
+        container.add(table);
+
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Vendor");
+        model.addColumn("Amount");
+        model.addColumn("Date&Time");
+        table.setModel(model);
+
+        JScrollPane scroll = new JScrollPane(table);
+        scroll.setSize(800, 300);
+        scroll.setLocation(50, 100);
         container.add(scroll);
 
         try {
@@ -38,17 +48,14 @@ public class VendorTransactionHistory {
             ResultSet rs = cs.executeQuery();
 
             while (rs.next()) {
-                transactions.append("Transaction ID: " + rs.getString("ID") + "\n");
-                transactions.append("Student ID: " + rs.getString("student_id") + "\n");
-                transactions.append("Amount: " + rs.getString("total_amount") + "\n");
-                transactions.append("Date and Time: " + rs.getString("date_time") + "\n\n");
+                model.addRow(new Object[]{rs.getString("ID"), rs.getString("v_name"), rs.getString("total_amount"), rs.getString("date_time")});
             }
         } catch (Exception e) {
             System.out.println(e);
         }
 
         JButton back = new JButton("Back");
-        configureButton(back, 400, 350, 100, 30);
+        configureButton(back, 400, 500, 100, 30);
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,6 +67,11 @@ public class VendorTransactionHistory {
         container.add(back);
 
         f.setVisible(true);
+        // Centering the form within the frame
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (dim.width - f.getSize().width) / 2;
+        int y = (dim.height - f.getSize().height) / 2;
+        f.setLocation(x, y);
     }
 
     private void configureButton(JButton button, int x, int y, int width, int height) {
