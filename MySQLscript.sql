@@ -63,14 +63,6 @@ begin
 end //
 delimiter ;
 
--- procedure to get all the payments made by a student
-delimiter //
-create procedure get_all_payments_made_by_student(IN student_id varchar(50))
-begin
-    select * from transactions where transactions.student_id = student_id;
-end //
-delimiter ;
-
 -- procedure to check total amount earned by a vendor
 delimiter //
 create procedure get_total_amount_earned_by_vendor(IN vendor_id varchar(50), OUT total_amount_earned int)
@@ -143,12 +135,10 @@ begin
 end //
 delimiter ;
 
--- alter procedure get_all_payments_made_by_student to get v_name, amount, date_time
-drop procedure get_all_payments_made_by_student;
 delimiter //
 create procedure get_all_payments_made_by_student(IN student_id varchar(50))
 begin
-    select vendors.v_name, transactions.total_amount, transactions.date_time from transactions, vendors where transactions.student_id = student_id and transactions.vendor_id = vendors.ID;
+    select transactions.id, vendors.v_name, transactions.total_amount, transactions.date_time from transactions, vendors where transactions.student_id = student_id and transactions.vendor_id = vendors.ID;
 end //
 delimiter ;
 
