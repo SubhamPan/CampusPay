@@ -75,7 +75,8 @@ delimiter ;
 delimiter //
 create procedure get_all_transactions_made_by_vendor(IN vendor_id varchar(50))
 begin
-    select * from transactions where transactions.vendor_id = vendor_id;
+    -- transaction_id, student_id, s_name, total_amount, date_time
+    select transactions.ID, transactions.student_id, student.s_name, transactions.total_amount, transactions.date_time from transactions, student where transactions.vendor_id = vendor_id and transactions.student_id = student.ID;
 end //
 delimiter ;
 

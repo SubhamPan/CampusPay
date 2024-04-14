@@ -44,13 +44,13 @@ public class StudentHome {
         // make a label for most bought item
         JLabel mostBoughtLabel = new JLabel("Most Bought Item: ");
         mostBoughtLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        mostBoughtLabel.setBounds(325, 130, 200, 20);
+        mostBoughtLabel.setBounds(275, 130, 200, 20);
         container.add(mostBoughtLabel);
 
         // make a label for most bought item
         JLabel mostBought = new JLabel();
         mostBought.setFont(new Font("Arial", Font.PLAIN, 20));
-        mostBought.setBounds(515, 130, 150, 20);
+        mostBought.setBounds(475, 130, 350, 20);
         container.add(mostBought);
 
         try {

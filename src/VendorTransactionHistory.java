@@ -31,7 +31,7 @@ public class VendorTransactionHistory {
 
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID");
-        model.addColumn("Vendor");
+        model.addColumn("Student");
         model.addColumn("Amount");
         model.addColumn("Date&Time");
         table.setModel(model);
@@ -48,7 +48,7 @@ public class VendorTransactionHistory {
             ResultSet rs = cs.executeQuery();
 
             while (rs.next()) {
-                model.addRow(new Object[]{rs.getString("ID"), rs.getString("v_name"), rs.getString("total_amount"), rs.getString("date_time")});
+                model.addRow(new Object[]{rs.getString("ID"), rs.getString("student_id") + " - " + rs.getString("s_name"), rs.getString("total_amount"), rs.getString("date_time")});
             }
         } catch (Exception e) {
             System.out.println(e);
