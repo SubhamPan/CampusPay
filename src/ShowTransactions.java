@@ -91,12 +91,27 @@ public class ShowTransactions {
         });
         f.add(edit);
 
+        // refund selected transaction from table
+        JButton refund = new JButton("Refund");
+        refund.setFont(new Font("Arial", Font.PLAIN, 15));
+        refund.setSize(200, 20);
+        refund.setLocation(200, 450);
+        refund.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = table.getSelectedRow();
+                String transaction_id = table.getModel().getValueAt(row, 0).toString();
+                RefundTransaction refundTransaction = new RefundTransaction();
+                refundTransaction.show(transaction_id);
+            }
+        });
+        f.add(refund);
 
 //        back
         JButton back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(100, 20);
-        back.setLocation(200, 450);
+        back.setLocation(200, 500);
         back.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
