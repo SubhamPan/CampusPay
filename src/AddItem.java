@@ -12,7 +12,6 @@ public class AddItem {
     private JTextField priceText;
     private JButton submit;
     private JButton back;
-    private JTextArea tout;
 
     public void show() {
         // create a new frame to store the add item form
@@ -70,15 +69,6 @@ public class AddItem {
         back.setLocation(250, 200);
         f.add(back);
 
-        // create a text area to display the result of the form submission
-        tout = new JTextArea();
-        tout.setFont(new Font("Arial", Font.PLAIN, 15));
-        tout.setSize(300, 200);
-        tout.setLocation(100, 250);
-        tout.setLineWrap(true);
-        tout.setEditable(false);
-        f.add(tout);
-
         // add an action listener to the submit button
         submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -95,10 +85,10 @@ public class AddItem {
                     cs.setInt(2, Integer.parseInt(price));
                     cs.setString(3, User.getInstance().getId());
                     cs.executeQuery();
-                    tout.setText("Item added successfully");
+                    JOptionPane.showMessageDialog(f, "Item Added Successfully");
                 } catch (Exception ex) {
                     System.out.println(ex);
-                    tout.setText("Error adding item");
+                    JOptionPane.showMessageDialog(f, "Error Adding Item");
                 }
             }
         });

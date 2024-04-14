@@ -2,62 +2,66 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 public class VendorItems {
-    // this class is used to display, add and change prices of items sold by a vendor
-    private Container c;
     private JLabel title;
-    private JTextArea items;
     private JScrollPane scroll;
     private JButton add;
     private JButton edit;
 
     public void show() {
-        // create a new frame to store the items sold by the vendor
         JFrame f = new JFrame("Vendor Items");
-        f.setSize(600, 400);
+        f.setBounds(350, 90, 900, 600);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLayout(null);
 
-        // create a label
+        Container container = f.getContentPane();
+        container.setBackground(new Color(243, 238, 234));
+
         title = new JLabel("Vendor Items");
         title.setFont(new Font("Arial", Font.PLAIN, 30));
         title.setSize(300, 30);
-        title.setLocation(250, 30);
-        f.add(title);
+        title.setLocation(300, 30);
+        container.add(title);
 
-        // create a scrollable area to store the items sold by the vendor
-        items = new JTextArea(30, 30);
-        items.setFont(new Font("Arial", Font.PLAIN, 10));
-        scroll = new JScrollPane(items);
-        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setSize(500, 200);
+        // create a table to display all the items
+        JTable table = new JTable();
+        table.setFont(new Font("Arial", Font.PLAIN, 15));
+        table.setSize(800, 300);
+        table.setLocation(50, 100);
+        container.add(table);
+
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Name");
+        model.addColumn("Price");
+        table.setModel(model);
+
+        JScrollPane scroll = new JScrollPane(table);
+        scroll.setSize(800, 300);
         scroll.setLocation(50, 100);
-        f.add(scroll);
+        container.add(scroll);
 
-        // connect to the database and get the items sold by the vendor
         try {
             Conn c = new Conn();
-            // use procedure get_all_items_sold_by_vendor(IN vendor_id varchar(50))
             CallableStatement cs = c.con.prepareCall("{call get_all_items_sold_by_vendor(?)}");
             cs.setString(1, User.getInstance().getId());
             ResultSet rs = cs.executeQuery();
 
-            // display the items sold by the vendor
             while (rs.next()) {
-                items.append("Item ID: " + rs.getString("ID") + "\n");
-                items.append("Item Name: " + rs.getString("item_name") + "\n");
-                items.append("Price: " + rs.getString("price") + "\n\n");
+                model.addRow(new Object[]{rs.getString("ID"), rs.getString("item_name"), rs.getString("price")});
             }
         } catch (Exception e) {
             System.out.println(e);
         }
 
-        // create a button to add an item
+        int buttonWidth = 100;
+        int buttonHeight = 30;
+        int buttonX = 300;
+
         add = new JButton("Add Item");
-        add.setFont(new Font("Arial", Font.PLAIN, 15));
-        add.setSize(100, 20);
-        add.setLocation(100, 300);
+        configureButton(add, buttonX - 90, 500, buttonWidth, buttonHeight);
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,13 +70,10 @@ public class VendorItems {
                 f.dispose();
             }
         });
-        f.add(add);
+        container.add(add);
 
-        // create a button to edit an item
         edit = new JButton("Edit Item");
-        edit.setFont(new Font("Arial", Font.PLAIN, 15));
-        edit.setSize(100, 20);
-        edit.setLocation(250, 300);
+        configureButton(edit, buttonX + 60, 500, buttonWidth, buttonHeight);
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -81,13 +82,10 @@ public class VendorItems {
                 f.dispose();
             }
         });
-        f.add(edit);
+        container.add(edit);
 
-        // create a button to go back to the home page
         JButton back = new JButton("Back");
-        back.setFont(new Font("Arial", Font.PLAIN, 15));
-        back.setSize(100, 20);
-        back.setLocation(400, 300);
+        configureButton(back, buttonX + 210, 500, buttonWidth, buttonHeight);
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -96,8 +94,32 @@ public class VendorItems {
                 f.dispose();
             }
         });
-        f.add(back);
+        container.add(back);
+
+        //  add button to delete item
+        JButton delete = new JButton("Delete Item");
+        configureButton(delete, buttonX + 320, 500, buttonWidth, buttonHeight);
+        delete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DeleteItem item = new DeleteItem();
+                item.show();
+            }
+        });
+        container.add(delete);
 
         f.setVisible(true);
+        // Centering the form within the frame
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (dim.width - f.getSize().width) / 2;
+        int y = (dim.height - f.getSize().height) / 2;
+        f.setLocation(x, y);
+    }
+
+    private void configureButton(JButton button, int x, int y, int width, int height) {
+        button.setFont(new Font("Arial", Font.PLAIN, 15));
+        button.setBounds(x, y, width, height);
+        button.setBackground(new Color(176, 166, 149)); // B0A695
+        button.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
     }
 }

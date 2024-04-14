@@ -114,6 +114,19 @@ public class ShowOrders {
         container.add(back);
 
         f.setVisible(true);
+
+        // Centering the form within the frame
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (dim.width - f.getSize().width) / 2;
+        int y = (dim.height - f.getSize().height) / 2;
+        f.setLocation(x, y);
+    }
+
+    private void configureButton(JButton button, int x, int y, int width, int height) {
+        button.setFont(new Font("Arial", Font.PLAIN, 15));
+        button.setBounds(x, y, width, height);
+        button.setBackground(new Color(176, 166, 149)); // B0A695
+        button.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
     }
 
     private void configureButton(JButton button, int x, int y, int width, int height) {

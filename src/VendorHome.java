@@ -4,30 +4,25 @@ import java.awt.event.*;
 import java.sql.*;
 
 public class VendorHome {
-    // this will be the home page for the vendor
     public void show() {
-        // create a new frame to store the text fields and buttons
         JFrame f = new JFrame("Home");
-        f.setSize(800, 600);
+        f.setBounds(300, 90, 900, 600);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLayout(null);
 
-        // create a label
-        JLabel title = new JLabel("Home Page");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
-        title.setSize(300, 30);
-        title.setLocation(250, 30);
-        f.add(title);
+        Container container = f.getContentPane();
+        container.setBackground(new Color(243, 238, 234));
 
-        // show the total amount earned by querying the database
+        JLabel title = new JLabel("Home Page");
+        title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
+        title.setBounds(350, 30, 300, 40);
+        container.add(title);
+
         JLabel total = new JLabel("Total Amount Earned: ");
         total.setFont(new Font("Arial", Font.PLAIN, 20));
-        total.setSize(150, 20);
-        total.setLocation(100, 100);
-        f.add(total);
+        total.setBounds(320, 100, 500, 20);
+        container.add(total);
 
-        // connect to the database and get the total amount earned
-        // use procedure get_total_amount_earned_by_vendor(IN vendor_id varchar(50), OUT total_amount_earned int)
         try {
             Conn c = new Conn();
             CallableStatement cs = c.con.prepareCall("{call get_total_amount_earned_by_vendor(?, ?)}");
@@ -37,18 +32,42 @@ public class VendorHome {
             int total_amount_earned = cs.getInt(2);
             JLabel totalAmount = new JLabel(Integer.toString(total_amount_earned));
             totalAmount.setFont(new Font("Arial", Font.PLAIN, 20));
-            totalAmount.setSize(150, 20);
-            totalAmount.setLocation(250, 100);
-            f.add(totalAmount);
+            totalAmount.setBounds(520, 100, 200, 20);
+            container.add(totalAmount);
         } catch (Exception e) {
             System.out.println(e);
         }
 
-        // create a button to view the transaction history
+        // add most popular item
+        JLabel mostPopular = new JLabel("Most Popular Item: ");
+        mostPopular.setFont(new Font("Arial", Font.PLAIN, 20));
+        mostPopular.setBounds(320, 130, 500, 20);
+        container.add(mostPopular);
+
+        try {
+            Conn c = new Conn();
+            CallableStatement cs = c.con.prepareCall("{call get_most_popular_item_of_vendor(?, ?, ?)}");
+            cs.setString(1, User.getInstance().getId());
+            cs.registerOutParameter(2, Types.INTEGER);
+            cs.registerOutParameter(3, Types.VARCHAR);
+            cs.execute();
+            int item_id = cs.getInt(2);
+            String item_name = cs.getString(3);
+            JLabel mostPopularItem = new JLabel();
+            mostPopularItem.setFont(new Font("Arial", Font.PLAIN, 20));
+            mostPopularItem.setText(item_id + " - " + item_name);
+            mostPopularItem.setBounds(520, 130, 200, 20);
+            container.add(mostPopularItem);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        int buttonWidth = 200;
+        int buttonHeight = 30;
+        int buttonX = 350;
+
         JButton transactionHistory = new JButton("Transaction History");
-        transactionHistory.setFont(new Font("Arial", Font.PLAIN, 15));
-        transactionHistory.setSize(200, 20);
-        transactionHistory.setLocation(250, 140);
+        configureButton(transactionHistory, buttonX, 170, buttonWidth, buttonHeight);
         transactionHistory.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -57,13 +76,10 @@ public class VendorHome {
                 f.dispose();
             }
         });
-        f.add(transactionHistory);
+        container.add(transactionHistory);
 
-        // create a button to view the items sold by vendor
         JButton itemsSold = new JButton("My Items");
-        itemsSold.setFont(new Font("Arial", Font.PLAIN, 15));
-        itemsSold.setSize(200, 20);
-        itemsSold.setLocation(250, 180);
+        configureButton(itemsSold, buttonX, 220, buttonWidth, buttonHeight);
         itemsSold.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -72,13 +88,10 @@ public class VendorHome {
                 f.dispose();
             }
         });
-        f.add(itemsSold);
+        container.add(itemsSold);
 
-        // create a button to start a new transaction
         JButton newTransaction = new JButton("New Transaction");
-        newTransaction.setFont(new Font("Arial", Font.PLAIN, 15));
-        newTransaction.setSize(200, 20);
-        newTransaction.setLocation(250, 220);
+        configureButton(newTransaction, buttonX, 270, buttonWidth, buttonHeight);
         newTransaction.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -87,13 +100,10 @@ public class VendorHome {
                 f.dispose();
             }
         });
-        f.add(newTransaction);
+        container.add(newTransaction);
 
-        // create a button to edit the vendor details
         JButton editVendor = new JButton("Edit Details");
-        editVendor.setFont(new Font("Arial", Font.PLAIN, 15));
-        editVendor.setSize(200, 20);
-        editVendor.setLocation(250, 260);
+        configureButton(editVendor, buttonX, 320, buttonWidth, buttonHeight);
         editVendor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -101,13 +111,10 @@ public class VendorHome {
                 edit.show();
             }
         });
-        f.add(editVendor);
+        container.add(editVendor);
 
-        // create a button to show orders
         JButton orders = new JButton("Show Orders");
-        orders.setFont(new Font("Arial", Font.PLAIN, 15));
-        orders.setSize(200, 20);
-        orders.setLocation(200, 300);
+        configureButton(orders, buttonX, 370, buttonWidth, buttonHeight);
         orders.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -116,13 +123,10 @@ public class VendorHome {
                 f.dispose();
             }
         });
-        f.add(orders);
+        container.add(orders);
 
-        // add logout button
         JButton logout = new JButton("Logout");
-        logout.setFont(new Font("Arial", Font.PLAIN, 15));
-        logout.setSize(100, 20);
-        logout.setLocation(250, 500);
+        configureButton(logout, buttonX + 40, 500, 100, buttonHeight);
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -132,8 +136,15 @@ public class VendorHome {
                 f.dispose();
             }
         });
-        f.add(logout);
+        container.add(logout);
 
         f.setVisible(true);
+    }
+
+    private void configureButton(JButton button, int x, int y, int width, int height) {
+        button.setFont(new Font("Arial", Font.PLAIN, 15));
+        button.setBounds(x, y, width, height);
+        button.setBackground(new Color(176, 166, 149)); // B0A695
+        button.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
     }
 }

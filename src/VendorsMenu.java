@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
@@ -20,11 +21,21 @@ public class VendorsMenu {
         title.setLocation(250, 30);
         f.add(title);
 
-        // create a scrollable area to store the list of vendors
-        JTextArea vendors = new JTextArea(30, 30);
-        vendors.setFont(new Font("Arial", Font.PLAIN, 10));
-        JScrollPane scroll = new JScrollPane(vendors);
-        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        // create a table to display the list of vendors
+        JTable table = new JTable();
+        table.setFont(new Font("Arial", Font.PLAIN, 15));
+        table.setSize(400, 200);
+        table.setLocation(100, 100);
+        f.add(table);
+
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("v_name");
+        model.addColumn("contact");
+        table.setModel(model);
+
+        // create a scroll pane for the table
+        JScrollPane scroll = new JScrollPane(table);
         scroll.setSize(500, 200);
         scroll.setLocation(50, 100);
         f.add(scroll);
@@ -36,8 +47,7 @@ public class VendorsMenu {
 
             // display the list of vendors
             while (rs.next()) {
-                vendors.append("Vendor Name: " + rs.getString("v_name") + "\n");
-                vendors.append("Contact: " + rs.getString("contact") + "\n\n");
+                model.addRow(new Object[]{rs.getString("ID"), rs.getString("v_name"), rs.getString("contact")});
             }
         } catch (Exception e) {
             System.out.println(e);
