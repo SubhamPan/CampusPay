@@ -61,7 +61,7 @@ public class VendorItems {
         int buttonX = 300;
 
         add = new JButton("Add Item");
-        configureButton(add, buttonX - 50, 500, buttonWidth, buttonHeight);
+        configureButton(add, buttonX - 90, 500, buttonWidth, buttonHeight);
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -73,7 +73,7 @@ public class VendorItems {
         container.add(add);
 
         edit = new JButton("Edit Item");
-        configureButton(edit, buttonX + 100, 500, buttonWidth, buttonHeight);
+        configureButton(edit, buttonX + 60, 500, buttonWidth, buttonHeight);
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -85,7 +85,7 @@ public class VendorItems {
         container.add(edit);
 
         JButton back = new JButton("Back");
-        configureButton(back, buttonX + 250, 500, buttonWidth, buttonHeight);
+        configureButton(back, buttonX + 210, 500, buttonWidth, buttonHeight);
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -95,6 +95,18 @@ public class VendorItems {
             }
         });
         container.add(back);
+
+        //  add button to delete item
+        JButton delete = new JButton("Delete Item");
+        configureButton(delete, buttonX + 320, 500, buttonWidth, buttonHeight);
+        delete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DeleteItem item = new DeleteItem();
+                item.show();
+            }
+        });
+        container.add(delete);
 
         f.setVisible(true);
         // Centering the form within the frame
