@@ -107,7 +107,7 @@ public class StudentHome {
         logoutButton.setBackground(new Color(176, 166, 149));
         logoutButton.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
         logoutButton.addActionListener(e -> {
-//            User.getInstance().clear();
+            User.getInstance().clear();
             LoginSystem login = new LoginSystem();
             login.show();
             frame.dispose();

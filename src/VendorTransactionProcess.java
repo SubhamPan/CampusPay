@@ -112,11 +112,12 @@ public class VendorTransactionProcess {
                 int price = 0;
                 try {
                     Conn c = new Conn();
-                    CallableStatement cs = c.con.prepareCall("{call get_price_of_item(?, ?)}");
+                    CallableStatement cs = c.con.prepareCall("{call get_item_details(?)}");
                     cs.setInt(1, Integer.parseInt(product.split(" ")[1]));
-                    cs.registerOutParameter(2, Types.INTEGER);
-                    cs.execute();
-                    price = cs.getInt(2);
+                    ResultSet rs = cs.executeQuery();
+                    if (rs.next()) {
+                        price = rs.getInt(3);
+                    }
 
                     int total = Integer.parseInt(amountText.getText());
                     total += price * Integer.parseInt(quantity);
