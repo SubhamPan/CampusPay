@@ -38,12 +38,36 @@ public class VendorHome {
             System.out.println(e);
         }
 
+        // add most popular item
+        JLabel mostPopular = new JLabel("Most Popular Item: ");
+        mostPopular.setFont(new Font("Arial", Font.PLAIN, 20));
+        mostPopular.setBounds(320, 130, 500, 20);
+        container.add(mostPopular);
+
+        try {
+            Conn c = new Conn();
+            CallableStatement cs = c.con.prepareCall("{call get_most_popular_item_of_vendor(?, ?, ?)}");
+            cs.setString(1, User.getInstance().getId());
+            cs.registerOutParameter(2, Types.INTEGER);
+            cs.registerOutParameter(3, Types.VARCHAR);
+            cs.execute();
+            int item_id = cs.getInt(2);
+            String item_name = cs.getString(3);
+            JLabel mostPopularItem = new JLabel();
+            mostPopularItem.setFont(new Font("Arial", Font.PLAIN, 20));
+            mostPopularItem.setText(item_id + " - " + item_name);
+            mostPopularItem.setBounds(520, 130, 200, 20);
+            container.add(mostPopularItem);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
         int buttonWidth = 200;
         int buttonHeight = 30;
         int buttonX = 350;
 
         JButton transactionHistory = new JButton("Transaction History");
-        configureButton(transactionHistory, buttonX, 140, buttonWidth, buttonHeight);
+        configureButton(transactionHistory, buttonX, 170, buttonWidth, buttonHeight);
         transactionHistory.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,7 +79,7 @@ public class VendorHome {
         container.add(transactionHistory);
 
         JButton itemsSold = new JButton("My Items");
-        configureButton(itemsSold, buttonX, 190, buttonWidth, buttonHeight);
+        configureButton(itemsSold, buttonX, 220, buttonWidth, buttonHeight);
         itemsSold.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,7 +91,7 @@ public class VendorHome {
         container.add(itemsSold);
 
         JButton newTransaction = new JButton("New Transaction");
-        configureButton(newTransaction, buttonX, 240, buttonWidth, buttonHeight);
+        configureButton(newTransaction, buttonX, 270, buttonWidth, buttonHeight);
         newTransaction.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -79,7 +103,7 @@ public class VendorHome {
         container.add(newTransaction);
 
         JButton editVendor = new JButton("Edit Details");
-        configureButton(editVendor, buttonX, 290, buttonWidth, buttonHeight);
+        configureButton(editVendor, buttonX, 320, buttonWidth, buttonHeight);
         editVendor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -90,7 +114,7 @@ public class VendorHome {
         container.add(editVendor);
 
         JButton orders = new JButton("Show Orders");
-        configureButton(orders, buttonX, 340, buttonWidth, buttonHeight);
+        configureButton(orders, buttonX, 370, buttonWidth, buttonHeight);
         orders.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

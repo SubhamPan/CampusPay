@@ -10,7 +10,7 @@ create table login (
 
 create table student (
     ID varchar(50),
-    BITS_account varchar(50) NOT NULL,
+    account_no varchar(50) NOT NULL,
     s_name varchar(50) NOT NULL,
     contact char(10),
     primary key (ID)
@@ -115,7 +115,7 @@ delimiter ;
 delimiter //
 create procedure update_student_details(IN ID varchar(50), IN BITS_account varchar(50), IN s_name varchar(50), IN contact char(10), IN password varchar(256))
 begin
-    update student set BITS_account = BITS_account, s_name = s_name, contact = contact, password = password where student.ID = ID;
+    update student set account_no = account_no, s_name = s_name, contact = contact, password = password where student.ID = ID;
 end //
 delimiter ;
 
@@ -231,7 +231,7 @@ delimiter //
 create procedure register_student(IN ID varchar(50), IN BITS_account varchar(50), IN s_name varchar(50), IN contact char(10), IN password varchar(256))
 begin
     start transaction;
-    insert into student (ID, BITS_account, s_name, contact) values (ID, BITS_account, s_name, contact);
+    insert into student (ID, account_no, s_name, contact) values (ID, account_no, s_name, contact);
     insert into login (ID, password, role) values (ID, password, 0);
     commit;
 end //
@@ -250,7 +250,8 @@ delimiter ;
 delimiter //
 create procedure delete_item(IN ID int)
 begin
-    delete from items where items.ID = ID;
+    -- set vendor_id of item null
+    update items set vendor_id = null where items.ID = ID;
 end //
 delimiter ;
 
@@ -262,26 +263,18 @@ begin
 end //
 delimiter ;
 
--- procedure to delete a student
+-- procedure to get most popular item of a vendor
 delimiter //
-create procedure delete_student(IN ID varchar(50))
+create procedure get_most_popular_item_of_vendor(IN vendor_id varchar(50), OUT ID int, OUT item_name varchar(50))
 begin
-    delete from student where student.ID = ID;
+    select items.ID, items.item_name into ID, item_name from items, orders where items.vendor_id = vendor_id and items.ID = orders.item_id group by items.ID order by sum(orders.quantity) desc limit 1;
 end //
 delimiter ;
 
--- procedure to delete a vendor
+-- procedure to get most bought item by a student
 delimiter //
-create procedure delete_vendor(IN ID varchar(50))
+create procedure get_most_bought_item_by_student(IN student_id varchar(50), OUT ID int, OUT item_name varchar(50), OUT v_name varchar(50))
 begin
-    delete from vendors where vendors.ID = ID;
-end //
-delimiter ;
-
--- procedure to delete an admin
-delimiter //
-create procedure delete_admin(IN ID varchar(50))
-begin
-    delete from login where login.ID = ID;
+    select items.ID, items.item_name, vendors.v_name into ID, item_name, v_name from items, orders, transactions, vendors where transactions.student_id = student_id and transactions.ID = orders.transaction_id and orders.item_id = items.ID and items.vendor_id = vendors.ID group by items.ID order by sum(orders.quantity) desc limit 1;
 end //
 delimiter ;

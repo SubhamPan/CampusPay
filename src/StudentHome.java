@@ -41,9 +41,38 @@ public class StudentHome {
             System.out.println(e);
         }
 
+        // make a label for most bought item
+        JLabel mostBoughtLabel = new JLabel("Most Bought Item: ");
+        mostBoughtLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        mostBoughtLabel.setBounds(325, 130, 200, 20);
+        container.add(mostBoughtLabel);
+
+        // make a label for most bought item
+        JLabel mostBought = new JLabel();
+        mostBought.setFont(new Font("Arial", Font.PLAIN, 20));
+        mostBought.setBounds(515, 130, 150, 20);
+        container.add(mostBought);
+
+        try {
+            Conn c = new Conn();
+            // use procedure get_most_bought_item_by_student(IN student_id varchar(50), OUT ID int, OUT item_name varchar(50), OUT v_name varchar(50))
+            CallableStatement cs = c.con.prepareCall("{call get_most_bought_item_by_student(?, ?, ?, ?)}");
+            cs.setString(1, User.getInstance().getId());
+            cs.registerOutParameter(2, Types.INTEGER);
+            cs.registerOutParameter(3, Types.VARCHAR);
+            cs.registerOutParameter(4, Types.VARCHAR);
+            cs.execute();
+            int id = cs.getInt(2);
+            String item_name = cs.getString(3);
+            String v_name = cs.getString(4);
+            mostBought.setText(id + " - " + item_name + " by " + v_name);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
         JButton vendorsButton = new JButton("Vendors");
         vendorsButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        vendorsButton.setBounds(400, 150, 100, 30);
+        vendorsButton.setBounds(400, 180, 100, 30);
         vendorsButton.setBackground(new Color(176, 166, 149));
         vendorsButton.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
         vendorsButton.addActionListener(e -> {
@@ -55,7 +84,7 @@ public class StudentHome {
 
         JButton paymentButton = new JButton("Payment");
         paymentButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        paymentButton.setBounds(400, 200, 100, 30);
+        paymentButton.setBounds(400, 230, 100, 30);
         paymentButton.setBackground(new Color(176, 166, 149));
         paymentButton.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
         paymentButton.addActionListener(e -> {
@@ -67,7 +96,7 @@ public class StudentHome {
 
         JButton paymentHistoryButton = new JButton("Payment History");
         paymentHistoryButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        paymentHistoryButton.setBounds(375, 250, 150, 30);
+        paymentHistoryButton.setBounds(375, 280, 150, 30);
         paymentHistoryButton.setBackground(new Color(176, 166, 149));
         paymentHistoryButton.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
         paymentHistoryButton.addActionListener(e -> {
@@ -79,7 +108,7 @@ public class StudentHome {
 
         JButton updateDetailsButton = new JButton("Update Details");
         updateDetailsButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        updateDetailsButton.setBounds(375, 300, 150, 30);
+        updateDetailsButton.setBounds(375, 330, 150, 30);
         updateDetailsButton.setBackground(new Color(176, 166, 149));
         updateDetailsButton.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
         updateDetailsButton.addActionListener(e -> {
@@ -91,7 +120,7 @@ public class StudentHome {
 
         JButton ordersButton = new JButton("Show Orders");
         ordersButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        ordersButton.setBounds(375, 350, 150, 30);
+        ordersButton.setBounds(375, 380, 150, 30);
         ordersButton.setBackground(new Color(176, 166, 149));
         ordersButton.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
         ordersButton.addActionListener(e -> {
@@ -103,7 +132,7 @@ public class StudentHome {
 
         JButton logoutButton = new JButton("Logout");
         logoutButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        logoutButton.setBounds(400, 450, 100, 30);
+        logoutButton.setBounds(400, 480, 100, 30);
         logoutButton.setBackground(new Color(176, 166, 149));
         logoutButton.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
         logoutButton.addActionListener(e -> {
