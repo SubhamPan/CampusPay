@@ -14,8 +14,8 @@ public class StudentRegistration {
         container.setBackground(new Color(243, 238, 234));
 
         JLabel title = new JLabel("Register Student");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
-        title.setBounds(350, 100, 300, 30);
+        title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
+        title.setBounds(325, 100, 300, 30);
         container.add(title);
 
         JLabel nameLabel = new JLabel("Name");
@@ -125,8 +125,8 @@ public class StudentRegistration {
         frame.setLocation(x, y);
     }
 
-//    public static void main(String[] args) {
-//        StudentRegistration studentRegistration = new StudentRegistration();
-//        studentRegistration.show();
-//    }
+    public static void main(String[] args) {
+        StudentRegistration studentRegistration = new StudentRegistration();
+        studentRegistration.show();
+    }
 }

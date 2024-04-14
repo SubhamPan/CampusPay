@@ -27,8 +27,8 @@ public class EditVendor {
         container.setBackground(new Color(243, 238, 234));
 
         title = new JLabel("Edit Vendor");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
-        title.setBounds(350, 50, 400, 30);
+        title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
+        title.setBounds(375, 50, 400, 30);
         container.add(title);
 
         ID = new JLabel("Vendor ID");
@@ -101,7 +101,7 @@ public class EditVendor {
         }
 
         edit = new JButton("Edit");
-        configureButton(edit, 400, 450, 100, 30);
+        configureButton(edit, 400, 400, 100, 30);
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -135,7 +135,7 @@ public class EditVendor {
         container.add(edit);
 
         back = new JButton("Back");
-        configureButton(back, 400, 500, 100, 30);
+        configureButton(back, 400, 450, 100, 30);
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -158,5 +158,10 @@ public class EditVendor {
         button.setBounds(x, y, width, height);
         button.setBackground(new Color(176, 166, 149)); // B0A695
         button.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
+    }
+
+    public static void main(String[] args) {
+        EditVendor edit = new EditVendor();
+        edit.show();
     }
 }

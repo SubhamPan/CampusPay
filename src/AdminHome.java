@@ -8,57 +8,61 @@ public class AdminHome {
         // create a frame
         JFrame f = new JFrame("Admin Home");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setSize(600, 600);
-        f.setLayout(null);
+        f.setSize(900, 600);
+        f.setResizable(false);
+
+        Container container = f.getContentPane();
+        container.setLayout(null);
+        container.setBackground(new Color(243, 238, 234));
 
         // create a label for the title
         JLabel title = new JLabel("Admin Home");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
+        title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
         title.setSize(300, 30);
-        title.setLocation(200, 50);
-        f.add(title);
+        title.setLocation(350, 50);
+        container.add(title);
 
         // create a button to view the list of vendors
         JButton vendors = new JButton("View Vendors");
         vendors.setFont(new Font("Arial", Font.PLAIN, 15));
         vendors.setSize(200, 20);
-        vendors.setLocation(200, 150);
+        vendors.setLocation(350, 150);
+        vendors.setBackground(new Color(176, 166, 149)); // Set background color
+        vendors.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // Set border color
         vendors.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                AdminVendors vendor = new AdminVendors();
-//                vendor.show();
-//                f.dispose();
                 ViewVendors viewVendors = new ViewVendors();
                 viewVendors.show();
                 f.dispose();
             }
         });
-        f.add(vendors);
+        container.add(vendors);
 
         // create a button to view the list of students
         JButton students = new JButton("View Students");
         students.setFont(new Font("Arial", Font.PLAIN, 15));
         students.setSize(200, 20);
-        students.setLocation(200, 200);
+        students.setLocation(350, 200);
+        students.setBackground(new Color(176, 166, 149)); // Set background color
+        students.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // Set border color
         students.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                AdminStudents student = new AdminStudents();
-//                student.show();
-//                f.dispose();
                 ViewStudents viewStudents = new ViewStudents();
                 viewStudents.show();
                 f.dispose();
             }
         });
-        f.add(students);
+        container.add(students);
 
         // create a button to view the list of transactions
         JButton transactions = new JButton("Show Transactions");
         transactions.setFont(new Font("Arial", Font.PLAIN, 15));
         transactions.setSize(200, 20);
-        transactions.setLocation(200, 250);
+        transactions.setLocation(350, 250);
+        transactions.setBackground(new Color(176, 166, 149)); // Set background color
+        transactions.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // Set border color
         transactions.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,13 +71,15 @@ public class AdminHome {
                 f.dispose();
             }
         });
-        f.add(transactions);
+        container.add(transactions);
 
         // create a button to show orders
         JButton orders = new JButton("Show Orders");
         orders.setFont(new Font("Arial", Font.PLAIN, 15));
         orders.setSize(200, 20);
-        orders.setLocation(200, 300);
+        orders.setLocation(350, 300);
+        orders.setBackground(new Color(176, 166, 149)); // Set background color
+        orders.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // Set border color
         orders.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -82,13 +88,15 @@ public class AdminHome {
                 f.dispose();
             }
         });
-        f.add(orders);
+        container.add(orders);
 
         // create a button to logout
         JButton logout = new JButton("Logout");
         logout.setFont(new Font("Arial", Font.PLAIN, 15));
         logout.setSize(100, 20);
-        logout.setLocation(250, 500);
+        logout.setLocation(400, 500);
+        logout.setBackground(new Color(176, 166, 149)); // Set background color
+        logout.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // Set border color
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -98,9 +106,16 @@ public class AdminHome {
                 f.dispose();
             }
         });
-        f.add(logout);
+        container.add(logout);
         f.setVisible(true);
+
+        // Centering the frame on the screen
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (dim.width - f.getSize().width) / 2;
+        int y = (dim.height - f.getSize().height) / 2;
+        f.setLocation(x, y);
     }
+
     public static void main(String[] args) {
         AdminHome adminHome = new AdminHome();
         adminHome.show();

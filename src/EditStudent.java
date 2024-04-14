@@ -28,7 +28,7 @@ public class EditStudent {
         container.setBackground(new Color(243, 238, 234));
 
         title = new JLabel("Edit Student");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
+        title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
         title.setBounds(375, 30, 300, 30);
         container.add(title);
 
@@ -191,8 +191,8 @@ public class EditStudent {
         int y = (dim.height - f.getSize().height) / 2;
         f.setLocation(x, y);
     }
-//    public static void main(String[] args) {
-//        EditStudent editStudent = new EditStudent();
-//        editStudent.show();
-//    }
+    public static void main(String[] args) {
+        EditStudent editStudent = new EditStudent();
+        editStudent.show();
+    }
 }

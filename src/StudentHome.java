@@ -14,8 +14,8 @@ public class StudentHome {
         container.setBackground(new Color(243, 238, 234));
 
         JLabel title = new JLabel("Home Page");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
-        title.setBounds(375, 30, 300, 30);
+        title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
+        title.setBounds(375, 30, 300, 35);
         container.add(title);
 
         JLabel totalLabel = new JLabel("Total Amount Spent: ");
@@ -44,7 +44,7 @@ public class StudentHome {
         // make a label for most bought item
         JLabel mostBoughtLabel = new JLabel("Most Bought Item: ");
         mostBoughtLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        mostBoughtLabel.setBounds(275, 130, 200, 20);
+        mostBoughtLabel.setBounds(325, 130, 200, 25);
         container.add(mostBoughtLabel);
 
         // make a label for most bought item
@@ -149,8 +149,8 @@ public class StudentHome {
         int y = (dim.height - frame.getSize().height) / 2;
         frame.setLocation(x, y);
     }
-//    public static void main(String[] args) {
-//        StudentHome studentHome = new StudentHome();
-//        studentHome.show();
-//    }
+    public static void main(String[] args) {
+        StudentHome studentHome = new StudentHome();
+        studentHome.show();
+    }
 }

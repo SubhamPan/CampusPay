@@ -10,21 +10,22 @@ public class VendorsMenu {
     public void show() {
         // create a new frame to store the list of vendors
         JFrame f = new JFrame("Vendors");
-        f.setSize(600, 400);
+        f.setSize(900, 600);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLayout(null);
+        f.getContentPane().setBackground(new Color(243, 238, 234));
 
         // create a label
         JLabel title = new JLabel("Vendors");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
+        title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
         title.setSize(300, 30);
-        title.setLocation(250, 30);
+        title.setLocation(400, 50);
         f.add(title);
 
         // create a table to display the list of vendors
         JTable table = new JTable();
         table.setFont(new Font("Arial", Font.PLAIN, 15));
-        table.setSize(400, 200);
+        table.setSize(800, 350);
         table.setLocation(100, 100);
         f.add(table);
 
@@ -36,7 +37,7 @@ public class VendorsMenu {
 
         // create a scroll pane for the table
         JScrollPane scroll = new JScrollPane(table);
-        scroll.setSize(500, 200);
+        scroll.setSize(800, 350);
         scroll.setLocation(50, 100);
         f.add(scroll);
 
@@ -57,7 +58,9 @@ public class VendorsMenu {
         JButton back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(100, 20);
-        back.setLocation(250, 300);
+        back.setLocation(400, 500);
+        back.setBackground(new Color(176, 166, 149));
+        back.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
         back.addActionListener(new ActionListener() {
 
             @Override
@@ -69,8 +72,23 @@ public class VendorsMenu {
             }
         });
         f.add(back);
-
-        // set the frame visibility
         f.setVisible(true);
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (dim.width - f.getSize().width) / 2;
+        int y = (dim.height - f.getSize().height) / 2;
+        f.setLocation(x, y);
+        // set the frame visibility
+    }
+    private void configureButton(JButton button, int x, int y, int width, int height) {
+        button.setFont(new Font("Arial", Font.PLAIN, 15));
+        button.setBounds(x, y, width, height);
+        button.setBackground(new Color(176, 166, 149)); // B0A695
+        button.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
+    }
+
+    public static void main(String[] args) {
+        VendorsMenu vendorsMenu = new VendorsMenu();
+        vendorsMenu.show();
     }
 }

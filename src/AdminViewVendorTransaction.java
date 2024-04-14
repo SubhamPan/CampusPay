@@ -18,15 +18,17 @@ public class AdminViewVendorTransaction {
     public void show(String Vid) {
         // create a new frame to store the transaction history
         JFrame f = new JFrame("Transaction History");
-        f.setSize(600, 400);
+        f.setSize(900, 600); // Set frame size
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLayout(null);
+        f.setResizable(false);
+        f.getContentPane().setBackground(new Color(243, 238, 234)); // Set background color
 
         // create a label
         title = new JLabel("Transaction History");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
+        title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
         title.setSize(300, 30);
-        title.setLocation(250, 30);
+        title.setLocation(300, 30);
         f.add(title);
 
         // create a scrollable area to store the transaction history
@@ -34,7 +36,7 @@ public class AdminViewVendorTransaction {
         transactions.setFont(new Font("Arial", Font.PLAIN, 10));
         scroll = new JScrollPane(transactions);
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setSize(500, 200);
+        scroll.setSize(800, 400); // Adjust size to fit frame
         scroll.setLocation(50, 100);
         f.add(scroll);
 
@@ -43,8 +45,7 @@ public class AdminViewVendorTransaction {
             Conn c = new Conn();
             // use procedure get_all_transactions_made_by_vendor(IN vendor_id varchar(50))
             CallableStatement cs = c.con.prepareCall("{call get_all_transactions_made_by_vendor(?)}");
-//            cs.setString(1, User.getInstance().getId());
-            cs.setString(1,Vid);
+            cs.setString(1, Vid);
             ResultSet rs = cs.executeQuery();
 
             // display the transaction history
@@ -62,7 +63,9 @@ public class AdminViewVendorTransaction {
         JButton back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(100, 20);
-        back.setLocation(250, 300);
+        back.setLocation(400, 520); // Adjust location to fit frame
+        back.setBackground(new Color(176, 166, 149)); // Set background color
+        back.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149),2)); // Set border color
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,5 +77,15 @@ public class AdminViewVendorTransaction {
         f.add(back);
 
         f.setVisible(true);
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (dim.width - f.getSize().width) / 2;
+        int y = (dim.height - f.getSize().height) / 2;
+        f.setLocation(x, y);
+    }
+
+    public static void main(String[] args) {
+        AdminViewVendorTransaction adminViewVendorTransaction = new AdminViewVendorTransaction();
+        adminViewVendorTransaction.show("V001");
     }
 }

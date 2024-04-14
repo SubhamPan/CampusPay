@@ -2,6 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 public class ShowTransactions {
     private JLabel title;
@@ -14,52 +15,64 @@ public class ShowTransactions {
     public void show() {
         JFrame f = new JFrame("Show Transactions");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setSize(600, 600);
+        f.setSize(900, 600);
         f.setLayout(null);
+        f.setResizable(false);
+        f.getContentPane().setBackground(new Color(243, 238, 234));
 
         title = new JLabel("Transactions");
-        title.setFont(new Font("Arial", Font.PLAIN, 20));
+        title.setFont(new Font("MONOSPACED", Font.BOLD, 20));
         title.setSize(200, 20);
-        title.setLocation(200, 50);
+        title.setLocation(375, 25);
         f.add(title);
 
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(columns);
+        table = new JTable();
+        table.setModel(model);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        table.setFillsViewportHeight(true);
+        table.setFont(new Font("Arial", Font.PLAIN, 15));
+        table.setSize(800, 250);
+        table.setLocation(100, 100);
+        f.add(table);
 
 
-        String[][] data = new String[100][5];
         try {
             Conn c = new Conn();
-//            ResultSet rs = c.stmt.executeQuery("SELECT * FROM transactions");
             CallableStatement cs = c.con.prepareCall("{call get_all_transactions()}");
             ResultSet rs = cs.executeQuery();
             int i = 0;
             while (rs.next()) {
-                data[i][0] = rs.getString(columns[0]);
-                data[i][1] = rs.getString(columns[1]);
-                data[i][2] = rs.getString(columns[2]);
-                data[i][3] = rs.getString(columns[3]);
-                data[i][4] = rs.getString(columns[4]);
+//                data[i][0] = rs.getString(columns[0]);
+//                data[i][1] = rs.getString(columns[1]);
+//                data[i][2] = rs.getString(columns[2]);
+//                data[i][3] = rs.getString(columns[3]);
+//                data[i][4] = rs.getString(columns[4]);
+                model.addRow(new Object[]{rs.getString("ID"), rs.getString("vendor_id"), rs.getString("student_id"), rs.getString("total_amount"), rs.getString("date_time")});
                 i++;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
-        table = new JTable(data, columns);
-        table.setFont(new Font("Arial", Font.PLAIN, 15));
-        table.setSize(300, 200);
-        table.setLocation(100, 100);
-        f.add(table);
+//        table = new JTable(data, columns);
+//        table.setFont(new Font("Arial", Font.PLAIN, 15));
+//        table.setSize(700, 300);
+//        table.setLocation(100, 100);
+//        f.add(table);
         JScrollPane scroll = new JScrollPane(table);
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setSize(500, 200);
-        scroll.setLocation(50, 100);
+        scroll.setSize(800, 300);
+        scroll.setLocation(50, 75);
         f.add(scroll);
 
         add = new JButton("Add Transaction");
         add.setFont(new Font("Arial", Font.PLAIN, 15));
         add.setSize(200, 20);
-        add.setLocation(200, 350);
+        add.setLocation(350, 400);
+        add.setBackground(new Color(176,166,149));
+        add.setBorder(BorderFactory.createLineBorder(new Color(176,166,149), 2));
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -70,11 +83,12 @@ public class ShowTransactions {
         });
         f.add(add);
 
-//        Edit selected transaction from table
         edit = new JButton("Edit Transaction");
         edit.setFont(new Font("Arial", Font.PLAIN, 15));
         edit.setSize(200, 20);
-        edit.setLocation(200, 400);
+        edit.setLocation(350, 440);
+        edit.setBackground(new Color(176,166,149));
+        edit.setBorder(BorderFactory.createLineBorder(new Color(176,166,149), 2));
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -91,11 +105,12 @@ public class ShowTransactions {
         });
         f.add(edit);
 
-        // refund selected transaction from table
         JButton refund = new JButton("Refund");
         refund.setFont(new Font("Arial", Font.PLAIN, 15));
         refund.setSize(200, 20);
-        refund.setLocation(200, 450);
+        refund.setLocation(350, 480);
+        refund.setBackground(new Color(176,166,149));
+        refund.setBorder(BorderFactory.createLineBorder(new Color(176,166,149), 2));
         refund.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -107,14 +122,15 @@ public class ShowTransactions {
         });
         f.add(refund);
 
-//        back
         JButton back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(100, 20);
-        back.setLocation(200, 500);
-        back.addMouseListener(new MouseAdapter() {
+        back.setLocation(400, 520);
+        back.setBackground(new Color(176,166,149));
+        back.setBorder(BorderFactory.createLineBorder(new Color(176,166,149), 2));
+        back.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 AdminHome adminHome = new AdminHome();
                 adminHome.show();
                 f.dispose();
@@ -123,6 +139,10 @@ public class ShowTransactions {
         f.add(back);
 
         f.setVisible(true);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (dim.width - f.getSize().width) / 2;
+        int y = (dim.height - f.getSize().height) / 2;
+        f.setLocation(x, y);
     }
 
     public static void main(String[] args) {

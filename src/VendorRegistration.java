@@ -29,56 +29,56 @@ public class VendorRegistration {
 
         title = new JLabel("Vendor Registration");
         title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
-        title.setBounds(300, 30, 400, 40); // Centered horizontally
+        title.setBounds(300, 80, 400, 40); // Centered horizontally
         container.add(title);
 
         name = new JLabel("Name");
         name.setFont(new Font("Arial", Font.PLAIN, 20));
-        name.setBounds(250, 100, 100, 20); // Centered horizontally
+        name.setBounds(300, 150, 100, 20); // Centered horizontally
         container.add(name);
 
         nameText = new JTextField();
         nameText.setFont(new Font("Arial", Font.PLAIN, 15));
-        nameText.setBounds(350, 100, 190, 20); // Centered horizontally
+        nameText.setBounds(400, 150, 190, 20); // Centered horizontally
         nameText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2)); // EBE3D5
         container.add(nameText);
 
         accountNo = new JLabel("Acc No.");
         accountNo.setFont(new Font("Arial", Font.PLAIN, 20));
-        accountNo.setBounds(250, 150, 150, 20); // Centered horizontally
+        accountNo.setBounds(300, 200, 150, 20); // Centered horizontally
         container.add(accountNo);
 
         accountNoText = new JTextField();
         accountNoText.setFont(new Font("Arial", Font.PLAIN, 15));
-        accountNoText.setBounds(350, 150, 190, 20); // Centered horizontally
+        accountNoText.setBounds(400, 200, 190, 20); // Centered horizontally
         accountNoText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2)); // EBE3D5
         container.add(accountNoText);
 
         contact = new JLabel("Contact");
         contact.setFont(new Font("Arial", Font.PLAIN, 20));
-        contact.setBounds(250, 200, 100, 20); // Centered horizontally
+        contact.setBounds(300, 250, 100, 20); // Centered horizontally
         container.add(contact);
 
         contactText = new JTextField();
         contactText.setFont(new Font("Arial", Font.PLAIN, 15));
-        contactText.setBounds(350, 200, 190, 20); // Centered horizontally
+        contactText.setBounds(400, 250, 190, 20); // Centered horizontally
         contactText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2)); // EBE3D5
         container.add(contactText);
 
         password = new JLabel("Password");
         password.setFont(new Font("Arial", Font.PLAIN, 20));
-        password.setBounds(250, 250, 100, 20); // Centered horizontally
+        password.setBounds(300, 300, 100, 20); // Centered horizontally
         container.add(password);
 
         passwordText = new JPasswordField();
         passwordText.setFont(new Font("Arial", Font.PLAIN, 15));
-        passwordText.setBounds(350, 250, 190, 20); // Centered horizontally
+        passwordText.setBounds(400, 300, 190, 20); // Centered horizontally
         passwordText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2)); // EBE3D5
         container.add(passwordText);
 
         register = new JButton("Register");
         register.setFont(new Font("Arial", Font.PLAIN, 15));
-        register.setBounds(350, 300, 100, 30); // Centered horizontally
+        register.setBounds(400, 350, 100, 30); // Centered horizontally
         register.setBackground(new Color(176, 166, 149)); // B0A695
         register.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
         register.addActionListener(new ActionListener() {
@@ -112,7 +112,7 @@ public class VendorRegistration {
 
         back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
-        back.setBounds(350, 350, 100, 30); // Centered horizontally
+        back.setBounds(400, 400, 100, 30); // Centered horizontally
         back.setBackground(new Color(176, 166, 149)); // B0A695
         back.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
         back.addActionListener(new ActionListener() {
@@ -133,5 +133,10 @@ public class VendorRegistration {
         f.setLocation(x, y);
 
         f.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        VendorRegistration registration = new VendorRegistration();
+        registration.show();
     }
 }

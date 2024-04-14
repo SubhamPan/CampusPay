@@ -16,58 +16,69 @@ public class AddItem {
     public void show() {
         // create a new frame to store the add item form
         JFrame f = new JFrame("Add Item");
-        f.setSize(600, 400);
+        f.setSize(900, 600);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setLayout(null);
+        f.setResizable(false);
+
+        Container container = f.getContentPane();
+        container.setLayout(null);
+        container.setBackground(new Color(243, 238, 234));
 
         // create a label
         title = new JLabel("Add Item");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
+        title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
         title.setSize(300, 30);
-        title.setLocation(250, 30);
-        f.add(title);
+        title.setLocation(390, 130);
+        container.add(title);
 
         // create a label for the name
         name = new JLabel("Name");
         name.setFont(new Font("Arial", Font.PLAIN, 20));
         name.setSize(100, 20);
-        name.setLocation(100, 100);
-        f.add(name);
+        name.setLocation(300, 200);
+        container.add(name);
 
         // create a text field for the name
         nameText = new JTextField();
         nameText.setFont(new Font("Arial", Font.PLAIN, 15));
         nameText.setSize(190, 20);
-        nameText.setLocation(200, 100);
-        f.add(nameText);
+        nameText.setLocation(375, 200);
+        nameText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2));
+        container.add(nameText);
 
         // create a label for the price
         price = new JLabel("Price");
         price.setFont(new Font("Arial", Font.PLAIN, 20));
         price.setSize(100, 20);
-        price.setLocation(100, 150);
-        f.add(price);
+        price.setLocation(300, 250);
+        container.add(price);
 
         // create a text field for the price
         priceText = new JTextField();
         priceText.setFont(new Font("Arial", Font.PLAIN, 15));
         priceText.setSize(190, 20);
-        priceText.setLocation(200, 150);
-        f.add(priceText);
+        priceText.setLocation(375, 250);
+        priceText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2));
+        container.add(priceText);
 
         // create a button to submit the form
         submit = new JButton("Submit");
         submit.setFont(new Font("Arial", Font.PLAIN, 15));
         submit.setSize(100, 20);
-        submit.setLocation(100, 200);
-        f.add(submit);
+        submit.setLocation(325, 300);
+        submit.setBackground(new Color(176, 166, 149));
+        submit.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
+        container.add(submit);
 
         // create a button to go back to the home page
         back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(100, 20);
-        back.setLocation(250, 200);
-        f.add(back);
+        back.setLocation(475, 300);
+        back.setBackground(new Color(176, 166, 149));
+        back.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
+
+        container.add(back);
 
         // add an action listener to the submit button
         submit.addActionListener(new ActionListener() {
@@ -105,5 +116,14 @@ public class AddItem {
 
         // display the frame
         f.setVisible(true);
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (dim.width - f.getSize().width) / 2;
+        int y = (dim.height - f.getSize().height) / 2;
+        f.setLocation(x, y);
+    }
+    public static void main(String[] args) {
+        AddItem item = new AddItem();
+        item.show();
     }
 }
