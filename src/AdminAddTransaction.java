@@ -31,7 +31,8 @@ public class AdminAddTransaction {
         JComboBox<String> studentList = new JComboBox<String>();
         try {
             Conn c = new Conn();
-            ResultSet rs = c.stmt.executeQuery("SELECT * FROM student");
+            CallableStatement cs = c.con.prepareCall("{call get_all_students()}");
+            ResultSet rs = cs.executeQuery();
             while (rs.next()) {
                 studentList.addItem(rs.getString("ID"));
             }
@@ -55,7 +56,8 @@ public class AdminAddTransaction {
         JComboBox<String> vendorList = new JComboBox<String>();
         try {
             Conn c = new Conn();
-            ResultSet rs = c.stmt.executeQuery("SELECT * FROM vendors");
+            CallableStatement cs = c.con.prepareCall("{call get_all_vendors()}");
+            ResultSet rs = cs.executeQuery();
             while (rs.next()) {
                 vendorList.addItem(rs.getString("ID"));
             }
@@ -113,7 +115,7 @@ public class AdminAddTransaction {
             showTransactions.show();
                     f.dispose();
                 } catch (Exception ex) {
-//                    ex.printStackTrace();
+                    ex.printStackTrace();
                     JOptionPane.showMessageDialog(f, "Error Adding Transaction");
 
                 }

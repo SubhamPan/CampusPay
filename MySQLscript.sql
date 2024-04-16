@@ -274,7 +274,7 @@ delimiter ;
 
 --UPDATE transactions SET vendor_id = ?, student_id = ?, total_amount = ?, date_time = ? WHERE ID = ?
     delimiter //
-create procedure update_transaction(IN ID int, IN vendor_id varchar(50), IN student_id varchar(50), IN total_amount int, IN date_time datetime)
+create procedure update_transaction(IN vendor_id varchar(50), IN student_id varchar(50), IN total_amount int, IN date_time datetime, IN ID int)
 begin
     start transaction ;
     update transactions set vendor_id = vendor_id, student_id = student_id, total_amount = total_amount, date_time = date_time where transactions.ID = ID;

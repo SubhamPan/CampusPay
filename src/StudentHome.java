@@ -50,7 +50,7 @@ public class StudentHome {
         // make a label for most bought item
         JLabel mostBought = new JLabel();
         mostBought.setFont(new Font("Arial", Font.PLAIN, 20));
-        mostBought.setBounds(475, 130, 350, 20);
+        mostBought.setBounds(500, 130, 350, 20);
         container.add(mostBought);
 
         try {

@@ -106,6 +106,7 @@ public class AdminEditTransaction {
                     showTransactions.show();
                 } catch (Exception ex) {
                     ex.printStackTrace();
+                    JOptionPane.showMessageDialog(f, "Error Updating Transaction");
                 }
             }
         });

@@ -94,6 +94,10 @@ public class ShowTransactions {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = table.getSelectedRow();
+                if(row == -1) {
+                    JOptionPane.showMessageDialog(f, "Please select a transaction to edit");
+                    return;
+                }
                 String transaction_id = table.getModel().getValueAt(row, 0).toString();
                 String vendor_id = table.getModel().getValueAt(row, 1).toString();
                 String student_id = table.getModel().getValueAt(row, 2).toString();
@@ -116,6 +120,10 @@ public class ShowTransactions {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = table.getSelectedRow();
+                if(row == -1) {
+                    JOptionPane.showMessageDialog(f, "Please select a transaction to edit");
+                    return;
+                }
                 String transaction_id = table.getModel().getValueAt(row, 0).toString();
                 RefundTransaction refundTransaction = new RefundTransaction();
                 refundTransaction.show(transaction_id);
