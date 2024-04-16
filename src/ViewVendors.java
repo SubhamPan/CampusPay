@@ -81,11 +81,8 @@ public class ViewVendors {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // go to the vendor add page
-//                VendorAdd vendorAdd = new VendorAdd();
                 VendorRegistration vendorRegistration = new VendorRegistration();
                 vendorRegistration.show();
-                f.dispose();
-
             }
         });
         f.add(add);

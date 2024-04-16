@@ -87,9 +87,10 @@ public class StudentRegistration {
                     // show a success message
                     JOptionPane.showMessageDialog(frame, "Student registered successfully");
 
-                    // go back to the login page
-                    LoginSystem login = new LoginSystem();
-                    login.show();
+                    if(User.getInstance().getRole() != 2) {
+                        LoginSystem login = new LoginSystem();
+                        login.show();
+                    }
                     frame.dispose();
 
                 } catch (Exception ex) {

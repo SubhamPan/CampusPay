@@ -82,7 +82,6 @@ public class ViewStudents {
                 // go to the student registration page
                 StudentRegistration studentRegistration = new StudentRegistration();
                 studentRegistration.show();
-                f.dispose();
             }
         });
         f.add(add);

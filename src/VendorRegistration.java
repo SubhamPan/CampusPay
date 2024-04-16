@@ -118,9 +118,10 @@ public class VendorRegistration {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // go back to the login system
-                LoginSystem login = new LoginSystem();
-                login.show();
+                if(User.getInstance().getRole() != 2) {
+                    LoginSystem login = new LoginSystem();
+                    login.show();
+                }
                 f.dispose();
             }
         });
