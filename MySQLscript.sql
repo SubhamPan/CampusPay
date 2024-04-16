@@ -271,3 +271,13 @@ begin
     select items.ID, items.item_name, vendors.v_name into ID, item_name, v_name from items, orders, transactions, vendors where transactions.student_id = student_id and transactions.ID = orders.transaction_id and orders.item_id = items.ID and items.vendor_id = vendors.ID group by items.ID order by sum(orders.quantity) desc limit 1;
 end //
 delimiter ;
+
+--UPDATE transactions SET vendor_id = ?, student_id = ?, total_amount = ?, date_time = ? WHERE ID = ?
+    delimiter //
+create procedure update_transaction(IN ID int, IN vendor_id varchar(50), IN student_id varchar(50), IN total_amount int, IN date_time datetime)
+begin
+    start transaction ;
+    update transactions set vendor_id = vendor_id, student_id = student_id, total_amount = total_amount, date_time = date_time where transactions.ID = ID;
+    commit;
+end //
+delimiter ;

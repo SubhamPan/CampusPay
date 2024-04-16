@@ -7,12 +7,13 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 public class AdminViewVendorTransaction {
     // this class is used to display the transaction history of a vendor
     private Container c;
     private JLabel title;
-    private JTextArea transactions;
+//    private JTextArea transactions;
     private JScrollPane scroll;
 
     public void show(String Vid) {
@@ -27,14 +28,23 @@ public class AdminViewVendorTransaction {
         // create a label
         title = new JLabel("Transaction History");
         title.setFont(new Font("MONOSPACED", Font.BOLD, 30));
-        title.setSize(300, 30);
+        title.setSize(500, 30);
         title.setLocation(300, 30);
         f.add(title);
 
         // create a scrollable area to store the transaction history
-        transactions = new JTextArea(30, 30);
-        transactions.setFont(new Font("Arial", Font.PLAIN, 10));
-        scroll = new JScrollPane(transactions);
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Transaction ID");
+        model.addColumn("Student ID");
+        model.addColumn("Amount");
+        model.addColumn("Date and Time");
+        JTable table = new JTable();
+        table.setModel(model);
+        table.setFont(new Font("Arial", Font.PLAIN, 15));
+        table.setSize(800, 300);
+        table.setLocation(50, 100);
+        f.add(table);
+        scroll = new JScrollPane(table);
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.setSize(800, 400); // Adjust size to fit frame
         scroll.setLocation(50, 100);
@@ -50,10 +60,7 @@ public class AdminViewVendorTransaction {
 
             // display the transaction history
             while (rs.next()) {
-                transactions.append("Transaction ID: " + rs.getString("ID") + "\n");
-                transactions.append("Student ID: " + rs.getString("student_id") + "\n");
-                transactions.append("Amount: " + rs.getString("total_amount") + "\n");
-                transactions.append("Date and Time: " + rs.getString("date_time") + "\n\n");
+                model.addRow(new Object[]{rs.getString("ID"), rs.getString("student_id"), rs.getString("total_amount"), rs.getString("date_time")});
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "an error occurred, please contact the admin");
