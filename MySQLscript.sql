@@ -167,14 +167,6 @@ begin
 end //
 delimiter ;
 
--- procedure to add transaction
-delimiter //
-create procedure add_transaction(IN vendor_id varchar(50), IN student_id varchar(50), IN total_amount int)
-begin
-    insert into transactions (vendor_id, student_id, total_amount, date_time) values (vendor_id, student_id, total_amount, now());
-end //
-delimiter ;
-
 -- procedure to get all orders of a transaction
 delimiter //
 create procedure get_all_orders_of_transaction(IN transaction_id int)
