@@ -63,8 +63,6 @@ public class RefundTransaction {
         // action listener for the cancel button
         cancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ShowTransactions showTransactions = new ShowTransactions();
-                showTransactions.show();
                 f.dispose();
             }
         });

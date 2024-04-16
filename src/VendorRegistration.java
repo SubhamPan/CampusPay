@@ -100,9 +100,10 @@ public class VendorRegistration {
                     cs.execute();
                     JOptionPane.showMessageDialog(f, "Vendor registered successfully, your ID is " + ID + ". Please remember this ID.");
                     f.dispose();
-                    // go back to the login system
-                    LoginSystem login = new LoginSystem();
-                    login.show();
+                    if(User.getInstance().getRole() != 2) {
+                        LoginSystem login = new LoginSystem();
+                        login.show();
+                    }
                 } catch (Exception ex) {
                     System.out.println(ex);
                 }

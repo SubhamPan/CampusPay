@@ -10,11 +10,11 @@ public class ViewStudents {
     private JScrollPane scroll;
     private JButton add;
     private JButton edit;
-    private String[] columns = {"ID", "BITS_account", "s_name", "contact"};
+    private String[] columns = {"ID", "account_no", "s_name", "contact"};
     private JTable table;
     //   table to display the list of students
     // this class will be used to view the list of students
-    // display table of students with columns ID, BITS_account, s_name, Contact and buttons to add and edit students
+    // display table of students with columns ID, account_no, s_name, Contact and buttons to add and edit students
     public void show() {
         // create a frame
         JFrame f = new JFrame("View Students");
@@ -36,7 +36,7 @@ public class ViewStudents {
         table = new JTable();
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID");
-        model.addColumn("BITS_account");
+        model.addColumn("account_no");
         model.addColumn("s_name");
         model.addColumn("contact");
         table.setModel(model);
@@ -54,10 +54,10 @@ public class ViewStudents {
             int i = 0;
             while (rs.next()) {
 //                data[i][0] = rs.getString("ID");
-//                data[i][1] = rs.getString("BITS_account");
+//                data[i][1] = rs.getString("account_no");
 //                data[i][2] = rs.getString("s_name");
 //                data[i][3] = rs.getString("contact");
-                model.addRow(new Object[]{rs.getString("ID"), rs.getString("BITS_account"), rs.getString("s_name"), rs.getString("contact")});
+                model.addRow(new Object[]{rs.getString("ID"), rs.getString("account_no"), rs.getString("s_name"), rs.getString("contact")});
                 i++;
             }
         } catch (Exception e) {

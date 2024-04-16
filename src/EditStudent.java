@@ -172,10 +172,7 @@ public class EditStudent {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(User.getInstance().getRole() == 2) {
-                    ViewStudents home = new ViewStudents();
-                    home.show();
-                } else if(User.getInstance().getRole() == 0){
+                if(User.getInstance().getRole() == 0){
                     StudentHome home = new StudentHome();
                     home.show();
                 }

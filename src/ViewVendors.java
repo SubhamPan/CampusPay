@@ -14,7 +14,7 @@ public class ViewVendors {
     private JTable table;
     //   table to display the list of students
     // this class will be used to view the list of students
-    // display table of students with columns ID, BITS_account, s_name, Contact and buttons to add and edit students
+    // display table of students with columns ID, account_no, s_name, Contact and buttons to add and edit students
     public void show() {
         // create a frame
         JFrame f = new JFrame("View Vendors");

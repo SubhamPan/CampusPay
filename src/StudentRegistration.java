@@ -73,7 +73,7 @@ public class StudentRegistration {
                 // make a connection to the database
                 Conn c = new Conn();
                 try {
-                    // use procedure register_student(IN ID varchar(50), IN BITS_account varchar(50), IN s_name varchar(50), IN contact char(10), IN password varchar(256))
+                    // use procedure register_student(IN ID varchar(50), IN account_no varchar(50), IN s_name varchar(50), IN contact char(10), IN password varchar(256))
                     CallableStatement cs = c.con.prepareCall("{call register_student(?, ?, ?, ?, ?)}");
                     cs.setString(1, idText.getText());
                     cs.setString(2, idText.getText());
@@ -109,9 +109,10 @@ public class StudentRegistration {
             // Add your back button logic here
             @Override
             public void actionPerformed(ActionEvent e) {
-                // go back to the login page
-                LoginSystem login = new LoginSystem();
-                login.show();
+                if(User.getInstance().getRole() != 2) {
+                    LoginSystem login = new LoginSystem();
+                    login.show();
+                }
                 frame.dispose();
             }
         });

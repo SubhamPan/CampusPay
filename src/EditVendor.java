@@ -40,6 +40,16 @@ public class EditVendor {
         vendorList.setFont(new Font("Arial", Font.PLAIN, 15));
         vendorList.setBounds(400, 150, 190, 20);
         container.add(vendorList);
+        try {
+            Conn c = new Conn();
+            CallableStatement cs = c.con.prepareCall("{call get_all_vendors()}");
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                vendorList.addItem(rs.getString("ID") + " - " + rs.getString("v_name"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         name = new JLabel("Name");
         name.setFont(new Font("Arial", Font.PLAIN, 20));
