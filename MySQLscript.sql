@@ -281,13 +281,3 @@ begin
     commit;
 end //
 delimiter ;
-
---INSERT INTO transactions (vendor_id, student_id, total_amount,date_time) VALUES (?, ?, ?,now())
-    delimiter //
-create procedure insert_transaction(IN vendor_id varchar(50), IN student_id varchar(50), IN total_amount int)
-begin
-    start transaction ;
-    insert into transactions (vendor_id, student_id, total_amount,date_time) values (vendor_id, student_id, total_amount,now());
-    commit;
-end //
-delimiter ;
