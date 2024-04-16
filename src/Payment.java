@@ -2,6 +2,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Payment {
     // this class is used to make a payment
@@ -57,11 +59,13 @@ public class Payment {
         // connect to the database and get the list of vendors
         try {
             Conn c = new Conn();
-            ResultSet rs = c.stmt.executeQuery("SELECT * FROM vendors");
+            CallableStatement cs = c.con.prepareCall("{call get_all_vendors()}");
+            ResultSet rs = cs.executeQuery();
 
             // display the list of vendors
             while (rs.next()) {
-                vendorList.addItem(rs.getString("v_name"));
+                // ID - v_name
+                vendorList.addItem(rs.getString("ID") + " - " + rs.getString("v_name"));
             }
 
         } catch (Exception e) {
@@ -92,15 +96,13 @@ public class Payment {
                 try {
                     Conn c = new Conn();
                     // we need transaction_id, vendor_id, student_id, total amount, date_time
-                    String vendor_id = "";
-                    ResultSet rs = c.stmt.executeQuery("SELECT * FROM vendors WHERE v_name = '" + vendorList.getSelectedItem() + "'");
-                    if (rs.next()) {
-                        vendor_id = rs.getString("ID");
-                    }
+                    String vendor_id = vendorList.getSelectedItem().toString().split(" - ")[0];
                     // transaction_id is auto incremented
                     // student_id is current user ID
-                    // date_time is current date and time
-                    c.stmt.executeUpdate("INSERT INTO transactions (vendor_id, student_id, total_amount, date_time) VALUES ('" + vendor_id + "', '" + User.getInstance().getId() + "', '" + amount + "', NOW())");
+                    CallableStatement cs = c.con.prepareCall("{call make_transaction(?, ?, ?)}");
+                    cs.setString(1, vendor_id);
+                    cs.setString(2, User.getInstance().getId());
+                    cs.setString(3, amount);
 
                     JOptionPane.showMessageDialog(f, "Payment successful");
                 } catch (Exception ex) {

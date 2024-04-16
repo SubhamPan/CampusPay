@@ -42,7 +42,8 @@ public class EditStudent {
             // user is admin, get all students
             try {
                 Conn c = new Conn();
-                ResultSet rs = c.stmt.executeQuery("SELECT * FROM student");
+                CallableStatement cs = c.con.prepareCall("{call get_all_students()}");
+                ResultSet rs = cs.executeQuery();
                 while (rs.next()) {
                     // ID - sname
                     studentList.addItem(rs.getString("ID") + " - " + rs.getString("s_name"));

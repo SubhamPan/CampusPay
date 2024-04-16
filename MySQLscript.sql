@@ -106,9 +106,9 @@ delimiter ;
 
 -- procedure to a new transaction
 delimiter //
-create procedure make_transaction(IN vendor_id varchar(50), IN student_id varchar(50), IN total_amount int, IN date_time datetime)
+create procedure make_transaction(IN vendor_id varchar(50), IN student_id varchar(50), IN total_amount int)
 begin
-    insert into transactions (vendor_id, student_id, total_amount, date_time) values (vendor_id, student_id, total_amount, date_time);
+    insert into transactions (vendor_id, student_id, total_amount, date_time) values (vendor_id, student_id, total_amount, now());
 end //
 delimiter ;
 

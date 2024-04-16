@@ -130,8 +130,6 @@ public class DeleteItem {
         back.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
         back.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                VendorItems items = new VendorItems();
-                items.show();
                 f.dispose();
             }
         });
