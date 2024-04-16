@@ -46,6 +46,7 @@ public class StudentPaymentHistory {
                 model.addRow(new Object[] {rs.getString("v_name"), rs.getString("total_amount"), rs.getString("date_time")});
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(frame, "Error: " + e);
             System.out.println(e);
         }
 

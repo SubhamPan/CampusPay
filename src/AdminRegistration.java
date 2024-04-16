@@ -102,6 +102,7 @@ public class AdminRegistration {
                     LoginSystem login = new LoginSystem();
                     login.show();
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(f, "Error registering admin or admin already exists");
                     System.out.println(ex);
                 }
             }

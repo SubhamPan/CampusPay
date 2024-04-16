@@ -94,6 +94,7 @@ public class StudentRegistration {
                     frame.dispose();
 
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(frame, "Error: " + ex);
                     System.out.println(ex);
                 }
             }

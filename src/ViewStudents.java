@@ -61,6 +61,7 @@ public class ViewStudents {
                 i++;
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(f, "Error: " + e);
             e.printStackTrace();
         }
 

@@ -50,6 +50,7 @@ public class AdminViewVendorItems {
                 items.append("Price: " + rs.getString("price") + "\n\n");
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(f, "an error occurred, please contact the admin");
             System.out.println(e);
         }
 

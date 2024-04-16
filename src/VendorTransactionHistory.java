@@ -51,6 +51,7 @@ public class VendorTransactionHistory {
                 model.addRow(new Object[]{rs.getString("ID"), rs.getString("student_id") + " - " + rs.getString("s_name"), rs.getString("total_amount"), rs.getString("date_time")});
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(f, "Error: " + e);
             System.out.println(e);
         }
 

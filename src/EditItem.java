@@ -138,6 +138,7 @@ public class EditItem {
                     cs.execute();
                     JOptionPane.showMessageDialog(f, "Price updated successfully");
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(f, "An error occurred, please contact the admin");
                     System.out.println(ex);
                 }
             }

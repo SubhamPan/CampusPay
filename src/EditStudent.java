@@ -49,6 +49,7 @@ public class EditStudent {
                     studentList.addItem(rs.getString("ID") + " - " + rs.getString("s_name"));
                 }
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(f, "Error: " + e);
                 e.printStackTrace();
             }
         } else {
@@ -122,6 +123,7 @@ public class EditStudent {
                 contactText.setText(rs.getString("contact"));
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(f, "Error: " + e);
             System.out.println(e);
         }
 
@@ -158,6 +160,7 @@ public class EditStudent {
                     JOptionPane.showMessageDialog(f, "student details updated successfully");
                     f.dispose();
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(f, "Error updating student details");
                     System.out.println(ex);
                 }
             }

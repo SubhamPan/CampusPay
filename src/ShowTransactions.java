@@ -53,6 +53,7 @@ public class ShowTransactions {
                 i++;
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(f, "Error: " + e);
             e.printStackTrace();
         }
 

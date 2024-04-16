@@ -107,6 +107,7 @@ public class EditVendor {
                 contactText.setText(rs.getString("contact"));
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(f, "Error: " + e);
             System.out.println(e);
         }
 

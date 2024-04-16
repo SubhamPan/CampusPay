@@ -51,6 +51,7 @@ public class VendorsMenu {
                 model.addRow(new Object[]{rs.getString("ID"), rs.getString("v_name"), rs.getString("contact")});
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(f, "Error: " + e);
             System.out.println(e);
         }
 

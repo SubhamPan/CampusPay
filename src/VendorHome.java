@@ -35,6 +35,7 @@ public class VendorHome {
             totalAmount.setBounds(520, 100, 200, 20);
             container.add(totalAmount);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(f, "Error: " + e);
             System.out.println(e);
         }
 
@@ -59,6 +60,7 @@ public class VendorHome {
             mostPopularItem.setBounds(520, 130, 200, 20);
             container.add(mostPopularItem);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(f, "Error: " + e);
             System.out.println(e);
         }
 

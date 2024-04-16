@@ -53,6 +53,7 @@ public class VendorItems {
                 model.addRow(new Object[]{rs.getString("ID"), rs.getString("item_name"), rs.getString("price")});
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(f, "Error: " + e);
             System.out.println(e);
         }
 

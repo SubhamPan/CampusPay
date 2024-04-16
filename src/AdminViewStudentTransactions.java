@@ -59,6 +59,7 @@ public class AdminViewStudentTransactions {
                 model.addRow(new Object[] {rs.getString("v_name"), rs.getString("total_amount"), rs.getString("date_time")});
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(f ,"an error occurred while fetching the payment history, contact the admin");
             System.out.println(e);
         }
 

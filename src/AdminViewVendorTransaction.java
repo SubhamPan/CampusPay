@@ -56,6 +56,7 @@ public class AdminViewVendorTransaction {
                 transactions.append("Date and Time: " + rs.getString("date_time") + "\n\n");
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "an error occurred, please contact the admin");
             System.out.println(e);
         }
 

@@ -88,6 +88,7 @@ public class ShowOrders {
                         model.addRow(new Object[] {rs.getString("ID"), rs.getString("item_name"), rs.getString("quantity"), rs.getString("price")});
                     }
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(f, "Error: " + ex);
                     System.out.println(ex);
                 }
             }

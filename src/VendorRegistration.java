@@ -105,6 +105,7 @@ public class VendorRegistration {
                         login.show();
                     }
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(f, "Error: " + ex);
                     System.out.println(ex);
                 }
             }

@@ -127,6 +127,7 @@ public class VendorTransactionProcess {
                     total += price * Integer.parseInt(quantity);
                     amountText.setText(Integer.toString(total));
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(f, "Error: " + ex);
                     System.out.println(ex);
                 }
 
@@ -170,6 +171,7 @@ public class VendorTransactionProcess {
                     cs.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
                     cs.execute();
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(f, "Error: " + ex);
                     System.out.println(ex);
                 }
 
@@ -194,6 +196,7 @@ public class VendorTransactionProcess {
                         cs.execute();
                     }
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(f, "Error: " + ex);
                     System.out.println(ex);
                 }
 

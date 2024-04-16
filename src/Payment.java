@@ -106,6 +106,7 @@ public class Payment {
 
                     JOptionPane.showMessageDialog(f, "Payment successful");
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(f, "Error: " + ex);
                     System.out.println(ex);
                 }
             }

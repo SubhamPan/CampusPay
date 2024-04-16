@@ -89,6 +89,7 @@ public class DeleteItem {
                 itemList.addItem(rs.getString("ID") + " - " + rs.getString("item_name"));
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(f, "Error Fetching Items");
             System.out.println(e);
         }
         itemList.setFont(new Font("Arial", Font.PLAIN, 15));
