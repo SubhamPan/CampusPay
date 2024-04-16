@@ -101,7 +101,7 @@ public class AdminAddTransaction {
                 String transaction_amount = transaction_amount_text.getText();
                 try {
                     Conn c = new Conn();
-                    CallableStatement cs = c.con.prepareCall("call add_transaction(?, ?, ?)");
+                    CallableStatement cs = c.con.prepareCall("call make_transaction(?, ?, ?)");
                     cs.setString(1, vendor_id);
                     cs.setString(2, student_id);
                     cs.setString(3, transaction_amount);
