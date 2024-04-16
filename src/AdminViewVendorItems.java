@@ -2,12 +2,13 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 public class AdminViewVendorItems {
     // this class is used to display, add and change prices of items sold by a vendor
     private Container c;
     private JLabel title;
-    private JTextArea items;
+//    private JTextArea items;
     private JScrollPane scroll;
 
     public void show(String Vid) {
@@ -25,11 +26,23 @@ public class AdminViewVendorItems {
         title.setLocation(350, 30);
         f.add(title);
 
+
         // create a scrollable area to store the items sold by the vendor
-        items = new JTextArea(30, 30);
-        items.setFont(new Font("Arial", Font.PLAIN, 15));
-        items.setEditable(false); // Disable editing
-        scroll = new JScrollPane(items);
+//        items = new JTextArea(30, 30);
+//        items.setFont(new Font("Arial", Font.PLAIN, 15));
+//        items.setEditable(false); // Disable editing
+//        scroll = new JScrollPane(items);
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Name");
+        model.addColumn("Price");
+        JTable table = new JTable();
+        table.setModel(model);
+        table.setFont(new Font("Arial", Font.PLAIN, 15));
+        table.setSize(800, 300);
+        table.setLocation(50, 100);
+        f.add(table);
+        scroll = new JScrollPane(table);
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.setSize(800, 350);
         scroll.setLocation(50, 100);
@@ -45,9 +58,10 @@ public class AdminViewVendorItems {
 
             // display the items sold by the vendor
             while (rs.next()) {
-                items.append("Item ID: " + rs.getString("ID") + "\n");
-                items.append("Item Name: " + rs.getString("item_name") + "\n");
-                items.append("Price: " + rs.getString("price") + "\n\n");
+//                items.append("Item ID: " + rs.getString("ID") + "\n");
+//                items.append("Item Name: " + rs.getString("item_name") + "\n");
+//                items.append("Price: " + rs.getString("price") + "\n\n");
+                model.addRow(new Object[]{rs.getString("ID"), rs.getString("item_name"), rs.getString("price")});
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(f, "an error occurred, please contact the admin");

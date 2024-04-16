@@ -92,7 +92,7 @@ public class AdminEditTransaction {
             public void actionPerformed(ActionEvent e) {
                 try {
                     Conn c = new Conn();
-                    String query = "UPDATE transactions SET vendor_id = ?, student_id = ?, total_amount = ?, date_time = ? WHERE ID = ?";
+                    String query = "CALL update_transaction(?, ?, ?, ?, ?)";
                     PreparedStatement stmt = c.con.prepareStatement(query);
                     stmt.setString(1, vendorText.getText());
                     stmt.setString(2, studentText.getText());
