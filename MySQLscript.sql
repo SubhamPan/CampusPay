@@ -129,7 +129,10 @@ delimiter ;
 delimiter //
 create procedure update_student_details(IN ID varchar(50), IN BITS_account varchar(50), IN s_name varchar(50), IN contact char(10), IN password varchar(256))
 begin
-    update student set account_no = account_no, s_name = s_name, contact = contact, password = password where student.ID = ID;
+    start transaction ;
+    update student set account_no = account_no, s_name = s_name, contact = contact where student.ID = ID;
+    update login set password = password where login.ID = ID;
+    commit;
 end //
 delimiter ;
 
@@ -137,7 +140,10 @@ delimiter ;
 delimiter //
 create procedure update_vendor_details(IN ID varchar(50), IN v_name varchar(50), IN account_no varchar(50), IN contact char(10), IN password varchar(256))
 begin
-    update vendors set v_name = v_name, account_no = account_no, contact = contact, password = password where vendors.ID = ID;
+    start transaction ;
+    update vendors set v_name = v_name, account_no = account_no, contact = contact where vendors.ID = ID;
+    update login set password = password where login.ID = ID;
+    commit;
 end //
 delimiter ;
 
