@@ -109,9 +109,9 @@ delimiter ;
 delimiter //
 create procedure make_transaction(IN vendor_id varchar(50), IN student_id varchar(50), IN total_amount int, OUT status int)
 begin
-    start transaction;
     -- check if student has enough budget
     declare budget_left int;
+    start transaction;
     call get_budget_left(student_id, budget_left);
     if budget_left < total_amount then
         set status = 0;
