@@ -103,12 +103,17 @@ public class AdminAddTransaction {
                 String transaction_amount = transaction_amount_text.getText();
                 try {
                     Conn c = new Conn();
-                    CallableStatement cs = c.con.prepareCall("call make_transaction(?, ?, ?)");
+                    CallableStatement cs = c.con.prepareCall("call make_transaction(?, ?, ?, ?)");
                     cs.setString(1, vendor_id);
                     cs.setString(2, student_id);
                     cs.setString(3, transaction_amount);
+                    cs.registerOutParameter(4, Types.INTEGER);
                     cs.execute();
-
+                    int status = cs.getInt(4);
+                    if (status == 0) {
+                        JOptionPane.showMessageDialog(f, "Budget Exceeded, Payment Failed");
+                        return;
+                    }
                     JOptionPane.showMessageDialog(f, "Transaction Added Successfully");
 //                    Go back to show transactions
             ShowTransactions showTransactions = new ShowTransactions();

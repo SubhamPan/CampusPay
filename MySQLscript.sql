@@ -13,6 +13,7 @@ create table student (
     account_no varchar(50) NOT NULL,
     s_name varchar(50) NOT NULL,
     contact char(10),
+    budget int unsigned NOT NULL DEFAULT 100000,
     primary key (ID)
 );
 
@@ -106,9 +107,21 @@ delimiter ;
 
 -- procedure to a new transaction
 delimiter //
-create procedure make_transaction(IN vendor_id varchar(50), IN student_id varchar(50), IN total_amount int)
+create procedure make_transaction(IN vendor_id varchar(50), IN student_id varchar(50), IN total_amount int, OUT status int)
 begin
-    insert into transactions (vendor_id, student_id, total_amount, date_time) values (vendor_id, student_id, total_amount, now());
+    start transaction;
+    -- check if student has enough budget
+    declare budget_left int;
+    call get_budget_left(student_id, budget_left);
+    if budget_left < total_amount then
+        set status = 0;
+        rollback;
+    else
+        set status = 1;
+        -- insert into transactions
+        insert into transactions (vendor_id, student_id, total_amount, date_time) values (vendor_id, student_id, total_amount, now());
+    end if;
+    commit;
 end //
 delimiter ;
 
@@ -273,11 +286,50 @@ end //
 delimiter ;
 
 --UPDATE transactions SET vendor_id = ?, student_id = ?, total_amount = ?, date_time = ? WHERE ID = ?
-    delimiter //
+delimiter //
 create procedure update_transaction(IN vendor_id varchar(50), IN student_id varchar(50), IN total_amount int, IN date_time datetime, IN ID int)
 begin
     start transaction ;
     update transactions set vendor_id = vendor_id, student_id = student_id, total_amount = total_amount, date_time = date_time where transactions.ID = ID;
     commit;
+end //
+delimiter ;
+
+-- procedure to set monthly budget of a student
+delimiter //
+create procedure set_monthly_budget(IN ID varchar(50), IN budget int)
+begin
+    update student set budget = budget where student.ID = ID;
+end //
+delimiter ;
+
+-- procedure to get monthly budget of a student
+delimiter //
+create procedure get_monthly_budget(IN ID varchar(50), OUT monthly_budget int)
+begin
+    -- select budget into budget from student where student.ID = ID;
+    select budget into monthly_budget from student where student.ID = ID;
+end //
+delimiter ;
+
+-- procedure to get total amount spent by a student in the last month
+delimiter //
+create procedure get_total_amount_spent_by_student_last_month(IN student_id varchar(50), OUT total_amount_spent int)
+begin
+    select sum(total_amount) into total_amount_spent from transactions where transactions.student_id = student_id and transactions.date_time >= date_sub(now(), interval 1 month);
+end //
+delimiter ;
+
+-- procedure to get budget left of a student
+delimiter //
+create procedure get_budget_left(IN ID varchar(50), OUT budget_left int)
+begin
+    -- get total amount spent by student in the last month
+    declare total_amount_spent int;
+    call get_total_amount_spent_by_student_last_month(ID, total_amount_spent);
+    -- get budget of student
+    declare budget int;
+    call get_monthly_budget(ID, budget);
+    set budget_left = budget - total_amount_spent;
 end //
 delimiter ;

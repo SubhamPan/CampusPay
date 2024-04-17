@@ -164,11 +164,18 @@ public class VendorTransactionProcess {
                 String amount = amountText.getText();
                 try {
                     Conn c = new Conn();
-                    CallableStatement cs = c.con.prepareCall("{call make_transaction(?, ?, ?)}");
+                    CallableStatement cs = c.con.prepareCall("{call make_transaction(?, ?, ?, ?)}");
                     cs.setString(1, User.getInstance().getId());
                     cs.setString(2, studentText.getText());
                     cs.setInt(3, Integer.parseInt(amount));
+                    cs.registerOutParameter(4, Types.INTEGER);
                     cs.execute();
+                    int status = cs.getInt(4);
+                    if (status == 0) {
+                        JOptionPane.showMessageDialog(f, "Budget exceeded, payment failed");
+                        return;
+                    }
+                    JOptionPane.showMessageDialog(f, "Payment successful");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(f, "Error: " + ex);
                     System.out.println(ex);

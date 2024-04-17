@@ -130,6 +130,19 @@ public class StudentHome {
         });
         container.add(ordersButton);
 
+        // add a button to set the budget
+        JButton setBudgetButton = new JButton("Set Budget");
+        setBudgetButton.setFont(new Font("Arial", Font.PLAIN, 15));
+        setBudgetButton.setBounds(375, 430, 150, 30);
+        setBudgetButton.setBackground(new Color(176, 166, 149));
+        setBudgetButton.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
+        setBudgetButton.addActionListener(e -> {
+            SetBudget setBudget = new SetBudget();
+            setBudget.show();
+            frame.dispose();
+        });
+        container.add(setBudgetButton);
+
         JButton logoutButton = new JButton("Logout");
         logoutButton.setFont(new Font("Arial", Font.PLAIN, 15));
         logoutButton.setBounds(400, 480, 100, 30);

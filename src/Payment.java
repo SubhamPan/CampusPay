@@ -99,11 +99,17 @@ public class Payment {
                     String vendor_id = vendorList.getSelectedItem().toString().split(" - ")[0];
                     // transaction_id is auto incremented
                     // student_id is current user ID
-                    CallableStatement cs = c.con.prepareCall("{call make_transaction(?, ?, ?)}");
+                    CallableStatement cs = c.con.prepareCall("{call make_transaction(?, ?, ?, ?)}");
                     cs.setString(1, vendor_id);
                     cs.setString(2, User.getInstance().getId());
                     cs.setString(3, amount);
-
+                    cs.registerOutParameter(4, Types.INTEGER);
+                    cs.executeQuery();
+                    int status = cs.getInt(4);
+                    if (status == 0) {
+                        JOptionPane.showMessageDialog(f, "Budget exceeded, payment failed");
+                        return;
+                    }
                     JOptionPane.showMessageDialog(f, "Payment successful");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(f, "Error: " + ex);
