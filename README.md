@@ -11,6 +11,84 @@ CampusPay is a Java application that provides a platform for students, vendors, 
 - Java Swing framewok:is a platform independent
 framework,,built on top of the AWT package.
 - JDBC:is a connector, is an API for the Java programming language. Its primary purpose is to define how a client (Java application) can access a database.
+## Setup Instructions
+
+### 1) Download and Extract the Project
+
+1. Download the CampusPay-master.zip file from the Google drive.
+2. Locate the compressed file containing the project code.
+3. Right-click on the file and select "Extract" or use a suitable extraction tool.
+4. Choose a destination folder where you want to extract the contents of the compressed file.
+5. Once extracted, you should have a folder containing your project files and directories.
+6. Now open the folder in an editor with Java Runtime available preferably INTELLIJ.
+
+### 2) Setup CampusPay Using MySQLscript.sql Script
+
+1. Open your MySQL database management tool (e.g., MySQL Workbench).
+2. Connect to your root MySQL server using appropriate credentials.
+3. Locate the `MySQLscript.sql` script within the extracted project folder.
+4. Open the `MySQLscript.sql` script in your MySQL management tool.
+5. Execute the script to create a new schema/database for CampusPay.
+
+### 3) Set System Environment Variable MYSQL_ROOT_PASSWORD
+
+#### On Windows:
+
+1. Right-click on _This PC_ or _My Computer_ and select _Properties_.
+2. Click on _Advanced system settings_ on the left side.
+3. In the System Properties window, click on the _Environment Variables_ button.
+4. Under _System variables,_ click _New_.
+5. Set the Variable Name to `MYSQL_ROOT_PASSWORD` and the Variable Value to your MySQL root password.
+6. Click _OK_ to save the variable.
+
+
+#### On Linux/macOS:
+
+1. Open a terminal window.
+2. Edit the .bashrc or .bash_profile file in your home directory using a text editor (e.g., nano ~/.bashrc or nano ~/.bash_profile).
+3. Add the following line at the end of the file: export MYSQL_ROOT_PASSWORD=your_password
+4. Save the file and close the text editor.
+5. Run source ~/.bashrc or source ~/.bash_profile to apply the changes.
+
+
+### 4) Install JDBC Driver
+
+1. Download the JDBC driver for MySQL from the [official MySQL website](https://dev.mysql.com/downloads/connector/j/) or a trusted source.
+2. Follow the installation instructions provided with the JDBC driver for your specific operating system.
+3. Extract the file and locate the location where the JDBC driver JAR file is installed on your system.
+
+### 5) Add JDBC Driver to Project
+
+1. Open your project in IntelliJ IDEA.
+2. In the Project Explorer or Project view, locate the directory where you want to store external libraries (e.g., a _lib_ folder within your project).
+3. Right-click on the directory and select _New_ > _Directory_ to create a new directory if needed.
+4. Once the directory is created or located, right-click on it and select "Paste" to paste the copied JDBC driver JAR file into the directory.
+5. Alternatively, you can directly add the JDBC driver JAR file to your project's classpath:
+    * In IntelliJ IDEA, go to _File_ > _Project Structure_.
+    * In the Project Structure dialog, select _Modules_ from the left sidebar.
+    * Click on the _Dependencies_ tab.
+    * Click on the "+" button and select _JARs or directories..._
+    * Navigate to the location where you saved the JDBC driver JAR file, select it, and click _OK_ to add it to your project's dependencies.
+6.Ensure that the JDBC driver JAR file is successfully added to your project's dependencies.
+Please refer to [https://www.jetbrains.com/help/idea/jdbc-drivers.html]
+
+
+
+### 6) Register an Admin using AdminRegistration Class:
+
+1. Navigate to the directory within your project where the AdminRegistration class is located.
+2. Run `AdminRegistration` Class using the Run option in the Upper Right Corner of the INTELLIJ window.
+3. Register Admin Application will open.
+4. Create an Admin to handle admin operations.
+
+
+### 7) Run the Final Application
+
+1. Navigate to the directory within your project where the `LoginSystem` class is located.
+2. Run `LoginSystem` Class using the Run option in the Upper Right Corner of the INTELLIJ window.
+3. The Project is now running.
+
+
 ## AddItem
 The `AddItem` class in the `AddItem.java` file is used to create a form that allows a vendor to add a new item to the database. Here's a breakdown of its functionality:
 
