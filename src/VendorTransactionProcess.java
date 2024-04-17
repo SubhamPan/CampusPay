@@ -164,11 +164,10 @@ public class VendorTransactionProcess {
                 String amount = amountText.getText();
                 try {
                     Conn c = new Conn();
-                    CallableStatement cs = c.con.prepareCall("{call make_transaction(?, ?, ?, ?)}");
+                    CallableStatement cs = c.con.prepareCall("{call make_transaction(?, ?, ?)}");
                     cs.setString(1, User.getInstance().getId());
                     cs.setString(2, studentText.getText());
                     cs.setInt(3, Integer.parseInt(amount));
-                    cs.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
                     cs.execute();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(f, "Error: " + ex);
