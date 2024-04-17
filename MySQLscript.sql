@@ -221,7 +221,7 @@ delimiter ;
 
 -- procedure wrapped in a transaction to register a student
 delimiter //
-create procedure register_student(IN ID varchar(50), IN BITS_account varchar(50), IN s_name varchar(50), IN contact char(10), IN password varchar(256))
+create procedure register_student(IN ID varchar(50), IN account_no varchar(50), IN s_name varchar(50), IN contact char(10), IN password varchar(256))
 begin
     start transaction;
     insert into student (ID, account_no, s_name, contact) values (ID, account_no, s_name, contact);
