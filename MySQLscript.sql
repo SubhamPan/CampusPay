@@ -326,9 +326,9 @@ create procedure get_budget_left(IN ID varchar(50), OUT budget_left int)
 begin
     -- get total amount spent by student in the last month
     declare total_amount_spent int;
-    call get_total_amount_spent_by_student_last_month(ID, total_amount_spent);
     -- get budget of student
     declare budget int;
+    call get_total_amount_spent_by_student_last_month(ID, total_amount_spent);
     call get_monthly_budget(ID, budget);
     set budget_left = budget - total_amount_spent;
 end //
