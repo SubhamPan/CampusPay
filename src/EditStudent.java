@@ -158,6 +158,8 @@ public class EditStudent {
                     cs.setString(5, s_password);
                     cs.execute();
                     JOptionPane.showMessageDialog(f, "student details updated successfully");
+                    StudentHome home = new StudentHome();
+                    home.show();
                     f.dispose();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(f, "Error updating student details");

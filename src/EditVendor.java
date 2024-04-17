@@ -137,6 +137,8 @@ public class EditVendor {
                     cs.setString(5, v_password);
                     cs.execute();
                     JOptionPane.showMessageDialog(f, "Vendor details updated successfully");
+                    VendorHome home = new VendorHome();
+                    home.show();
                     f.dispose();
                 } catch (Exception ex) {
                     System.out.println(ex);
