@@ -96,30 +96,46 @@ public class EditItem {
         priceText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2));
         f.add(priceText);
 
+        // create button to get selected item details
+        JButton getItemDetails = new JButton("Get Details");
+        getItemDetails.setFont(new Font("Arial", Font.PLAIN, 15));
+        getItemDetails.setSize(150, 20);
+        getItemDetails.setLocation(400, 350);
+        getItemDetails.setBackground(new Color(176, 166, 149)); // Set background color
+        getItemDetails.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // Set border color
+        f.add(getItemDetails);
+
+        // listen for the get details button to be clicked
+        getItemDetails.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // set the item_name and price to the current price of the item
+                // use procedure get_item_details(IN ID int)
+                try {
+                    Conn c = new Conn();
+                    CallableStatement cs = c.con.prepareCall("{call get_item_details(?)}");
+                    String item = selectItem.getSelectedItem().toString();
+                    String[] parts = item.split(" - ");
+                    cs.setInt(1, Integer.parseInt(parts[0]));
+                    ResultSet rs = cs.executeQuery();
+                    rs.next();
+                    priceText.setText(rs.getString("price"));
+                    itemNameText.setText(rs.getString("item_name"));
+                } catch (Exception ex) {
+                    System.out.println(ex);
+                }
+            }
+        });
+
         // create a button to submit the form
         submit = new JButton("Submit");
         submit.setFont(new Font("Arial", Font.PLAIN, 15));
         submit.setSize(100, 20);
-        submit.setLocation(400, 350);
+        submit.setLocation(400, 400);
         submit.setBackground(new Color(176, 166, 149)); // Set background color
         submit.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // Set border color
         f.add(submit);
 
-        // set the item_name and price to the current price of the item
-        // use procedure get_item_details(IN ID int)
-        try {
-            Conn c = new Conn();
-            CallableStatement cs = c.con.prepareCall("{call get_item_details(?)}");
-            String item = selectItem.getSelectedItem().toString();
-            String[] parts = item.split(" - ");
-            cs.setInt(1, Integer.parseInt(parts[0]));
-            ResultSet rs = cs.executeQuery();
-            rs.next();
-            priceText.setText(rs.getString("price"));
-            itemNameText.setText(rs.getString("item_name"));
-        } catch (Exception e) {
-            System.out.println(e);
-        }
 
         // listen for the submit button to be clicked
         submit.addActionListener(new ActionListener() {
@@ -148,7 +164,7 @@ public class EditItem {
         back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(100, 20);
-        back.setLocation(400, 400);
+        back.setLocation(400, 450);
         back.setBackground(new Color(176, 166, 149)); // Set background color
         back.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // Set border color
         back.addActionListener(new ActionListener() {

@@ -52,7 +52,8 @@ public class DeleteItem {
             // connect to the database and get the list of vendors
             try {
                 Conn c = new Conn();
-                ResultSet rs = c.stmt.executeQuery("SELECT * FROM vendors");
+                CallableStatement cs = c.con.prepareCall("{call get_all_vendors()}");
+                ResultSet rs = cs.executeQuery();
 
                 // display the list of vendors
                 while (rs.next()) {

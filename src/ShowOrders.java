@@ -74,6 +74,8 @@ public class ShowOrders {
         show.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // clear previous data
+                model.setRowCount(0);
                 String transaction = transactionList.getSelectedItem().toString();
                 String[] parts = transaction.split(" - ");
                 String transactionID = parts[0];
