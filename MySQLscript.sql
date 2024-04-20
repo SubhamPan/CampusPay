@@ -106,11 +106,10 @@ select
     transactions.total_amount,
     transactions.date_time
 from
-    transactions,
-    student
+    transactions
+    join student on transactions.student_id = student.ID
 where
-        transactions.vendor_id = vendor_id
-  and transactions.student_id = student.ID;
+        transactions.vendor_id = vendor_id;
 
 end / / delimiter;
 
