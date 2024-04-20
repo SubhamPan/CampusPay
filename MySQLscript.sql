@@ -37,7 +37,7 @@ create table
 create table
     items (
               ID int auto_increment,
-              item_name varchar(50),
+              item_name varchar(50) NOT NULL,
               price int unsigned NOT NULL,
               vendor_id varchar(50),
               primary key (ID),
