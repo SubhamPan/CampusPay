@@ -66,6 +66,9 @@ public class StudentHome {
             String item_name = cs.getString(3);
             String v_name = cs.getString(4);
             mostBought.setText(id + " - " + item_name + " by " + v_name);
+            if(item_name == null) {
+                mostBought.setText("No items bought yet");
+            }
         } catch (Exception e) {
             System.out.println(e);
         }

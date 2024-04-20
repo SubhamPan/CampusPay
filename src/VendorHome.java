@@ -57,6 +57,9 @@ public class VendorHome {
             JLabel mostPopularItem = new JLabel();
             mostPopularItem.setFont(new Font("Arial", Font.PLAIN, 20));
             mostPopularItem.setText(item_id + " - " + item_name);
+            if(item_id == 0)
+                mostPopularItem.setText("No items sold yet");
+
             mostPopularItem.setBounds(520, 130, 200, 20);
             container.add(mostPopularItem);
         } catch (Exception e) {
