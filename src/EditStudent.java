@@ -107,29 +107,63 @@ public class EditStudent {
         passwordText.setBorder(BorderFactory.createLineBorder(new Color(224, 227, 215), 2));
         container.add(passwordText);
 
-        try {
-            Conn c = new Conn();
-            CallableStatement cs = c.con.prepareCall("{call get_student_details(?)}");
-            if(User.getInstance().getRole() != 2) {
-                cs.setString(1, User.getInstance().getId());
-            } else {
-                String[] parts = studentList.getSelectedItem().toString().split(" - ");
-                cs.setString(1, parts[0]);
+//        button for getting details of selected student
+        JButton getDetails = new JButton("Get Details");
+        getDetails.setFont(new Font("Arial", Font.PLAIN, 15));
+        getDetails.setBounds(425, 350, 100, 20);
+        getDetails.setBackground(new Color(176, 166, 149));
+        getDetails.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
+        getDetails.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Conn c = new Conn();
+                    CallableStatement cs = c.con.prepareCall("{call get_student_details(?)}");
+                    if(User.getInstance().getRole() != 2) {
+                        cs.setString(1, User.getInstance().getId());
+                    } else {
+                        String[] parts = studentList.getSelectedItem().toString().split(" - ");
+                        cs.setString(1, parts[0]);
+                    }
+                    ResultSet rs = cs.executeQuery();
+                    while (rs.next()) {
+                        nameText.setText(rs.getString("s_name"));
+                        accountText.setText(rs.getString("account_no"));
+                        contactText.setText(rs.getString("contact"));
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(f, "Error: " + ex);
+                    System.out.println(ex);
+                }
             }
-            ResultSet rs = cs.executeQuery();
-            while (rs.next()) {
-                nameText.setText(rs.getString("s_name"));
-                accountText.setText(rs.getString("account_no"));
-                contactText.setText(rs.getString("contact"));
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(f, "Error: " + e);
-            System.out.println(e);
-        }
+        });
+        container.add(getDetails);
+
+//        try {
+//            Conn c = new Conn();
+//            CallableStatement cs = c.con.prepareCall("{call get_student_details(?)}");
+//            if(User.getInstance().getRole() != 2) {
+//                cs.setString(1, User.getInstance().getId());
+//            } else {
+//                String[] parts = studentList.getSelectedItem().toString().split(" - ");
+//                cs.setString(1, parts[0]);
+//            }
+//            ResultSet rs = cs.executeQuery();
+//            while (rs.next()) {
+//                nameText.setText(rs.getString("s_name"));
+//                accountText.setText(rs.getString("account_no"));
+//                contactText.setText(rs.getString("contact"));
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(f, "Error: " + e);
+//            System.out.println(e);
+//        }
+
+
 
         edit = new JButton("Edit");
         edit.setFont(new Font("Arial", Font.PLAIN, 15));
-        edit.setBounds(425, 350, 100, 20);
+        edit.setBounds(425, 400, 100, 20);
         edit.setBackground(new Color(176, 166, 149));
         edit.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
         edit.addActionListener(new ActionListener() {
@@ -172,7 +206,7 @@ public class EditStudent {
 
         back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
-        back.setBounds(425, 400, 100, 20);
+        back.setBounds(425, 450, 100, 20);
         back.setBackground(new Color(176, 166, 149));
         back.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
         back.addActionListener(new ActionListener() {
