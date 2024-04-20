@@ -111,6 +111,10 @@ public class VendorTransactionProcess {
             public void actionPerformed(ActionEvent e) {
                 String product = (String) productList.getSelectedItem();
                 String quantity = quantityText.getText();
+                if(quantity.equals("")) {
+                    JOptionPane.showMessageDialog(f, "Quantity cannot be empty");
+                    return;
+                }
 
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
                 int price = 0;
@@ -162,6 +166,10 @@ public class VendorTransactionProcess {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String amount = amountText.getText();
+                if(studentText.getText().equals("")) {
+                    JOptionPane.showMessageDialog(f, "Student ID cannot be empty");
+                    return;
+                }
                 try {
                     Conn c = new Conn();
                     CallableStatement cs = c.con.prepareCall("{call make_transaction(?, ?, ?, ?)}");
