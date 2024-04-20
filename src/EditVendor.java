@@ -40,15 +40,30 @@ public class EditVendor {
         vendorList.setFont(new Font("Arial", Font.PLAIN, 15));
         vendorList.setBounds(400, 150, 190, 20);
         container.add(vendorList);
-        try {
+        if(User.getInstance().getRole() == 1) {
+            vendorList.setEnabled(false);
             Conn c = new Conn();
-            CallableStatement cs = c.con.prepareCall("{call get_all_vendors()}");
-            ResultSet rs = cs.executeQuery();
-            while (rs.next()) {
-                vendorList.addItem(rs.getString("ID") + " - " + rs.getString("v_name"));
+            try {
+                CallableStatement cs = c.con.prepareCall("{call get_vendor_details(?)}");
+                cs.setString(1, User.getInstance().getId());
+                ResultSet rs = cs.executeQuery();
+                while (rs.next()) {
+                    vendorList.addItem(User.getInstance().getId() + " - " + rs.getString("v_name"));
+                }
+            } catch (Exception e) {
+                System.out.println(e);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+            try {
+                Conn c = new Conn();
+                CallableStatement cs = c.con.prepareCall("{call get_all_vendors()}");
+                ResultSet rs = cs.executeQuery();
+                while (rs.next()) {
+                    vendorList.addItem(rs.getString("ID") + " - " + rs.getString("v_name"));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         name = new JLabel("Name");

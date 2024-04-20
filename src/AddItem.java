@@ -97,6 +97,8 @@ public class AddItem {
                     cs.setString(3, User.getInstance().getId());
                     cs.executeQuery();
                     JOptionPane.showMessageDialog(f, "Item Added Successfully");
+                    nameText.setText("");
+                    priceText.setText("");
                 } catch (Exception ex) {
                     System.out.println(ex);
                     JOptionPane.showMessageDialog(f, "Error Adding Item");

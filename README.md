@@ -8,8 +8,8 @@ CampusPay is a Java application that provides a platform for students, vendors, 
 ## Technology used
 - Java: The application is written in Java, making use of its robust OOP features.
 - SQL: The application interacts with a database using SQL stored procedures.
-- Java Swing framewok:is a platform independent
-framework,,built on top of the AWT package.
+- Java Swing framework:is a platform independent
+framework,built on top of the AWT package.
 - JDBC:is a connector, is an API for the Java programming language. Its primary purpose is to define how a client (Java application) can access a database.
 ## Setup Instructions
 
