@@ -127,7 +127,7 @@ delimiter ;
 
 -- procedure to update student details
 delimiter //
-create procedure update_student_details(IN ID varchar(50), IN BITS_account varchar(50), IN s_name varchar(50), IN contact char(10), IN password varchar(256))
+create procedure update_student_details(IN ID varchar(50), IN account_no varchar(50), IN s_name varchar(50), IN contact char(10), IN password varchar(256))
 begin
     start transaction ;
     update student set account_no = account_no, s_name = s_name, contact = contact where student.ID = ID;
@@ -322,7 +322,8 @@ delimiter ;
 delimiter //
 create procedure get_total_amount_spent_by_student_last_month(IN student_id varchar(50), OUT total_amount_spent int)
 begin
-    select sum(total_amount) into total_amount_spent from transactions where transactions.student_id = student_id and transactions.date_time >= date_sub(now(), interval 1 month);
+select sum(total_amount) into total_amount_spent from transactions where transactions.student_id = student_id and transactions.date_time >= date_sub(now(), interval 1 month);
+set total_amount_spent = ifnull(total_amount_spent, 0);
 end //
 delimiter ;
 
