@@ -179,7 +179,7 @@ The `AdminViewVendorTransaction` class in the `AdminViewVendorTransaction.java` 
 
 
 ## EditItem
-The `EditItem.java` file contains a class named `EditItem` which is used to edit the details of an item sold by a vendor in the CampusPay1 application. Here's a breakdown of its functionality:
+The `EditItem.java` file contains a class named `EditItem` which is used to edit the details of an item sold by a vendor in the CampusPay application. Here's a breakdown of its functionality:
 
 1. show Method: The `show` method is used to set up and display the GUI for the edit item form. It creates a `JFrame` and adds several components to it, including labels, text fields, a drop-down menu for selecting the item to edit, and buttons.
 
@@ -193,7 +193,7 @@ The `EditItem.java` file contains a class named `EditItem` which is used to edit
 
 
 ## EditStudent 
-The `EditStudent.java` file contains a class named `EditStudent` which is used to edit the details of a student in the CampusPay1 application. Here's a breakdown of its functionality:
+The `EditStudent.java` file contains a class named `EditStudent` which is used to edit the details of a student in the CampusPay application. Here's a breakdown of its functionality:
 
 1. show Method: The `show` method is used to set up and display the GUI for the edit student form. It creates a `JFrame` and adds several components to it, including labels, text fields, a drop-down menu for selecting the student to edit, and buttons.
 
@@ -207,7 +207,7 @@ The `EditStudent.java` file contains a class named `EditStudent` which is used t
 
 
 ## EditVendor
-The `EditVendor.java` file likely contains a class named `EditVendor` which is used to edit the details of a vendor in the CampusPay1 application. Here's a hypothetical breakdown of its functionality:
+The `EditVendor.java` file likely contains a class named `EditVendor` which is used to edit the details of a vendor in the CampusPay application. Here's a hypothetical breakdown of its functionality:
 
 1. show Method: The `show` method is used to set up and display the GUI for the edit vendor form. It creates a `JFrame` and adds several components to it, including labels, text fields, a drop-down menu for selecting the vendor to edit, and buttons.
 
@@ -221,7 +221,7 @@ The `EditVendor.java` file likely contains a class named `EditVendor` which is u
 
 
 ## LoginSystem 
-The `LoginSystem.java` file contains a class named `LoginSystem` which is used to handle the login functionality of the CampusPay1 application. Here's a breakdown of its functionality:
+The `LoginSystem.java` file contains a class named `LoginSystem` which is used to handle the login functionality of the CampusPay application. Here's a breakdown of its functionality:
 
 1. show Method: The `show` method is used to set up and display the GUI for the login form. It creates a `JFrame` and adds several components to it, including labels, text fields, and buttons.
 
@@ -238,7 +238,7 @@ The `LoginSystem.java` file contains a class named `LoginSystem` which is used t
 7. Password Hashing: The password entered by the user is hashed using the `Hash` class before it is sent to the `verify_login` stored procedure. This is done to protect the user's password.
 
 ## Hash
-The `Hash.java` file contains a utility class named `Hash` which is used to hash a password using the SHA-256 algorithm in the CampusPay1 application. Here's a breakdown of its functionality:
+The `Hash.java` file contains a utility class named `Hash` which is used to hash a password using the SHA-256 algorithm in the CampusPay application. Here's a breakdown of its functionality:
 
 1. hash Method: The `hash` method is a static method that takes a password as a string and returns the hashed version of the password. It uses the SHA-256 hashing algorithm to create a hash of the password.
 
@@ -307,7 +307,7 @@ The `SetBudget.java` file is a part of a Java application that provides an inter
 
 8. Frame Visibility and Position: The frame is made visible and its position is set to the center of the screen.
 ## ShowOrders 
-The `ShowOrders.java` file contains a class named `ShowOrders` which is used to display the orders made by a user in the CampusPay1 application. Here's a breakdown of its functionality:
+The `ShowOrders.java` file contains a class named `ShowOrders` which is used to display the orders made by a user in the CampusPay application. Here's a breakdown of its functionality:
 
 1. show Method: The `show` method is used to set up and display the GUI for the orders page. It creates a `JFrame` and adds several components to it, including labels, a drop-down menu for selecting the transaction, a table to display the orders, and buttons.
 
@@ -320,7 +320,7 @@ The `ShowOrders.java` file contains a class named `ShowOrders` which is used to 
 5. Back Button: The "Back" button has an `ActionListener` attached to it. When the button is clicked, it creates an instance of `AdminHome`, `VendorHome`, or `StudentHome` (based on the user's role), calls the `show` method to display the respective home page, and disposes of the current frame.
 
 ## ShowTransactions 
-The `ShowTransactions.java` file contains a class named `ShowTransactions` which is used to display all transactions in the CampusPay1 application. Here's a breakdown of its functionality:
+The `ShowTransactions.java` file contains a class named `ShowTransactions` which is used to display all transactions in the CampusPay application. Here's a breakdown of its functionality:
 
 1. show Method: The `show` method is used to set up and display the GUI for the transactions page. It creates a `JFrame` and adds several components to it, including labels, a table to display the transactions, and buttons.
 
@@ -365,7 +365,7 @@ The `StudentHome.java` file is a part of a Java application that provides the ho
 
 7. Main Method: The `main` method is declared which creates an instance of `StudentHome` and calls the `show()` method. This is the entry point of the program.
 ## StudentPaymentHistory
-The `StudentRegistration.java` file contains a class named `StudentRegistration` which is used to handle the student registration functionality in the CampusPay1 application. Here's a breakdown of its functionality:
+The `StudentRegistration.java` file contains a class named `StudentRegistration` which is used to handle the student registration functionality in the CampusPay application. Here's a breakdown of its functionality:
 
 1. show Method: The `show` method is used to set up and display the GUI for the student registration page. It creates a `JFrame` and adds several components to it, including labels, text fields for name, ID, contact, and password, and buttons.
 
@@ -376,7 +376,7 @@ The `StudentRegistration.java` file contains a class named `StudentRegistration`
 4. Back Button: The "Back" button has an `ActionListener` attached to it. When the button is clicked, it creates an instance of `LoginSystem`, calls the `show` method to display the login page, and disposes of the current frame.
 
 ## StudentRegistration 
-The `StudentRegistration.java` file contains a class named `StudentRegistration` which is used to handle the student registration functionality in the CampusPay1 application. Here's a breakdown of its functionality:
+The `StudentRegistration.java` file contains a class named `StudentRegistration` which is used to handle the student registration functionality in the CampusPay application. Here's a breakdown of its functionality:
 
 1. show Method: The `show` method is used to set up and display the GUI for the student registration page. It creates a `JFrame` and adds several components to it, including labels, text fields for name, ID, contact, and password, and buttons.
 
@@ -387,7 +387,7 @@ The `StudentRegistration.java` file contains a class named `StudentRegistration`
 4. Back Button: The "Back" button has an `ActionListener` attached to it. When the button is clicked, it creates an instance of `LoginSystem`, calls the `show` method to display the login page, and disposes of the current frame.
 
 ## User 
-The `User.java` file contains a class named `User` which is used to store and manage user information in the CampusPay1 application. This class is implemented as a singleton, meaning that only one instance of this class can exist at any given time. Here's a breakdown of its functionality:
+The `User.java` file contains a class named `User` which is used to store and manage user information in the CampusPay application. This class is implemented as a singleton, meaning that only one instance of this class can exist at any given time. Here's a breakdown of its functionality:
 
 1. Private Constructor: The constructor of the `User` class is private to prevent the creation of new instances of the `User` class from outside the class.
 
@@ -402,7 +402,7 @@ The `User.java` file contains a class named `User` which is used to store and ma
 6. clear Method: This method is used to clear the user information. It sets the ID, role, and password to their default values
 
 ## VendorHome 
-The `VendorHome.java` file contains a class named `VendorHome` which is used to handle the home page functionality for a vendor user in the CampusPay1 application. Here's a breakdown of its functionality:
+The `VendorHome.java` file contains a class named `VendorHome` which is used to handle the home page functionality for a vendor user in the CampusPay application. Here's a breakdown of its functionality:
 
 1. show Method: The `show` method is used to set up and display the GUI for the vendor home page. It creates a `JFrame` and adds several components to it, including labels, buttons, and a total amount earned label.
 
@@ -421,7 +421,7 @@ The `VendorHome.java` file contains a class named `VendorHome` which is used to 
 8. Logout Button: The "Logout" button, when clicked, clears the user information, creates an instance of `LoginSystem`, calls the `show` method to display the login page, and disposes of the current frame.
 
 ## VendorItems 
-The `VendorItems.java` file contains a class named `VendorItems` which is used to display the items sold by a vendor in the CampusPay1 application. Here's a breakdown of its functionality:
+The `VendorItems.java` file contains a class named `VendorItems` which is used to display the items sold by a vendor in the CampusPay application. Here's a breakdown of its functionality:
 
 1. show Method: The `show` method is used to set up and display the GUI for the vendor items page. It creates a `JFrame` and adds several components to it, including labels, a text area to display the items, and buttons.
 
@@ -435,7 +435,7 @@ The `VendorItems.java` file contains a class named `VendorItems` which is used t
 
 
 ## VendorRegistration 
-The `VendorRegistration.java` file contains a class named `VendorRegistration` which is used to handle the vendor registration functionality in the CampusPay1 application. Here's a breakdown of its functionality:
+The `VendorRegistration.java` file contains a class named `VendorRegistration` which is used to handle the vendor registration functionality in the CampusPay application. Here's a breakdown of its functionality:
 
 1. show Method: The `show` method is used to set up and display the GUI for the vendor registration page. It creates a `JFrame` and adds several components to it, including labels, text fields for name, account number, contact, and password, and buttons.
 
@@ -446,7 +446,7 @@ The `VendorRegistration.java` file contains a class named `VendorRegistration` w
 4. Back Button: The "Back" button has an `ActionListener` attached to it. When the button is clicked, it creates an instance of `LoginSystem`, calls the `show` method to display the login page, and disposes of the current frame.
 
 ## VendorsMenu 
-The `VendorMenu.java` file contains a class named `VendorMenu` which is used to display the list of vendors in the CampusPay1 application. Here's a breakdown of its functionality:
+The `VendorMenu.java` file contains a class named `VendorMenu` which is used to display the list of vendors in the CampusPay application. Here's a breakdown of its functionality:
 
 1. show Method: The `show` method is used to set up and display the GUI for the vendor menu page. It creates a `JFrame` and adds several components to it, including a title label, a scrollable text area to display the list of vendors, and a back button.
 
@@ -455,7 +455,7 @@ The `VendorMenu.java` file contains a class named `VendorMenu` which is used to 
 3. Back Button: The "Back" button has an `ActionListener` attached to it. When the button is clicked, it creates an instance of `StudentHome`, calls the `show` method to display the student home page, and disposes of the current frame.
 
 ## VendorTransactionHistory
-The `VendorTransactionHistory.java` file contains a class named `VendorTransactionHistory` which is used to display the transaction history of a vendor in the CampusPay1 application. Here's a breakdown of its functionality:
+The `VendorTransactionHistory.java` file contains a class named `VendorTransactionHistory` which is used to display the transaction history of a vendor in the CampusPay application. Here's a breakdown of its functionality:
 
 1. show Method: The `show` method is used to set up and display the GUI for the vendor transaction history page. It creates a `JFrame` and adds several components to it, including a title label, a scrollable text area to display the transactions, and a back button.
 
