@@ -1,5 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.text.View;
 import java.awt.event.*;
 import java.sql.*;
 
@@ -139,27 +140,6 @@ public class EditStudent {
         });
         container.add(getDetails);
 
-//        try {
-//            Conn c = new Conn();
-//            CallableStatement cs = c.con.prepareCall("{call get_student_details(?)}");
-//            if(User.getInstance().getRole() != 2) {
-//                cs.setString(1, User.getInstance().getId());
-//            } else {
-//                String[] parts = studentList.getSelectedItem().toString().split(" - ");
-//                cs.setString(1, parts[0]);
-//            }
-//            ResultSet rs = cs.executeQuery();
-//            while (rs.next()) {
-//                nameText.setText(rs.getString("s_name"));
-//                accountText.setText(rs.getString("account_no"));
-//                contactText.setText(rs.getString("contact"));
-//            }
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(f, "Error: " + e);
-//            System.out.println(e);
-//        }
-
-
 
         edit = new JButton("Edit");
         edit.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -215,6 +195,10 @@ public class EditStudent {
                 if(User.getInstance().getRole() == 0){
                     StudentHome home = new StudentHome();
                     home.show();
+                }
+                else if(User.getInstance().getRole() == 2){
+                    ViewStudents viewStudents = new ViewStudents();
+                    viewStudents.show();
                 }
                 f.dispose();
             }
