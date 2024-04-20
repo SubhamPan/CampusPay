@@ -1,5 +1,5 @@
 
-# Project Title
+# Campus Pay - The Student Credit Management System
 
 A brief description of what this project does and who it's for
 
