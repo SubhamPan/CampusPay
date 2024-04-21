@@ -172,8 +172,14 @@ public class EditStudent {
                     cs.setString(5, s_password);
                     cs.execute();
                     JOptionPane.showMessageDialog(f, "student details updated successfully");
-                    StudentHome home = new StudentHome();
-                    home.show();
+                    if(User.getInstance().getRole() == 2){
+                        ViewStudents viewStudents = new ViewStudents();
+                        viewStudents.show();
+                    }
+                    else if(User.getInstance().getRole() == 0){
+                        StudentHome home = new StudentHome();
+                        home.show();
+                    }
                     f.dispose();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(f, "Error updating student details");
