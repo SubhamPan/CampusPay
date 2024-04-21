@@ -97,8 +97,8 @@ begin
     -- transaction_id, student_id, s_name, total_amount, date_time
 select transactions.ID, transactions.student_id, student.s_name, transactions.total_amount, transactions.date_time
 from transactions
-            join student on transactions.student_id = student.ID
-    where transactions.vendor_id = vendor_id;
+    join student on transactions.student_id = student.ID
+where transactions.vendor_id = vendor_id;
 end //
 
 
@@ -206,8 +206,8 @@ create procedure get_all_payments_made_by_student(IN student_id varchar (50))
 begin
 select transactions.id, vendors.v_name, transactions.total_amount, transactions.date_time
 from transactions
-            join vendors on transactions.vendor_id = vendors.ID
-    where transactions.student_id = student_id;
+    join vendors on transactions.vendor_id = vendors.ID
+where transactions.student_id = student_id;
 end //
 
 
@@ -245,8 +245,8 @@ begin
     -- item_id, item_name, price, quantity
 select items.ID, items.item_name, items.price, orders.quantity
 from orders
-            join items on orders.item_id = items.ID
-    where orders.transaction_id = transaction_id;
+    join items on orders.item_id = items.ID
+where orders.transaction_id = transaction_id;
 end //
 
 
@@ -358,8 +358,8 @@ begin
 select items.ID, items.item_name
 into ID, item_name
 from items
-            join orders on items.ID = orders.item_id
-    where items.vendor_id = vendor_id
+    join orders on items.ID = orders.item_id
+where items.vendor_id = vendor_id
 group by items.ID
 order by sum(orders.quantity) desc limit 1;
 end //
@@ -372,9 +372,10 @@ create procedure get_most_bought_item_by_student(IN student_id varchar (50), OUT
 begin
 select items.ID, items.item_name, vendors.v_name
 into ID, item_name, v_name
-from items join orders on items.ID = orders.item_id
-          join transactions on orders.transaction_id = transactions.ID
-          join vendors on items.vendor_id = vendors.ID
+from items
+    join orders on items.ID = orders.item_id
+    join transactions on orders.transaction_id = transactions.ID
+    join vendors on items.vendor_id = vendors.ID
 where transactions.student_id = student_id
 group by items.ID
 order by sum(orders.quantity) desc limit 1;
