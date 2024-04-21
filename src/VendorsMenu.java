@@ -88,8 +88,8 @@ public class VendorsMenu {
         button.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
     }
 
-    public static void main(String[] args) {
-        VendorsMenu vendorsMenu = new VendorsMenu();
-        vendorsMenu.show();
-    }
+//    public static void main(String[] args) {
+//        VendorsMenu vendorsMenu = new VendorsMenu();
+//        vendorsMenu.show();
+//    }
 }

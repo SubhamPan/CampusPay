@@ -146,8 +146,8 @@ public class DeleteItem {
         f.setLocation(x, y);
     }
 
-    public static void main(String[] args) {
-        DeleteItem deleteItem = new DeleteItem();
-        deleteItem.show();
-    }
+//    public static void main(String[] args) {
+//        DeleteItem deleteItem = new DeleteItem();
+//        deleteItem.show();
+//    }
 }

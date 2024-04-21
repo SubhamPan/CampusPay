@@ -75,8 +75,8 @@ public class RefundTransaction {
 
     }
 
-    public static void main(String[] args) {
-        RefundTransaction refundTransaction = new RefundTransaction();
-        refundTransaction.show("1");
-    }
+//    public static void main(String[] args) {
+//        RefundTransaction refundTransaction = new RefundTransaction();
+//        refundTransaction.show("1");
+//    }
 }

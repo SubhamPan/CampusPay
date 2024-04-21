@@ -218,8 +218,8 @@ public class EditStudent {
         int y = (dim.height - f.getSize().height) / 2;
         f.setLocation(x, y);
     }
-    public static void main(String[] args) {
-        EditStudent editStudent = new EditStudent();
-        editStudent.show();
-    }
+//    public static void main(String[] args) {
+//        EditStudent editStudent = new EditStudent();
+//        editStudent.show();
+//    }
 }

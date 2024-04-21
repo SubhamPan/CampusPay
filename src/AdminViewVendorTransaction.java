@@ -92,8 +92,8 @@ public class AdminViewVendorTransaction {
         f.setLocation(x, y);
     }
 
-    public static void main(String[] args) {
-        AdminViewVendorTransaction adminViewVendorTransaction = new AdminViewVendorTransaction();
-        adminViewVendorTransaction.show("V001");
-    }
+//    public static void main(String[] args) {
+//        AdminViewVendorTransaction adminViewVendorTransaction = new AdminViewVendorTransaction();
+//        adminViewVendorTransaction.show("V001");
+//    }
 }

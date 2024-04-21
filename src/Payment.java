@@ -146,8 +146,8 @@ public class Payment {
         f.setLocation(x, y);
     }
 
-    public static void main(String[] args) {
-        Payment p = new Payment();
-        p.show();
-    }
+//    public static void main(String[] args) {
+//        Payment p = new Payment();
+//        p.show();
+//    }
 }

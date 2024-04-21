@@ -186,8 +186,8 @@ public class EditVendor {
         button.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
     }
 
-    public static void main(String[] args) {
-        EditVendor edit = new EditVendor();
-        edit.show();
-    }
+//    public static void main(String[] args) {
+//        EditVendor edit = new EditVendor();
+//        edit.show();
+//    }
 }

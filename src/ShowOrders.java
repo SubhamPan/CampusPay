@@ -133,8 +133,8 @@ public class ShowOrders {
         button.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
     }
 
-    public static void main(String[] args) {
-        ShowOrders showOrders = new ShowOrders();
-        showOrders.show();
-    }
+//    public static void main(String[] args) {
+//        ShowOrders showOrders = new ShowOrders();
+//        showOrders.show();
+//    }
 }

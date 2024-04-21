@@ -124,8 +124,8 @@ public class VendorItems {
         button.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
     }
 
-    public static void main(String[] args) {
-        VendorItems items = new VendorItems();
-        items.show();
-    }
+//    public static void main(String[] args) {
+//        VendorItems items = new VendorItems();
+//        items.show();
+//    }
 }

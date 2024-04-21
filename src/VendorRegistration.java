@@ -138,8 +138,8 @@ public class VendorRegistration {
         f.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        VendorRegistration registration = new VendorRegistration();
-        registration.show();
-    }
+//    public static void main(String[] args) {
+//        VendorRegistration registration = new VendorRegistration();
+//        registration.show();
+//    }
 }

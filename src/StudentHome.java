@@ -165,8 +165,8 @@ public class StudentHome {
         int y = (dim.height - frame.getSize().height) / 2;
         frame.setLocation(x, y);
     }
-    public static void main(String[] args) {
-        StudentHome studentHome = new StudentHome();
-        studentHome.show();
-    }
+//    public static void main(String[] args) {
+//        StudentHome studentHome = new StudentHome();
+//        studentHome.show();
+//    }
 }

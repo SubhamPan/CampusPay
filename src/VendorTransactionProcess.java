@@ -250,8 +250,8 @@ public class VendorTransactionProcess {
         button.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2));
     }
 
-    public static void main(String[] args) {
-        VendorTransactionProcess transactionProcess = new VendorTransactionProcess();
-        transactionProcess.show();
-    }
+//    public static void main(String[] args) {
+//        VendorTransactionProcess transactionProcess = new VendorTransactionProcess();
+//        transactionProcess.show();
+//    }
 }
