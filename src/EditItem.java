@@ -187,8 +187,8 @@ public class EditItem {
 
     }
 
-    public static void main(String[] args) {
-        EditItem edit = new EditItem();
-        edit.show();
-    }
+//    public static void main(String[] args) {
+//        EditItem edit = new EditItem();
+//        edit.show();
+//    }
 }

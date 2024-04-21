@@ -91,8 +91,8 @@ public class AdminViewStudentTransactions {
         f.setLocation(x, y);
     }
 
-    public static void main(String[] args) {
-        AdminViewStudentTransactions view = new AdminViewStudentTransactions();
-        view.show("S1");
-    }
+//    public static void main(String[] args) {
+//        AdminViewStudentTransactions view = new AdminViewStudentTransactions();
+//        view.show("S1");
+//    }
 }

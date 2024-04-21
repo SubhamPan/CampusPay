@@ -158,8 +158,8 @@ public class VendorHome {
         button.setBorder(BorderFactory.createLineBorder(new Color(176, 166, 149), 2)); // B0A695
     }
 
-    public static void main(String[] args) {
-        VendorHome vendorHome = new VendorHome();
-        vendorHome.show();
-    }
+//    public static void main(String[] args) {
+//        VendorHome vendorHome = new VendorHome();
+//        vendorHome.show();
+//    }
 }

@@ -141,8 +141,8 @@ public class AdminEditTransaction {
         f.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        AdminEditTransaction adminEditTransaction = new AdminEditTransaction("1", "1", "1", "100", "2021-05-01 00:00:00");
-        adminEditTransaction.show();
-    }
+//    public static void main(String[] args) {
+//        AdminEditTransaction adminEditTransaction = new AdminEditTransaction("1", "1", "1", "100", "2021-05-01 00:00:00");
+//        adminEditTransaction.show();
+//    }
 }

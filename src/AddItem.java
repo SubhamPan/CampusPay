@@ -124,8 +124,8 @@ public class AddItem {
         int y = (dim.height - f.getSize().height) / 2;
         f.setLocation(x, y);
     }
-    public static void main(String[] args) {
-        AddItem item = new AddItem();
-        item.show();
-    }
+//    public static void main(String[] args) {
+//        AddItem item = new AddItem();
+//        item.show();
+//    }
 }

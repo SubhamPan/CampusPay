@@ -154,8 +154,8 @@ public class ShowTransactions {
         f.setLocation(x, y);
     }
 
-    public static void main(String[] args) {
-        ShowTransactions showTransactions = new ShowTransactions();
-        showTransactions.show();
-    }
+//    public static void main(String[] args) {
+//        ShowTransactions showTransactions = new ShowTransactions();
+//        showTransactions.show();
+//    }
 }

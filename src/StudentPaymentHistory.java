@@ -70,8 +70,8 @@ public class StudentPaymentHistory {
         int y = (dim.height - frame.getSize().height) / 2;
         frame.setLocation(x, y);
     }
-    public static void main(String[] args) {
-        StudentPaymentHistory studentPaymentHistory = new StudentPaymentHistory();
-        studentPaymentHistory.show();
-    }
+//    public static void main(String[] args) {
+//        StudentPaymentHistory studentPaymentHistory = new StudentPaymentHistory();
+//        studentPaymentHistory.show();
+//    }
 }

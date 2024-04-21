@@ -154,8 +154,8 @@ public class AdminAddTransaction {
         f.setLocation(x, y);
 
     }
-    public static void main(String[] args) {
-        AdminAddTransaction adminAddTransaction = new AdminAddTransaction();
-        adminAddTransaction.show();
-    }
+//    public static void main(String[] args) {
+//        AdminAddTransaction adminAddTransaction = new AdminAddTransaction();
+//        adminAddTransaction.show();
+//    }
 }

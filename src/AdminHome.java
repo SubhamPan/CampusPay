@@ -116,8 +116,8 @@ public class AdminHome {
         f.setLocation(x, y);
     }
 
-    public static void main(String[] args) {
-        AdminHome adminHome = new AdminHome();
-        adminHome.show();
-    }
+//    public static void main(String[] args) {
+//        AdminHome adminHome = new AdminHome();
+//        adminHome.show();
+//    }
 }

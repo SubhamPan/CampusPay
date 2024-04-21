@@ -94,8 +94,8 @@ public class AdminViewVendorItems {
         f.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        AdminViewVendorItems items = new AdminViewVendorItems();
-        items.show("V1");
-    }
+//    public static void main(String[] args) {
+//        AdminViewVendorItems items = new AdminViewVendorItems();
+//        items.show("V1");
+//    }
 }
